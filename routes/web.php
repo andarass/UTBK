@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Middleware\CheckRoleMiddleware;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +21,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+//Route Admin
+Route::get('/admin/login', [LoginController::class, 'index'])->name('admin.login');
+Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.post');
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
+    Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin']], function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+
+        Route::get('/change-password', [ProfileController::class, 'change_password'])->name('changePassword');
+        Route::post('/update-password', [ProfileController::class, 'update_password'])->name('updatePassword');
+
+        Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
+    });
 });
