@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\KategoriUtbkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -33,6 +34,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
         Route::get('/change-password', [ProfileController::class, 'change_password'])->name('changePassword');
         Route::post('/update-password', [ProfileController::class, 'update_password'])->name('updatePassword');
+
+        Route::resource('KategoriUtbk', KategoriUtbkController::class);
+
+        // Route::group(['prefix' => 'KategoriUtbk'], function () {
+        //     Route::resource()
+        // });
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
     });
