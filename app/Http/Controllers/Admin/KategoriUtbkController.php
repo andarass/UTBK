@@ -90,7 +90,9 @@ class KategoriUtbkController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kategoriUtbk = KategoriUtbk::find($id);
+
+        return view('admin.kategori-utbk.edit', compact('kategoriUtbk'));
     }
 
     /**
@@ -98,7 +100,18 @@ class KategoriUtbkController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('_token');
+
+        $request->validate([
+            'name' => 'required|string',
+            'kkm_ujian' => 'required|string',
+        ]);
+
+        $kategoriUtbk = KategoriUtbk::find($id);
+
+        $kategoriUtbk->update($data);
+
+        return redirect()->route('KategoriUtbk.index')->with('success', 'Berhasil Ubah Kategori UTBK');
     }
 
     /**
@@ -106,6 +119,27 @@ class KategoriUtbkController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $kategoriUtbk = KategoriUtbk::find($id);
+
+            if (!$kategoriUtbk) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Kategori UTBK not found',
+                ], 404);
+            }
+
+            $kategoriUtbk->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Kategori UTBK Deleted',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }
