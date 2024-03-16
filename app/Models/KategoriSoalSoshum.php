@@ -10,7 +10,7 @@ class KategoriSoalSoshum extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'kategori_soal_sainteks';
+    protected $table = 'kategori_soal_soshums';
 
     protected $fillable = [
         'name',

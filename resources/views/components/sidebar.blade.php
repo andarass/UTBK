@@ -63,15 +63,15 @@
                         <span class="menu-title">Kategori UTBK</span>
                     </a>
                 </div>
-                {{-- <div class="menu-item">
-                    <a class="menu-link {{ Route::is('admin.kategori') ? 'active' : '' }}"
+                <div class="menu-item">
+                    <a class="menu-link {{ Route::is('admin.kategori*') ? 'active' : '' }}"
                         href="{{ route('admin.kategori') }}">
                         <span class="menu-icon">
                             <i class="fa-solid fa-clipboard-list"></i>
                         </span>
                         <span class="menu-title">Kategori Soal</span>
                     </a>
-                </div>  --}}
+                </div>
                 {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketSoal*', 'SoalUjian*', 'ReadingUjian*']) ? 'show' : '' }}">
                     <span class="menu-link {{ request()->is(['PaketSoal*','SoalUjian*', 'ReadingUjian*']) ? 'active' : '' }}">
                         <span class="menu-icon">

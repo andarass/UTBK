@@ -4,20 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\KategoriUtbk;
 use Yajra\DataTables\DataTables;
+use App\Models\KategoriSoalSoshum;
 
-class KategoriUtbkController extends Controller
+
+class KategoriSoshum extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        $KategoriUtbk = KategoriUtbk::get();
+    public function index(Request $request) {
+        $kategoriSoshum = KategoriSoalSoshum::get();
 
         if ($request->ajax()) {
-            return DataTables::of($KategoriUtbk)
+            return DataTables::of($kategoriSoshum)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($item) {
                     return
@@ -32,7 +29,7 @@ class KategoriUtbkController extends Controller
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
                         <div class="menu-item px-3">
-                            <a href="' . route('KategoriUtbk.edit', $item->id) . '" class="menu-link px-3">
+                            <a href="' . route('admin.kategori-soshum.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
                         </div>
@@ -45,90 +42,66 @@ class KategoriUtbkController extends Controller
                 ->rawColumns(['actions'])
                 ->make();
         }
-        return view('admin.kategori-utbk.index');
+        return view('admin.kategori-soal.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('admin.kategori-utbk.create');
+    public function create() {
+        return view('admin.kategori-soal.createKategoriSoshum');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $data = $request->except('_token');
 
         $request->validate([
             'name' => 'required|string',
-            'kkm_ujian' => 'required|string',
         ]);
-        KategoriUtbk::create($data);
 
-        return redirect()->route('KategoriUtbk.index')->with('success', 'Berhasil Tambah Kategori UTBK');
+        KategoriSoalSoshum::create($data);
+
+        return redirect()->route('admin.kategori')->with('success', 'Berhasil Tambah Kategori Soal Soshum');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $kategoriUtbk = KategoriUtbk::find($id);
+        $kategoriSoshum = KategoriSoalSoshum::find($id);
 
-        return view('admin.kategori-utbk.edit', compact('kategoriUtbk'));
+        return view('admin.kategori-soshum.edit', compact('kategoriSoshum'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $data = $request->except('_token');
 
         $request->validate([
             'name' => 'required|string',
-            'kkm_ujian' => 'required|string',
         ]);
 
-        $kategoriUtbk = KategoriUtbk::find($id);
+        $kategoriSoshum = KategoriSoalSoshum::find($id);
 
-        $kategoriUtbk->update($data);
+        $kategoriSoshum->update($data);
 
-        return redirect()->route('KategoriUtbk.index')->with('success', 'Berhasil Ubah Kategori UTBK');
+        return redirect()->route('admin.kategori')->with('success', 'Berhasil Ubah Kategori Soal Soshum');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         try {
-            $kategoriUtbk = KategoriUtbk::find($id);
+            $kategoriSoshum = KategoriSoalSoshum::find($id);
 
-            if (!$kategoriUtbk) {
+            if (!$kategoriSoshum) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Kategori UTBK not found',
+                    'message' => 'Kategori Soal Soshum not found',
                 ], 404);
             }
 
-            $kategoriUtbk->delete();
+            $kategoriSoshum->delete();
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Kategori UTBK Deleted',
+                'message' => 'Kategori Soal Soshum Deleted',
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -137,4 +110,7 @@ class KategoriUtbkController extends Controller
             ], 500);
         }
     }
+
+
+
 }
