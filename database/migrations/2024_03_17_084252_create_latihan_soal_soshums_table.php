@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('latihan_soal_sainteks', function (Blueprint $table) {
+        Schema::create('latihan_soal_soshums', function (Blueprint $table) {
             $table->id();
             $table->text('soal')->nullable();
             $table->string('soal_gambar')->nullable();
@@ -28,9 +28,10 @@ return new class extends Migration
             $table->string('jawaban_e_gambar')->nullable();
             $table->string('kunci_jawaban');
             $table->string('point_soal');
-            $table->foreignId('paket_soal_latihan_soal_id')->constrained('paket_soal_latihan_soals');
+            $table->text('konten_bacaan_teks')->nullable();
+            $table->string('konten_bacaan_gambar')->nullable();
+            $table->foreignId('paket_soal_ujian_id')->constrained('paket_soal_latihan_soal_soshums');
             $table->foreignId('kategori_soal_id')->constrained('kategori_soal_sainteks');
-            $table->foreignId('konten_bacaan_latihan_soal_id')->nullable()->constrained('konten_bacaan_latihan_soal_sainteks');
             $table->foreignId('kategori_utbk_id')->constrained('kategori_utbks');
             $table->timestamps();
         });
@@ -41,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('latihan_soal_sainteks');
+        Schema::dropIfExists('latihan_soal_soshums');
     }
 };

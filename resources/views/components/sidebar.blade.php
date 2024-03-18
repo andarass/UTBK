@@ -72,8 +72,8 @@
                         <span class="menu-title">Kategori Soal</span>
                     </a>
                 </div>
-                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketSoal*', 'SoalUjian*', 'ReadingUjian*']) ? 'show' : '' }}">
-                    <span class="menu-link {{ request()->is(['PaketSoal*','SoalUjian*', 'ReadingUjian*']) ? 'active' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketSoalUjian*']) ? 'show' : '' }}">
+                    <span class="menu-link {{ request()->is(['PaketSoalUjian*']) ? 'active' : '' }}">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
@@ -88,15 +88,15 @@
                     </span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
-                            <a class="menu-link {{ Route::is('admin.paket-soal*') ? 'active' : '' }}"
-                                href="{{ route('admin.paket-soal') }}">
+                            <a class="menu-link {{ Route::is('admin.paket-soal-ujian*') ? 'active' : '' }}"
+                                href="{{ route('admin.paket-soal-ujian') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Paket Soal</span>
                             </a>
                         </div>
-                        <div class="menu-item">
+                        {{-- <div class="menu-item">
                             <a class="menu-link {{ Route::is('admin.ujian-soal*') ? 'active' : '' }}"
                                 href="{{ route('admin.ujian-soal') }}">
                                 <span class="menu-bullet">
@@ -104,8 +104,8 @@
                                 </span>
                                 <span class="menu-title">Soal Ujian</span>
                             </a>
-                        </div>
-                        <div class="menu-item">
+                        </div> --}}
+                        {{-- <div class="menu-item">
                             <a class="menu-link {{ Route::is('admin.reading-ujian*') ? 'active' : '' }}"
                                 href="{{ route('admin.reading-ujian') }}">
                                 <span class="menu-bullet">
@@ -113,9 +113,9 @@
                                 </span>
                                 <span class="menu-title">Reading Content</span>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
-                </div> --}}
+                </div>
 
                 {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['LatihanSoal*', 'ReadingLatihanSoal*', 'PaketLatihanSoal*']) ? 'show' : '' }}">
                     <span class="menu-link {{ request()->is(['LatihanSoal*', 'ReadingLatihanSoal*', 'PaketLatihanSoal*']) ? 'active' : '' }}">

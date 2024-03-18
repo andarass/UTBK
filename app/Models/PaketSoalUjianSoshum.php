@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class PaketSoal extends Model
+
+class PaketSoalUjianSoshum extends Model
 {
     use HasFactory;
-
-    protected $table = 'paket_soals';
 
     protected $fillable = [
         'name',

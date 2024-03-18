@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\KategoriSaintek;
 use App\Http\Controllers\Admin\KategoriSoshum;
 use App\Http\Controllers\Admin\KategoriUtbkController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PaketSoalUjianSaintekController;
+use App\Http\Controllers\Admin\PaketSoalUjianSoshumController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Middleware\CheckRoleMiddleware;
@@ -60,6 +62,29 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
             Route::delete('/destroyKategoriSoshum/{id}', [KategoriSoshum::class, 'destroy'])->name('admin.kategori-soshum.destroy');
         });
+
+        Route::group(['prefix' => 'PaketSoalUjian'], function () {
+            Route::get('/', [PaketSoalUjianSaintekController::class, 'index'])->name('admin.paket-soal-ujian');
+
+            Route::get('/create', [PaketSoalUjianSaintekController::class, 'create'])->name('admin.paket-soal-ujian-saintek.create');
+            Route::post('/store', [PaketSoalUjianSaintekController::class, 'store'])->name('admin.paket-soal-ujian-saintek.store');
+
+            Route::get('/edit/{id}', [PaketSoalUjianSaintekController::class, 'edit'])->name('admin.paket-soal-ujian-saintek.edit');
+            Route::put('/update/{id}', [PaketSoalUjianSaintekController::class, 'update'])->name('admin.paket-soal-ujian-saintek.update');
+
+            Route::delete('/destroy/{id}', [PaketSoalUjianSaintekController::class, 'destroy'])->name('admin.paket-soal-ujian-saintek.delete');
+
+            Route::get('/getPaketUjianSoshum', [PaketSoalUjianSoshumController::class, 'index'])->name('admin.paket-soal-ujian-soshum');
+
+            Route::get('/createPaketUjianSoshum', [PaketSoalUjianSoshumController::class, 'create'])->name('admin.paket-soal-ujian-soshum.create');
+            Route::post('/storePaketUjianSoshum', [PaketSoalUjianSoshumController::class, 'store'])->name('admin.paket-soal-ujian-soshum.store');
+
+            Route::get('/editPaketUjianSoshum/{id}', [PaketSoalUjianSoshumController::class, 'edit'])->name('admin.paket-soal-ujian-soshum.edit');
+            Route::put('/updatePaketUjianSoshum/{id}', [PaketSoalUjianSoshumController::class, 'update'])->name('admin.paket-soal-ujian-soshum.update');
+
+            Route::delete('/destroyPaketUjianSoshum/{id}', [PaketSoalUjianSoshumController::class, 'destroy'])->name('admin.paket-soal-ujian-soshum.destroy');
+        });
+
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
     });

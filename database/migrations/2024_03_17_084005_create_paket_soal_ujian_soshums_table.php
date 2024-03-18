@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('konten_bacaan_sainteks', function (Blueprint $table) {
+        Schema::create('paket_soal_ujian_soshums', function (Blueprint $table) {
             $table->id();
-            $table->text('konten_bacaan');
-            $table->foreignId('paket_soal_id')->constrained('paket_soals');
+            $table->string('name');
+            $table->foreignId('kategori_utbk_id')->constrained('kategori_utbks');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('konten_bacaan_sainteks');
+        Schema::dropIfExists('paket_soal_ujian_soshums');
     }
 };

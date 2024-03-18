@@ -18,14 +18,19 @@ class KategoriUtbk extends Model
         'kkm_ujian',
     ];
 
-    public function PaketSoal(): HasMany
+    public function PaketSoalUjianSaintek(): HasMany
     {
-        return $this->hasMany(PaketSoal::class);
+        return $this->hasMany(PaketSoalUjianSaintek::class);
     }
 
-    public function PaketSoalLatihanSoal(): HasMany
+    public function PaketSoalUjianSoshum(): HasMany
     {
-        return $this->hasMany(PaketSoalLatihanSoal::class);
+        return $this->hasMany(PaketSoalUjianSoshum::class);
     }
+
+    // public function PaketSoalLatihanSoal(): HasMany
+    // {
+    //     return $this->hasMany(PaketSoalLatihanSoal::class);
+    // }
 
 }
