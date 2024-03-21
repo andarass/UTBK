@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Paket Soal Ujian')
+@section('title', 'Paket Ujian Soal')
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
-            Paket Soal Ujian
+            Paket Ujian Soal
         </h1>
     </div>
 @endsection
@@ -50,7 +50,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <table id="paket_ujian_saintek"
+                                    <table id="kategori_saintek"
                                         class="table table-row-dashed align-middle fs-6 gy-4 my-0 pb-3">
                                         <thead>
                                             <tr class="fw-semibold fs-6 text-muted">
@@ -85,13 +85,14 @@
                                                 placeholder="Cari.." />
                                         </div>
                                         <div class="d-flex flex-stack">
-                                            <a id="paket-ujian-soshum-button" type="button" class="btn btn-primary ms-2"
+                                            <a id="kategori-soshum-button" type="button" class="btn btn-primary ms-2"
                                                 href="{{ route('admin.paket-soal-ujian-soshum.create') }}">
                                                 Tambah Paket Soal
                                             </a>
+
                                         </div>
                                     </div>
-                                    <table id="paket_ujian_soshum"
+                                    <table id="kategori_soshum"
                                         class="table table-row-dashed align-middle fs-6 gy-4 my-0 pb-3">
                                         <thead>
                                             <tr class="fw-semibold fs-6 text-muted">
@@ -116,7 +117,7 @@
 @endsection
 @push('scripts')
     <script>
-        var datatableSoshum = $('#paket_ujian_soshum').DataTable({
+        var datatableSoshum = $('#kategori_soshum').DataTable({
             processing: true,
             serverSide: true,
             ordering: true,
@@ -163,7 +164,7 @@
             datatable.search(this.value).draw();
         });
 
-        datatableSoshum.on('click', '.delete-confirm-paket-ujian-soshum', function(e) {
+        datatableSoshum.on('click', '.delete-confirm-kategoriSoshum', function(e) {
             e.preventDefault();
 
             Swal.fire({
@@ -219,7 +220,7 @@
         });
     </script>
     <script>
-        var datatable = $('#paket_ujian_saintek').DataTable({
+        var datatable = $('#kategori_saintek').DataTable({
             processing: true,
             serverSide: true,
             ordering: true,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PaketSoalUjianSaintek;
+use App\Models\KategoriUtbk;
 use Yajra\DataTables\DataTables;
 
 
@@ -29,7 +30,7 @@ class PaketSoalUjianSaintekController extends Controller
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
                         <div class="menu-item px-3">
-                            <a href="' . route('admin.kategori-saintek.edit', $item->id) . '" class="menu-link px-3">
+                            <a href="' . route('admin.paket-soal-ujian-saintek.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
                         </div>
@@ -47,4 +48,74 @@ class PaketSoalUjianSaintekController extends Controller
         }
         return view('admin.paket-soal-ujian.index');
     }
+
+    public function create() {
+        $kategoriUtbks = KategoriUtbk::get();
+
+        return view('admin.paket-soal-ujian.createPaketSoalUjianSaintek', compact('kategoriUtbks'));
+    }
+
+    public function store(Request $request)
+    {
+       $data = $request->except('_token');
+
+       $request->validate([
+           'name' => 'required|string',
+           'kategori_utbk_id' => 'required|string',
+       ]);
+
+       PaketSoalUjianSaintek::create($data);
+
+       return redirect()->route('admin.paket-soal-ujian')->with('success', 'Berhasil Tambah Paket Soal Saintek');
+   }
+
+   public function edit($id)
+    {
+        $PaketSoalSaintek = PaketSoalUjianSaintek::find($id);
+        $kategoriUtbks = KategoriUtbk::select(['id', 'name'])->get();
+
+        return view('admin.paket-soal-ujian.editPaketSoalUjianSaintek', ['PaketSoalSaintek' => $PaketSoalSaintek,  'kategoriUtbks' => $kategoriUtbks ]);
+    }
+
+    public function update(Request $request, $id){
+        $data = $request->except('_token');
+
+        $request->validate([
+            'name' => 'required|string',
+            'kategori_utbk_id' => 'required|string',
+        ]);
+
+        $PaketSoalUjian = PaketSoalUjianSaintek::find($id);
+
+        $PaketSoalUjian->update($data);
+
+        return redirect()->route('admin.paket-soal-ujian')->with('success', 'Berhasil ubah paket soal');
+    }
+
+    public function destroy(string $id)
+    {
+        try {
+            $paketSoalSaintek = PaketSoalUjianSaintek::find($id);
+
+            if (!$paketSoalSaintek) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Paket Soal Ujian Saintek not found',
+                ], 404);
+            }
+
+            $paketSoalSaintek->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Paket Soal Ujian Saintek Deleted',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }
