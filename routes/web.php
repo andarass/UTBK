@@ -4,9 +4,11 @@ use App\Http\Controllers\Admin\KategoriSaintek;
 use App\Http\Controllers\Admin\KategoriSoshum;
 use App\Http\Controllers\Admin\KategoriUtbkController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SoalUjianSaintekController;
+use App\Http\Controllers\Admin\SoalUjianSoshumController;
+use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\PaketSoalUjianSaintekController;
 use App\Http\Controllers\Admin\PaketSoalUjianSoshumController;
-use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Middleware\CheckRoleMiddleware;
 
@@ -83,6 +85,28 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             Route::put('/updatePaketUjianSoshum/{id}', [PaketSoalUjianSoshumController::class, 'update'])->name('admin.paket-soal-ujian-soshum.update');
 
             Route::delete('/destroyPaketUjianSoshum/{id}', [PaketSoalUjianSoshumController::class, 'destroy'])->name('admin.paket-soal-ujian-soshum.destroy');
+        });
+
+        Route::group(['prefix' => 'SoalUjian'], function () {
+            Route::get('/', [SoalUjianSaintekController::class, 'index'])->name('admin.soal-ujian');
+
+            Route::get('/create', [SoalUjianSaintekController::class, 'create'])->name('admin.soal-ujian-saintek.create');
+            Route::post('/store', [SoalUjianSaintekController::class, 'store'])->name('admin.soal-ujian-saintek.store');
+
+            Route::get('/edit/{id}', [SoalUjianSaintekController::class, 'edit'])->name('admin.soal-ujian-saintek.edit');
+            Route::put('/update/{id}', [SoalUjianSaintekController::class, 'update'])->name('admin.soal-ujian-saintek.update');
+
+            Route::delete('/destroy/{id}', [SoalUjianSaintekController::class, 'destroy'])->name('admin.soal-ujian-saintek.delete');
+
+            Route::get('/getSoalUjianSoshum', [SoalUjianSoshumController::class, 'index'])->name('admin.soal-ujian-soshum');
+
+            Route::get('/createSoalUjianSoshum', [SoalUjianSoshumController::class, 'create'])->name('admin.soal-ujian-soshum.create');
+            Route::post('/storeSoalUjianSoshum', [SoalUjianSoshumController::class, 'store'])->name('admin.soal-ujian-soshum.store');
+
+            Route::get('/editSoalUjianSoshum/{id}', [SoalUjianSoshumController::class, 'edit'])->name('admin.soal-ujian-soshum.edit');
+            Route::put('/updateSoalUjianSoshum/{id}', [SoalUjianSoshumController::class, 'update'])->name('admin.soal-ujian-soshum.update');
+
+            Route::delete('/destroySoalUjianSoshum/{id}', [SoalUjianSoshumController::class, 'destroy'])->name('admin.soal-ujian-soshum.destroy');
         });
 
 

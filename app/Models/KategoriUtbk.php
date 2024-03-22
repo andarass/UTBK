@@ -28,6 +28,11 @@ class KategoriUtbk extends Model
         return $this->hasMany(PaketSoalUjianSoshum::class);
     }
 
+    public function SoalUjianSaintek(): HasMany
+    {
+        return $this->hasMany(SoalUjianSaintek::class);
+    }
+
     // public function PaketSoalLatihanSoal(): HasMany
     // {
     //     return $this->hasMany(PaketSoalLatihanSoal::class);

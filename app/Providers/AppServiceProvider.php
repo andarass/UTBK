@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Validator::extend('audio', function ($attribute, $value, $parameters, $validator) {
+
+            $allowedExtensions = ['mp3', 'mpeg', 'mpga', 'mp3', 'wav', 'aac'];
+
+            return in_array(strtolower($value->getClientOriginalExtension()), $allowedExtensions);
+        });
     }
 }

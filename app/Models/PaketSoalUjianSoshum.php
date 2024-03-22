@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
@@ -19,5 +20,10 @@ class PaketSoalUjianSoshum extends Model
     public function KategoriUtbk(): BelongsTo
     {
         return $this->belongsTo(KategoriUtbk::class);
+    }
+
+    public function SoalUjianSoshum(): HasMany
+    {
+        return $this->hasMany(SoalUjianSoshum::class);
     }
 }
