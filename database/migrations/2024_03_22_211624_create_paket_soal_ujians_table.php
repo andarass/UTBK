@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kategori_utbks', function (Blueprint $table) {
+        Schema::create('paket_soal_ujians', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('kkm_ujian');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategori_utbks');
+        Schema::dropIfExists('paket_soal_ujians');
     }
 };

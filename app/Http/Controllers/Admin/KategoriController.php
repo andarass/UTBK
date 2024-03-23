@@ -4,18 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PaketSoalUjianSaintek;
-use App\Models\KategoriUtbk;
+use App\Models\Kategori;
+use App\Models\PaketSoal;
+use App\Models\SoalUjian;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
-
-class PaketSoalUjianSaintekController extends Controller
+class KategoriController extends Controller
 {
-    public function index(Request $request) {
-        $paketSoalUjianSaintek = PaketSoalUjianSaintek::get();
+    public function index(Request $request)
+    {
+
 
         if ($request->ajax()) {
-            return DataTables::of($paketSoalUjianSaintek)
+            $Kategori = Kategori::get();
+            return DataTables::of($Kategori)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($item) {
                     return
@@ -30,7 +33,7 @@ class PaketSoalUjianSaintekController extends Controller
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
                         <div class="menu-item px-3">
-                            <a href="' . route('admin.paket-soal-ujian-saintek.edit', $item->id) . '" class="menu-link px-3">
+                            <a href="' . route('admin.kategori.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
                         </div>
@@ -40,75 +43,68 @@ class PaketSoalUjianSaintekController extends Controller
                     </div>
                 </div>';
                 })
-                ->editColumn('kategori_utbk_id', function ($item) {
-                    return $item->KategoriUtbk->name ?? "-";
-                })
                 ->rawColumns(['actions'])
                 ->make();
         }
-        return view('admin.paket-soal-ujian.index');
+        return view('admin.kategori.index');
     }
 
-    public function create() {
-        $kategoriUtbks = KategoriUtbk::get();
-
-        return view('admin.paket-soal-ujian.createPaketSoalUjianSaintek', compact('kategoriUtbks'));
+    public function create()
+    {
+        return view('admin.kategori.create');
     }
 
     public function store(Request $request)
     {
-       $data = $request->except('_token');
-
-       $request->validate([
-           'name' => 'required|string',
-           'kategori_utbk_id' => 'required|string',
-       ]);
-
-       PaketSoalUjianSaintek::create($data);
-
-       return redirect()->route('admin.paket-soal-ujian')->with('success', 'Berhasil Tambah Paket Soal Saintek');
-   }
-
-   public function edit($id)
-    {
-        $PaketSoalSaintek = PaketSoalUjianSaintek::find($id);
-        $kategoriUtbks = KategoriUtbk::select(['id', 'name'])->get();
-
-        return view('admin.paket-soal-ujian.editPaketSoalUjianSaintek', ['PaketSoalSaintek' => $PaketSoalSaintek,  'kategoriUtbks' => $kategoriUtbks ]);
-    }
-
-    public function update(Request $request, $id){
         $data = $request->except('_token');
 
         $request->validate([
             'name' => 'required|string',
-            'kategori_utbk_id' => 'required|string',
         ]);
 
-        $PaketSoalUjian = PaketSoalUjianSaintek::find($id);
+        Kategori::create($data);
 
-        $PaketSoalUjian->update($data);
-
-        return redirect()->route('admin.paket-soal-ujian')->with('success', 'Berhasil ubah paket soal');
+        return redirect()->route('admin.kategori')->with('success', 'Berhasil Tambah Kategori Soal');
     }
 
-    public function destroy(string $id)
+    public function edit($id)
+    {
+        $Kategori = Kategori::find($id);
+
+        return view('admin.kategori.edit', ['Kategori' => $Kategori]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->except('_token');
+
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $Kategori = Kategori::find($id);
+
+        $Kategori->update($data);
+
+        return redirect()->route('admin.kategori')->with('success', 'Berhasil Ubah Kategori Soal');
+    }
+
+    public function destroy($id)
     {
         try {
-            $paketSoalSaintek = PaketSoalUjianSaintek::find($id);
+            $Kategori = Kategori::find($id);
 
-            if (!$paketSoalSaintek) {
+            if (!$Kategori) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Paket Soal Ujian Saintek not found',
+                    'message' => 'Kategori Soal not found',
                 ], 404);
             }
-
-            $paketSoalSaintek->delete();
+            $Kategori->delete();
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Paket Soal Ujian Saintek Deleted',
+                'message' => ' Kategori Soal deleted',
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -117,5 +113,4 @@ class PaketSoalUjianSaintekController extends Controller
             ], 500);
         }
     }
-
 }

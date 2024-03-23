@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Kategori UTBK')
+@section('title', 'Kategori Soal')
 
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
-            Kategori UTBK
+            Kategori Soal
         </h1>
     </div>
 @endsection
@@ -27,18 +27,17 @@
                     placeholder="Cari.." />
             </div>
             <div class="d-flex flex-stack">
-                <a type="button" class="btn btn-primary ms-2" href="{{ route('KategoriUtbk.create') }}">
-                    Tambah Kategori Test
+                <a type="button" class="btn btn-primary ms-2" href="{{ route('admin.kategori.create') }}">
+                    Tambah Kategori Soal
                 </a>
             </div>
         </div>
         <div class="card-body pt-0">
-            <table id="kategori-test-table" class="table align-middle table-row-dashed fs-6 gy-5">
+            <table id="category-soal-table" class="table align-middle table-row-dashed fs-6 gy-5">
                 <thead>
                     <tr class="fw-semibold fs-6 text-muted">
                         <th class="text-start min-w-100px">No</th>
-                        <th class="text-start min-w-70px">Kategori UTBK</th>
-                        <th class="text-start min-w-70px">Point KKM Ujian</th>
+                        <th class="text-start min-w-70px">Kategori Soal</th>
                         <th class="text-end min-w-100px">Actions</th>
                     </tr>
                 </thead>
@@ -48,7 +47,7 @@
 @endsection
 @push('scripts')
     <script>
-        var datatable = $('#kategori-test-table').DataTable({
+        var datatable = $('#category-soal-table').DataTable({
             processing: true,
             serverSide: true,
             ordering: true,
@@ -66,13 +65,6 @@
                 {
                     data: 'name',
                     name: 'name',
-                    orderable: true,
-                    searchable: true,
-                    width: '30%'
-                },
-                {
-                    data: 'kkm_ujian',
-                    name: 'kkm_ujian',
                     orderable: true,
                     searchable: true,
                     width: '30%'
@@ -112,7 +104,7 @@
                 if (result.isConfirmed) {
                     e.preventDefault();
                     var id = $(this).data("id");
-                    var route = "{{ route('KategoriUtbk.destroy', ':id') }}";
+                    var route = "{{ route('admin.kategori.destroy', ':id') }}";
                     route = route.replace(':id', id);
                     $.ajax({
                         url: route,

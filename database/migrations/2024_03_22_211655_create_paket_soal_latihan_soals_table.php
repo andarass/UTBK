@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket_soal_latihan_soal_sainteks', function (Blueprint $table) {
+        Schema::create('paket_soal_latihan_soals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('kategori_utbk_id')->constrained('kategori_utbks');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket_soal_latihan_soal_sainteks');
+        Schema::dropIfExists('paket_soal_latihan_soals');
     }
 };

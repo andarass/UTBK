@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket_soal_ujian_soshums', function (Blueprint $table) {
+        Schema::create('pertanyaans', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('kategori_utbk_id')->constrained('kategori_utbks');
+            $table->string('judul')->nullable();
+            $table->text('content')->nullable();
+            $table->string('gambar')->nullable();
+            $table->foreignId('kategori_id')->constrained('kategoris');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket_soal_ujian_soshums');
+        Schema::dropIfExists('pertanyaans');
     }
 };
