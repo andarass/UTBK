@@ -4,11 +4,11 @@
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
         <a href="{{ route('dashboard') }}">
             <img alt="Logo"
-                src="{{ isset($setting->logo_default) ? asset('storage/' . $setting->logo_default) : asset('assets/images/Japanify.jpeg') }}"
-                class="h-60px ms-15 app-sidebar-logo-default" />
+                src="{{ isset($setting->logo_default) ? asset('storage/' . $setting->logo_default) : asset('assets/images/logo-aplikasi.png') }}"
+                class="h-20 ms-20 app-sidebar-logo-default" />
             <img alt="Logo"
-                src="{{ isset($setting->logo_square) ? asset('storage/' . $setting->logo_square) : asset('assets/images/Japanify.jpeg') }}"
-                class="h-30px app-sidebar-logo-minimize" />
+                src="{{ isset($setting->logo_square) ? asset('storage/' . $setting->logo_square) : asset('assets/images/logo-aplikasi.png') }}"
+                class="h-60px app-sidebar-logo-minimize" />
         </a>
         <div id="kt_app_sidebar_toggle"
             class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
@@ -67,12 +67,12 @@
                     <a class="menu-link {{ Route::is('Kategori*') ? 'active' : '' }}"
                         href="{{ route('admin.kategori') }}">
                         <span class="menu-icon">
-                            <i class="fa-solid fa-clipboard-list"></i>
+                            <i class="bi bi-clipboard2-plus"></i>
                         </span>
                         <span class="menu-title">Kategori Soal</span>
                     </a>
                 </div>
-                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketSoalUjian*', 'SoalUjian*']) ? 'show' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketSoalUjian*', 'SoalUjian*']) ? 'show' : '' }}">
                     <span class="menu-link {{ request()->is(['PaketSoalUjian*', 'SoalUjian*']) ? 'active' : '' }}">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
@@ -87,7 +87,7 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion">
-                        <div class="menu-item">
+                        {{-- <div class="menu-item">
                             <a class="menu-link {{ Route::is('admin.paket-soal-ujian*') ? 'active' : '' }}"
                                 href="{{ route('admin.paket-soal-ujian') }}">
                                 <span class="menu-bullet">
@@ -95,8 +95,8 @@
                                 </span>
                                 <span class="menu-title">Paket Soal</span>
                             </a>
-                        </div>
-                        <div class="menu-item">
+                        </div> --}}
+                        {{-- <div class="menu-item">
                             <a class="menu-link {{ Route::is('admin.soal-ujian*') ? 'active' : '' }}"
                                 href="{{ route('admin.soal-ujian') }}">
                                 <span class="menu-bullet">
@@ -104,8 +104,8 @@
                                 </span>
                                 <span class="menu-title">Soal Ujian</span>
                             </a>
-                        </div>
-                        <div class="menu-item">
+                        </div> --}}
+                        {{-- <div class="menu-item">
                             <a class="menu-link {{ Route::is('admin.reading-ujian*') ? 'active' : '' }}"
                                 href="{{ route('admin.reading-ujian') }}">
                                 <span class="menu-bullet">
@@ -113,9 +113,9 @@
                                 </span>
                                 <span class="menu-title">Reading Content</span>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
-                </div> --}}
+                </div>
 
                 {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['LatihanSoal*', 'ReadingLatihanSoal*', 'PaketLatihanSoal*']) ? 'show' : '' }}">
                     <span class="menu-link {{ request()->is(['LatihanSoal*', 'ReadingLatihanSoal*', 'PaketLatihanSoal*']) ? 'active' : '' }}">

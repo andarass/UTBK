@@ -40,7 +40,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::get('/change-password', [ProfileController::class, 'change_password'])->name('changePassword');
         Route::post('/update-password', [ProfileController::class, 'update_password'])->name('updatePassword');
 
-        // Route::resource('KategoriUtbk', KategoriUtbkController::class);
 
         Route::group(['prefix' => 'Kategori'], function () {
             Route::get('/', [KategoriController::class, 'index'])->name('admin.kategori');
@@ -53,7 +52,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
             Route::delete('/destroy/{id}', [KategoriController::class, 'destroy'])->name('admin.kategori.destroy');
         });
-
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
     });
