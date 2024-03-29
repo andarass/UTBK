@@ -1,15 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\KategoriSaintek;
-use App\Http\Controllers\Admin\KategoriSoshum;
-use App\Http\Controllers\Admin\KategoriUtbkController;
+
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\SoalUjianSaintekController;
-use App\Http\Controllers\Admin\SoalUjianSoshumController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Middleware\CheckRoleMiddleware;
+use App\Http\Controllers\Admin\PaketUjianController;
 
 
 /*
@@ -52,6 +49,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
             Route::delete('/destroy/{id}', [KategoriController::class, 'destroy'])->name('admin.kategori.destroy');
         });
+
+        Route::resource('PaketUjianSoal', PaketUjianController::class);
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
     });

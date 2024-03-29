@@ -72,8 +72,8 @@
                         <span class="menu-title">Kategori Soal</span>
                     </a>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketSoalUjian*', 'SoalUjian*']) ? 'show' : '' }}">
-                    <span class="menu-link {{ request()->is(['PaketSoalUjian*', 'SoalUjian*']) ? 'active' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketUjianSoal*']) ? 'show' : '' }}">
+                    <span class="menu-link {{ request()->is(['PaketUjianSoal*']) ? 'active' : '' }}">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
@@ -87,15 +87,15 @@
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion">
-                        {{-- <div class="menu-item">
-                            <a class="menu-link {{ Route::is('admin.paket-soal-ujian*') ? 'active' : '' }}"
-                                href="{{ route('admin.paket-soal-ujian') }}">
+                        <div class="menu-item">
+                            <a class="menu-link {{ Route::is('PaketUjianSoal*') ? 'active' : '' }}"
+                                href="{{ route('PaketUjianSoal.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Paket Soal</span>
                             </a>
-                        </div> --}}
+                        </div>
                         {{-- <div class="menu-item">
                             <a class="menu-link {{ Route::is('admin.soal-ujian*') ? 'active' : '' }}"
                                 href="{{ route('admin.soal-ujian') }}">

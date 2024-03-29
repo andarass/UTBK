@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaketSoalUjian;
 use Illuminate\Http\Request;
-use App\Models\Kategori;
-use App\Models\PaketSoal;
-use App\Models\SoalUjian;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 
-class KategoriController extends Controller
+class PaketUjianController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
+        $paketUjian = PaketSoalUjian::get();
 
         if ($request->ajax()) {
-            $Kategori = Kategori::get();
-            return DataTables::of($Kategori)
+            return DataTables::of($paketUjian)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($item) {
                     return
@@ -32,7 +32,7 @@ class KategoriController extends Controller
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
                         <div class="menu-item px-3">
-                            <a href="' . route('admin.kategori.edit', $item->id) . '" class="menu-link px-3">
+                            <a href="' . route('PaketUjianSoal.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
                         </div>
@@ -45,14 +45,20 @@ class KategoriController extends Controller
                 ->rawColumns(['actions'])
                 ->make();
         }
-        return view('admin.kategori.index');
+        return view('admin.paket-ujian.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('admin.kategori.create');
+        return view('admin.paket-ujian.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $data = $request->except('_token');
@@ -61,19 +67,33 @@ class KategoriController extends Controller
             'name' => 'required|string',
         ]);
 
-        Kategori::create($data);
+        PaketSoalUjian::create($data);
 
-        return redirect()->route('admin.kategori')->with('success', 'Berhasil Tambah Kategori Soal');
+        return redirect()->route('PaketUjianSoal.store')->with('success', 'Berhasil Tambah Paket Soal');
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(PaketSoalUjian $paketSoalUjian)
     {
-        $Kategori = Kategori::find($id);
-
-        return view('admin.kategori.edit', ['Kategori' => $Kategori]);
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(PaketSoalUjian $paketSoalUjian, $id)
+    {
+        $PaketSoal = PaketSoalUjian::find($id);
+
+        return view('admin.paket-ujian.edit', compact('PaketSoal'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, PaketSoalUjian $paketSoalUjian, $id)
     {
         $data = $request->except('_token');
 
@@ -81,29 +101,33 @@ class KategoriController extends Controller
             'name' => 'required|string',
         ]);
 
-        $Kategori = Kategori::find($id);
+        $PaketSoal = PaketSoalUjian::find($id);
 
-        $Kategori->update($data);
+        $PaketSoal->update($data);
 
-        return redirect()->route('admin.kategori')->with('success', 'Berhasil Ubah Kategori Soal');
+        return redirect()->route('PaketUjianSoal.index')->with('success', 'Berhasil Ubah Paket Soal');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(PaketSoalUjian $paketSoalUjian, $id)
     {
         try {
-            $Kategori = Kategori::find($id);
+            $PaketSoal = PaketSoalUjian::find($id);
 
-            if (!$Kategori) {
+            if (!$PaketSoal) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Kategori Soal not found',
+                    'message' => 'Paket Soal not found',
                 ], 404);
             }
-            $Kategori->delete();
+
+            $PaketSoal->delete();
 
             return response()->json([
                 'status' => 'success',
-                'message' => ' Kategori Soal deleted',
+                'message' => 'Paket Soal deleted',
             ]);
         } catch (\Exception $e) {
             return response()->json([
