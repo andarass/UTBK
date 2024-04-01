@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('jawaban_c_gambar')->nullable();
             $table->text('jawaban_d')->nullable();
             $table->string('jawaban_d_gambar')->nullable();
+            $table->text('jawaban_e')->nullable();
+            $table->string('jawaban_e_gambar')->nullable();
             $table->text('konten_bacaan_teks')->nullable();
             $table->text('konten_bacaan_gambar')->nullable();
             $table->string('kunci_jawaban');

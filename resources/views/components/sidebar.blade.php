@@ -72,8 +72,8 @@
                         <span class="menu-title">Kategori Soal</span>
                     </a>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketUjianSoal*']) ? 'show' : '' }}">
-                    <span class="menu-link {{ request()->is(['PaketUjianSoal*']) ? 'active' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ request()->is(['PaketUjianSoal*', 'SoalUjian*']) ? 'show' : '' }}">
+                    <span class="menu-link {{ request()->is(['PaketUjianSoal*', 'SoalUjian*']) ? 'active' : '' }}">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
@@ -96,15 +96,15 @@
                                 <span class="menu-title">Paket Soal</span>
                             </a>
                         </div>
-                        {{-- <div class="menu-item">
-                            <a class="menu-link {{ Route::is('admin.soal-ujian*') ? 'active' : '' }}"
-                                href="{{ route('admin.soal-ujian') }}">
+                        <div class="menu-item">
+                            <a class="menu-link {{ Route::is('SoalUjian*') ? 'active' : '' }}"
+                                href="{{ route('SoalUjian.index') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Soal Ujian</span>
                             </a>
-                        </div> --}}
+                        </div>
                         {{-- <div class="menu-item">
                             <a class="menu-link {{ Route::is('admin.reading-ujian*') ? 'active' : '' }}"
                                 href="{{ route('admin.reading-ujian') }}">
