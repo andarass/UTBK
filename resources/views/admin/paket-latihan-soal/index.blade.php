@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Paket Ujian Soal')
+@section('title', 'Paket Latihan Soal')
 
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
-            Paket Ujian Soal
+            Paket Latihan Soal
         </h1>
     </div>
 @endsection
@@ -27,7 +27,7 @@
                     placeholder="Cari.." />
             </div>
             <div class="d-flex flex-stack">
-                <a type="button" class="btn btn-primary ms-2" href="{{ route('PaketUjianSoal.create') }}">
+                <a type="button" class="btn btn-primary ms-2" href="{{ route('PaketLatihanSoal.create') }}">
                     Tambah Paket Soal
                 </a>
             </div>
@@ -104,7 +104,7 @@
                 if (result.isConfirmed) {
                     e.preventDefault();
                     var id = $(this).data("id");
-                    var route = "{{ route('PaketUjianSoal.destroy', ':id') }}";
+                    var route = "{{ route('PaketLatihanSoal.destroy', ':id') }}";
                     route = route.replace(':id', id);
                     $.ajax({
                         url: route,

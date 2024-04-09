@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Tambah Paket Soal Ujian')
+@section('title', 'Edit Paket Latihan Soal')
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
-            Tambah Paket Soal
+            Edit Paket Soal
         </h1>
     </div>
 @endsection
@@ -14,7 +14,8 @@
 @section('content')
     <div class="card card-docs flex-row-fluid mb-2">
         <div class="card-body fs-6 text-gray-700">
-            <form action="{{ route('PaketUjianSoal.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('PaketLatihanSoal.update', $PaketSoal->id) }}" method="POST" enctype="multipart/form-data">
+                @method('PUT')
                 @csrf
                 <div class="card-body p-9">
                     <div class="row mb-5">
@@ -22,19 +23,13 @@
                             <label for="name" class="fs-6 fw-bold mt-2 mb-3">Paket Soal</label>
                         </div>
                         <div class="col-lg">
-                            <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                                placeholder="Input Paket Soal " />
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <input type="text" name="name" class="form-control" value="{{ $PaketSoal->name }}"
+                                placeholder="Input paket soal " />
+
                         </div>
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <a href="{{ route('PaketUjianSoal.index') }}" type="reset"
-                        class="btn btn-light btn-active-light-primary me-2">Batalkan</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>

@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Http\Controllers\Admin\PaketUjianController;
 use App\Http\Controllers\Admin\SoalUjianController;
+use App\Http\Controllers\Admin\PaketLatihanSoalController;
+use App\Http\Controllers\Admin\LatihanSoalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +61,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         });
 
         Route::resource('SoalUjian', SoalUjianController::class);
+
+        Route::resource('PaketLatihanSoal', PaketLatihanSoalController::class);
+
+        Route::resource('LatihanSoal', LatihanSoalController::class);
+
+        Route::group(['prefix' => 'LatihanSoal'], function () {
+            Route::get('/soal/{id}/delete-image', [LatihanSoalController::class, 'deleteImage'])->name('admin.soal-ujian.delete_image');
+            Route::get('/soal/{id}/delete-audio', [LatihanSoalController::class, 'deleteAudio'])->name('admin.soal-ujian.delete_audio');
+        });
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');
     });

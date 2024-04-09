@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tambah Paket Soal Ujian')
+@section('title', 'Tambah Paket Latihan Soal')
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
@@ -14,7 +14,7 @@
 @section('content')
     <div class="card card-docs flex-row-fluid mb-2">
         <div class="card-body fs-6 text-gray-700">
-            <form action="{{ route('PaketUjianSoal.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('PaketLatihanSoal.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body p-9">
                     <div class="row mb-5">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <a href="{{ route('PaketUjianSoal.index') }}" type="reset"
+                    <a href="{{ route('PaketLatihanSoal.index') }}" type="reset"
                         class="btn btn-light btn-active-light-primary me-2">Batalkan</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>

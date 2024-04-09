@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PaketSoalUjian;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Models\SoalUjian;
 
 class PaketUjianController extends Controller
 {
@@ -111,7 +112,7 @@ class PaketUjianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PaketSoalUjian $paketSoalUjian, $id)
+    public function destroy($id)
     {
         try {
             $PaketSoal = PaketSoalUjian::find($id);
@@ -122,6 +123,14 @@ class PaketUjianController extends Controller
                     'message' => 'Paket Soal not found',
                 ], 404);
             }
+
+              // Menghapus semua soal yang terkait dengan paket soal
+              $soalujians = SoalUjian::where('paket_soal_id', $id)->get();
+
+              //Menghapus semua soal yang terkait
+              foreach ($soalujians as $soalujian) {
+                  $soalujian->delete();
+              }
 
             $PaketSoal->delete();
 
