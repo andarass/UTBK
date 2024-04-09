@@ -23,8 +23,7 @@
                             <label for="soal" class="fs-6 fw-bold mt-2 mb-3">Soal</label>
                         </div>
                         <div class="col-lg">
-                            <textarea name="soal" id="soal" class="form-control" value="{{ $soalUjian->soal }}" placeholder="Input Soal">
-                                @if (old('soal'))
+                            <textarea name="soal" id="soal" class="form-control" value="{{ $soalUjian->soal }}" placeholder="Input Soal">@if (old('soal'))
 {{ old('soal') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->soal }}
@@ -82,8 +81,7 @@
                         </div>
                         <div class="col-lg">
                             <textarea name="konten_bacaan_teks" id="konten_bacaan_teks" class="form-control"
-                                value="{{ $soalUjian->konten_bacaan_teks }}" placeholder="Input Konten Bacaan Teks">
-                                @if (old('konten_bacaan_teks'))
+                                value="{{ $soalUjian->konten_bacaan_teks }}" placeholder="Input Konten Bacaan Teks">@if (old('konten_bacaan_teks'))
 {{ old('konten_bacaan_teks') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->konten_bacaan_teks }}
@@ -124,8 +122,7 @@
                             <input type="radio" name="answer_a_type" value="image" id="imageAnswerRadio" />
                             <label for="imageAnswerRadio">Gambar</label>
                             <textarea name="jawaban_a" id="answer_a" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_a }}" placeholder="Input Jawaban A">
-                                @if (old('jawaban_a'))
+                                value="{{ $soalUjian->jawaban_a }}" placeholder="Input Jawaban A">@if (old('jawaban_a'))
 {{ old('jawaban_a') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_a }}
@@ -157,8 +154,7 @@
                             <input type="radio" name="answer_b_type" value="image" id="imageAnswerRadioB" />
                             <label for="imageAnswerRadioB">Gambar</label>
                             <textarea name="jawaban_b" id="answer_b" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_b }}" placeholder="Input Jawaban B">
-                                @if (old('jawaban_b'))
+                                value="{{ $soalUjian->jawaban_b }}" placeholder="Input Jawaban B">@if (old('jawaban_b'))
 {{ old('jawaban_b') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_b }}
@@ -190,7 +186,7 @@
                             <input type="radio" name="answer_c_type" value="image" id="imageAnswerRadioC" />
                             <label for="imageAnswerRadioC">Gambar</label>
                             <textarea name="jawaban_c" id="answer_c" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_c }}" placeholder="Input Jawaban C"> @if (old('jawaban_c'))
+                                value="{{ $soalUjian->jawaban_c }}" placeholder="Input Jawaban C">@if (old('jawaban_c'))
 {{ old('jawaban_c') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_c }}
@@ -221,7 +217,7 @@
                             <input type="radio" name="answer_d_type" value="image" id="imageAnswerRadioD" />
                             <label for="imageAnswerRadioD">Gambar</label>
                             <textarea name="jawaban_d" id="answer_d" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_d }}" placeholder="Input Jawaban D"> @if (old('jawaban_d'))
+                                value="{{ $soalUjian->jawaban_d }}" placeholder="Input Jawaban D">@if (old('jawaban_d'))
 {{ old('jawaban_d') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_d }}
@@ -252,7 +248,7 @@
                             <input type="radio" name="answer_e_type" value="image" id="imageAnswerRadioE" />
                             <label for="imageAnswerRadioE">Gambar</label>
                             <textarea name="jawaban_e" id="answer_e" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_e }}" placeholder="Input Jawaban E"> @if (old('jawaban_e'))
+                                value="{{ $soalUjian->jawaban_e }}" placeholder="Input Jawaban E">@if (old('jawaban_e'))
 {{ old('jawaban_e') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_e }}
@@ -360,7 +356,7 @@
 
                 </div>
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <a href="{{ route('SoalUjian.index') }}" type="reset"
+                    <a href="{{ route('LatihanSoal.index') }}" type="reset"
                         class="btn btn-light btn-active-light-primary me-2">Batalkan</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
