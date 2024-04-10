@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jawabans', function (Blueprint $table) {
             $table->id();
             $table->text('jawaban');
-            $table->string('gambar');
+            $table->string('gambar')->nullable();
             $table->foreignId('pertanyaan_id')->constrained('pertanyaans');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
