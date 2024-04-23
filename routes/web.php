@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\LatihanSoalController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.home');
 });
 
 //Route Admin
