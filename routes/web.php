@@ -22,8 +22,18 @@ use App\Http\Controllers\Admin\LatihanSoalController;
 |
 */
 
+//Route User
+
 Route::get('/', function () {
     return view('user.home');
+});
+
+Route::get('/login', function () {
+    return view('user.login');
+});
+
+Route::get('/register', function () {
+    return view('user.register');
 });
 
 //Route Admin
