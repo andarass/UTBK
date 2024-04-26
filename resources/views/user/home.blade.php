@@ -62,7 +62,7 @@
                       </ul>
                   </div>
                   <div class="header-btn hidden sm:block sm:absolute sm:right-0 sm:mr-16 lg:static lg:mr-0">
-                    <a class="text-blue-600 border border-blue-600 px-10 py-3 rounded-full duration-300 hover:bg-blue-600 hover:text-white" href="#feature">Login</a>
+                    <a class="text-blue-600 border border-blue-600 px-10 py-3 rounded-full duration-300 hover:bg-blue-600 hover:text-white" href="/login">Login</a>
                   </div>
               </nav>
           </div>
@@ -406,7 +406,7 @@
                     <img class="rounded-full p-2 w-full" src="assets/img/testimonial/img1.jpg" alt="">
                   </div>
                   <div class="mb-2">
-                    <h2 class="font-bold text-lg uppercase text-blue-600 mb-2">Fajar</h2>
+                    <h2 class="font-bold text-lg uppercase text-blue-600 mb-2">Duta</h2>
                     <h3 class="font-medium text-white text-sm">Euphoriya</h3>
                   </div>
                 </div>
@@ -672,7 +672,7 @@
           <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 wow fadeInUp" data-wow-delay="0.2s">
             <div class="mx-3 mb-8">
               <div class="footer-logo mb-3">
-                <img src="assets/img/logo.svg" alt="">
+                {{-- <img src="{{ asset('assets/images/logo-aplikasi.png')}} " alt=""> --}}
               </div>
               <p class="text-gray-300">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam excepturi quasi, ipsam
                 voluptatem.</p>
@@ -759,7 +759,7 @@
     <!-- All js Here -->
     <script src="{{ asset('assets/js/user/wow.js') }}"></script>
     <!-- <script src="assets/js/tiny-slider.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+    <script src="{{ asset('assets/js/user/tiny-slider.js')}}"></script>
     <script src="{{ asset('assets/js/user/contact-form.js') }}"></script>
     <script src=" {{ asset('assets/js/user/main.js') }} "></script>
   </body>
