@@ -8,7 +8,7 @@
     <!--====== Favicon Icon ======-->
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
 
-    <title>KitaPTN</title>
+    <title>KITAPTN</title>
 
     <!-- Icon -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/LineIcons.2.0.css') }}">
