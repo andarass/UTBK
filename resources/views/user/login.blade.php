@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Login</title>
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
+    <title>Login | KITAPTN</title>
 </head>
+
 <body>
     <div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
         <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
@@ -14,7 +17,7 @@
                 <div>
                     {{-- <img src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
                         class="w-32 mx-auto" /> --}}
-                        <img src="{{ asset('assets/images/logo-aplikasi.png') }}" alt="logo" class="w-32 mx-auto" />
+                    <img src="{{ asset('assets/images/logo-aplikasi.png') }}" alt="logo" class="w-32 mx-auto" />
                 </div>
                 <div class="mt-8 flex flex-col items-center">
                     <h1 class="text-2xl xl:text-3xl font-extrabold">
@@ -41,7 +44,7 @@
                                     </svg>
                                 </div>
                                 <span class="ml-4">
-                                    Sign Up with Google
+                                    Log In with Google
                                 </span>
                             </button>
 
@@ -62,29 +65,42 @@
                         <div class="my-12 border-b text-center">
                             <div
                                 class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-                                Or sign up with e-mail
+                                Or log in with e-mail
                             </div>
                         </div>
 
                         <div class="mx-auto max-w-xs">
-                            <input
-                                class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                type="email" placeholder="Email" />
-                            <input
-                                class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                type="password" placeholder="Password" />
-                            <button
-                                class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
-                                <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                                    <circle cx="8.5" cy="7" r="4" />
-                                    <path d="M20 8v6M23 11h-6" />
-                                </svg>
-                                <span class="ml-3">
-                                    Log In
-                                </span>
-                            </button>
+                            <form action="{{ route('login.auth') }}" method="POST">
+                                @error('credentials')
+                                    <div style="color: red;">{{ $message }}</div>
+                                @enderror
+                                @csrf
+                                <input
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
+                                    type="email" name="email" placeholder="Email" required />
+                                <input
+                                    class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
+                                    type="password" name="password" placeholder="Password" required />
+                                <button type="submit"
+                                    class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                                    <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                        <circle cx="8.5" cy="7" r="4" />
+                                        <path d="M20 8v6M23 11h-6" />
+                                    </svg>
+                                    <span class="ml-3">
+                                        Log In
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="mt-5 text-sm text-center">
+                            Don't have an account?
+                            <a href="{{ route('user.register') }}"
+                                class="font-medium text-indigo-500 hover:text-indigo-600">
+                                Register here
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -97,4 +113,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\PaketUjianController;
 use App\Http\Controllers\Admin\SoalUjianController;
 use App\Http\Controllers\Admin\PaketLatihanSoalController;
 use App\Http\Controllers\Admin\LatihanSoalController;
+use App\Http\Controllers\User\LoginController as UserLoginController;
+use App\Http\Controllers\User\RegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,17 +26,23 @@ use App\Http\Controllers\Admin\LatihanSoalController;
 */
 
 //Route User
-
 Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/login', function () {
-    return view('user.login');
-});
+Route::get('/login', [UserLoginController::class, 'index'])->name('user.login');
+Route::post('/login', [UserLoginController::class, 'auth'])->name('login.auth');
 
-Route::get('/register', function () {
-    return view('user.register');
+
+Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
+Route::post('/register', [RegisterController::class, 'store'])->name('user.register.store');
+
+Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']], function () {
+    Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
+
+    Route::get('/menu', function () {
+        return view('user.menu');
+    });
 });
 
 //Route Admin
