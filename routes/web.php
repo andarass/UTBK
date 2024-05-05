@@ -11,7 +11,10 @@ use App\Http\Controllers\Admin\SoalUjianController;
 use App\Http\Controllers\Admin\PaketLatihanSoalController;
 use App\Http\Controllers\Admin\LatihanSoalController;
 use App\Http\Controllers\User\LoginController as UserLoginController;
+use App\Http\Controllers\User\MenuController;
 use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\User\LatihanSoalController as UserLatihanSoalController;
+use App\Http\Controllers\User\UjianController;
 
 
 /*
@@ -30,6 +33,14 @@ Route::get('/', function () {
     return view('user.home');
 });
 
+Route::get('/ujian-soal', function () {
+    return view('user.ujian.soal');
+});
+
+// Route::get('/menu', function () {
+//     return view('user.menu');
+// });
+
 Route::get('/login', [UserLoginController::class, 'index'])->name('user.login');
 Route::post('/login', [UserLoginController::class, 'auth'])->name('login.auth');
 
@@ -40,9 +51,10 @@ Route::post('/register', [RegisterController::class, 'store'])->name('user.regis
 Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']], function () {
     Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
 
-    Route::get('/menu', function () {
-        return view('user.menu');
-    });
+    Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
+
+    Route::get('/latihan-soal', [UserLatihanSoalController::class, 'index'])->name('user.latihan-soal');
+    Route::get('/ujian', [UjianController::class, 'index'])->name('user.ujian');
 });
 
 //Route Admin

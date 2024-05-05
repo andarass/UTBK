@@ -74,16 +74,18 @@
                                 @csrf
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
-                                    type="text" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" />
-                                    @error('name')
+                                    type="text" name="name" value="{{ old('name') }}"
+                                    placeholder="Nama Lengkap" />
+                                @error('name')
                                     <div class="invalid-feedback text-red-600">
                                         {{ $message }}
                                     </div>
                                 @enderror
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                    type="text" name="username" value="{{ old('username') }}" placeholder="Username" />
-                                    @error('username')
+                                    type="text" name="username" value="{{ old('username') }}"
+                                    placeholder="Username" />
+                                @error('username')
                                     <div class="invalid-feedback text-red-600">
                                         {{ $message }}
                                     </div>
@@ -91,21 +93,21 @@
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                                     type="email" name="email" value="{{ old('email') }}" placeholder="Email" />
-                                    @error('email')
+                                @error('email')
                                     <div class="invalid-feedback text-red-600">
                                         {{ $message }}
                                     </div>
                                 @enderror
                                 <input
                                     class="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
-                                    type="password" name="password" value="{{ old('password') }}" placeholder="Password" />
-                                    @error('password')
+                                    type="password" name="password" value="{{ old('password') }}"
+                                    placeholder="Password" />
+                                @error('password')
                                     <div class="invalid-feedback text-red-600">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                <button
-                                    type="submit"
+                                <button type="submit"
                                     class="mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                                     <svg class="w-6 h-6 -ml-2" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round">
