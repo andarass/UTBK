@@ -22,11 +22,11 @@ class Kategori extends Model
 
     public function SoalUjian(): HasMany
     {
-        return $this->hasMany(SoalUjian::class);
+        return $this->hasMany(SoalUjian::class,'kategori_id', 'id');
     }
 
     public function LatihanSoal(): HasMany
     {
-        return $this->hasMany(LatihanSoal::class);
+        return $this->hasMany(LatihanSoal::class, 'kategori_id', 'id');
     }
 }

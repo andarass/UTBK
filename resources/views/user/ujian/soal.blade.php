@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Soal</title>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
+        <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
+    <title>Soal Ujian | KITAPTN</title>
 </head>
 
 <body>
@@ -21,13 +23,16 @@
             </div>
             <div class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <div class="row">
-                    <div class="col-12 text-center">
-                        <p class="fs-4 fw-medium">Penalaran umum</p>
-                    </div>
+                    @if ($currentSoal && $currentSoal->kategori)
+                        <div class="col-12 text-center">
+                            <p class="fs-4 fw-medium"> {{ $currentSoal->kategori->name }}</p>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="col-md-3 text-end">
-                <span class="fs-4 fw-bold text-center">01:30:45</span>
+                <span id="waktu" class="fs-4 fw-bold text-center"><span id="jam">03</span>:<span
+                        id="menit">00</span>:<span id="detik">00</span></span>
             </div>
         </header>
     </div>
@@ -38,34 +43,18 @@
                 <div class="col-12 col-lg-5">
                     <div class="row gy-3 gy-md-4">
                         <div class="col-12">
-                            <div class="card widget-card border-light shadow-sm">
-                                <div
-                                    class="card-header bg-transparent p-4 border-light-subtle d-flex flex-column align-items-center">
-                                    <img class="rounded-circle mt-5" width="200" height="200"
-                                        src="{{ asset('assets/images/user/logo-user.png') }}" alt="logo-user">
-                                    <h5 class="card-title widget-card-title mb-3 mt-4">Duta Alif Gunawan</h5>
-                                </div>
+                            <div class="card widget-card border-light shadow">
+                                @include('user.components.ujian.profile')
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="card widget-card border-light shadow-sm">
+                            <div class="card widget-card border-light shadow">
                                 <div class="card-header bg-transparent p-4 border-light-subtle">
                                     <h5 class="card-title widget-card-title m-0">Daftar Soal</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">
-                                        @for ($i = 1; $i <= 20; $i++)
-                                            <div class="col-1 col-md-auto mb-2">
-                                                <button data-mdb-button-init data-mdb-ripple-init
-                                                    class="btn btn-primary btn-square-social"
-                                                    style="background-color: blue;" href="#!"
-                                                    role="button">{{ $i }}</button>
-                                            </div>
-                                            @if ($i % 10 == 0)
-                                                <div class="w-100 d-md-none"></div>
-                                                <!-- Baris baru setiap 10 tombol pada layar kecil -->
-                                            @endif
-                                        @endfor
+                                      @include('user.components.ujian.daftar-soal')
                                     </div>
                                 </div>
                             </div>
@@ -75,55 +64,14 @@
                 <div class="col-12 col-lg-7">
                     <div class="row gy-3 gy-md-4">
                         <div class="col-12">
-                            <div class="card widget-card border-light shadow-sm">
+                            <div class="card widget-card border-light shadow">
                                 <div class="card-header bg-transparent p-4 border-light-subtle">
-                                    <h5 class="card-title widget-card-title m-0">Nomor 01</h5>
-                                    <p class="card-body widget-card-body">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                        Quas dicta perspiciatis architecto maxime assumenda amet animi, recusandae harum
-                                        eum, rem asperiores suscipit placeat nostrum, vel similique numquam vitae
-                                        nesciunt fugit?
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque, natus. Ipsum
-                                        commodi fuga maiores, odit, suscipit, facere consequatur debitis minima itaque
-                                        ad soluta natus veritatis at facilis illum quasi fugiat.
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Quisquam, quos.
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                        Quisquam, quos.
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum sequi fugiat
-                                        perspiciatis praesentium minus dolor ipsum laborum rem sit delectus velit vitae,
-                                        veniam ullam dignissimos nobis est qui, omnis iure.
-                                    </p>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="option1" name="option">
-                                        <label class="form-check-label" for="option1">
-                                            Pilihan Jawaban 1
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="option2" name="option">
-                                        <label class="form-check-label" for="option2">
-                                            Pilihan Jawaban 2
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="option3" name="option">
-                                        <label class="form-check-label" for="option3">
-                                            Pilihan Jawaban 3
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="option4" name="option">
-                                        <label class="form-check-label" for="option4">
-                                            Pilihan Jawaban 4
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="option5" name="option">
-                                        <label class="form-check-label" for="option5">
-                                            Pilihan Jawaban 5
-                                        </label>
-                                    </div>
+                                    <h5 class="card-title widget-card-title m-0">Nomor {{ $currentSoalIndex + 1 }}</h5>
+                                    @include('user.components.ujian.soal')
+                                    @include('user.components.ujian.jawaban')
+                                </div>
+                                <div class="card-footer bg-transparent border-light-subtle">
+                                    @include('user.components.ujian.button-action')
                                 </div>
                             </div>
                         </div>
@@ -133,9 +81,115 @@
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script> --}}
+    <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
+    {{-- Menyimpan Waktu Start --}}
+    <script>
+        let waktuAwal = sessionStorage.getItem("waktuAwal");
+        let notifikasi30Menit = false;
+
+        if (!waktuAwal) {
+            waktuAwal = new Date().getTime();
+            sessionStorage.setItem("waktuAwal", waktuAwal);
+        }
+
+        let x = setInterval(() => {
+            let now = new Date().getTime();
+            let waktu = 10800000 - (now - waktuAwal); // 3 jam dalam milidetik
+
+            let hours = Math.floor((waktu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((waktu % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((waktu % (1000 * 60)) / 1000);
+
+            document.getElementById("jam").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("menit").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("detik").innerText = seconds.toString().padStart(2, '0');
+
+            // notifikasi 30 menit
+            if (minutes === 30  && !notifikasi30Menit) {
+                notifikasi30Menit = true
+                Swal.fire({
+                    title: "Perhatian!",
+                    text: "Sisa waktu tinggal 30 menit",
+                    icon: "info",
+                    confirmButtonText: "OK"
+                });
+            }
+
+            // waktu habis
+            if (waktu <= 0) {
+                clearInterval(x);
+                document.getElementById("waktu").innerText = "Waktu Habis";
+
+                Swal.fire({
+                    title: "Waktu Habis!",
+                    text: "You've passed the time limit.",
+                    icon: "warning",
+                    confirmButtonText: "OK"
+                }).then((result) => {
+                    // Redirect halaman result jika menekan ok
+                    if (result.isConfirmed || result.isDismissed) {
+                        window.location.href = "{{ route('user.ujian.skor-akhir-ujian') }}";
+                    }
+                });
+            }
+        }, 1000);
     </script>
+    {{-- Menyimpan Waktu End --}}
+
+    <script>
+        function pilihOpsi(opsi) {
+            const idPertanyaanSaatIni = '{{ $currentSoal->id }}';
+            const jawaban = {
+                idPertanyaan: idPertanyaanSaatIni,
+                opsiDipilih: opsi,
+                kategori: '{{ $currentSoal->kategori->name }}',
+                correctAnswer: '{{ $currentSoal->kunci_jawaban }}',
+                points: '{{ $currentSoal->point_soal }}',
+                idKategori: '{{ $currentSoal->kategori_id }}',
+            };
+
+            sessionStorage.setItem('jawabanSoal_' + idPertanyaanSaatIni, JSON.stringify(jawaban));
+        }
+
+        function ambilOpsiDipilih() {
+            const idPertanyaanSaatIni = '{{ $currentSoal->id }}';
+            const dataJawaban = sessionStorage.getItem('jawabanSoal_' + idPertanyaanSaatIni);
+
+            if (dataJawaban) {
+                const jawaban = JSON.parse(dataJawaban);
+                if (jawaban.idPertanyaan === idPertanyaanSaatIni) {
+                    const selectedOption = jawaban.opsiDipilih;
+
+                    const availableOptions = document.querySelectorAll('.form-check-input');
+                    availableOptions.forEach(option => {
+                        if (option.value === selectedOption) {
+                            option.checked = true;
+                        } else {
+                            option.checked = false;
+                        }
+                    });
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            ambilOpsiDipilih();
+        });
+
+        document.addEventListener('click', function(event) {
+            if (event.target.matches('.form-check-input')) {
+                const opsiDipilih = event.target.value;
+                pilihOpsi(opsiDipilih);
+            }
+        });
+    </script>
+
     <script>
         // Mendapatkan semua elemen checkbox
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -155,6 +209,85 @@
             });
         });
     </script>
-</body>
 
+<script>
+    function redirectToQuestion(soalId) {
+        
+        const url = '/soal-ujian/{{ $currentSoal->paket_soal_id }}/' + soalId;
+        window.location.href = url;
+    }
+</script>
+
+    <script>
+        function konfirmasiAkhiriUjian() {
+            Swal.fire({
+                title: "Apakah anda yakin ingin mengakhiri ujian ini ?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Iya",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Ujian Selesai!",
+                        icon: "success",
+                    }).then(() => {
+                        window.location.href = "{{ route('user.ujian.skor-akhir-ujian') }}";
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        let currentCategoryId = null;
+
+        function checkCategory(currentCategory, nextCategory, nextQuestionUrl) {
+            if (currentCategory !== nextCategory || currentCategoryId !== nextCategory) {
+                if (currentCategory !== nextCategory) {
+                    Swal.fire({
+                        title: "Pindah Sesi!",
+                        text: "You are moving to the next Section. Are you sure?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            currentCategoryId = nextCategory; // Update current category ID
+
+                            // Tambahkan entri ke dalam history
+                            history.pushState({
+                                page: nextQuestionUrl
+                            }, null, nextQuestionUrl);
+
+                            window.location.href = nextQuestionUrl;
+                        }
+                    });
+                    return false;
+                } else {
+                    currentCategoryId = currentCategory; // Update current category ID
+                }
+            }
+            return true; // Allow navigation to the next question
+        }
+
+        window.onload = function() {
+            // Simpan status awal dalam history state
+            history.replaceState({
+                page: window.location.href
+            }, null, window.location.href);
+
+            window.addEventListener('popstate', function(event) {
+                if (event.state && event.state.page !== window.location.href) {
+                    history.pushState({
+                        page: window.location.href
+                    }, null, window.location.href);
+                }
+            });
+        };
+    </script>
+</body>
 </html>

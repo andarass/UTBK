@@ -33,9 +33,9 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('/ujian-soal', function () {
-    return view('user.ujian.soal');
-});
+// Route::get('/ujian-soal', function () {
+//     return view('user.ujian.soal');
+// });
 
 // Route::get('/menu', function () {
 //     return view('user.menu');
@@ -53,8 +53,13 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
 
-    Route::get('/latihan-soal', [UserLatihanSoalController::class, 'index'])->name('user.latihan-soal');
-    Route::get('/ujian', [UjianController::class, 'index'])->name('user.ujian');
+    Route::get('/paket-latihan-soal', [UserLatihanSoalController::class, 'index'])->name('user.latihan-soal');
+
+    Route::get('/paket-ujian', [UjianController::class, 'index'])->name('user.ujian');
+    Route::get('/paket-ujian/{id}', [UjianController::class, 'detailPaketSoal'])->name('user.ujian.detail-paket-ujian');
+    Route::get('/soal-ujian/{paketSoalId}/{soalId}', [UjianController::class, 'mulaiUjian'])->name('user.soal-ujian');
+    Route::get('/skor-akhir-ujian', [UjianController::class, 'jawaban'])->name('user.ujian.skor-akhir-ujian');
+
 });
 
 //Route Admin
