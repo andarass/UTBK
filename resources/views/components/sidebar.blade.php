@@ -64,6 +64,24 @@
                     </a>
                 </div> --}}
                 <div class="menu-item">
+                    <a class="menu-link {{ Route::is('Universitas*') ? 'active' : '' }}"
+                        href="{{ route('Universitas.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </span>
+                        <span class="menu-title">Universitas</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ Route::is('Prodi*') ? 'active' : '' }}"
+                        href="{{ route('Prodi.index') }}">
+                        <span class="menu-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </span>
+                        <span class="menu-title">Prodi</span>
+                    </a>
+                </div>
+                <div class="menu-item">
                     <a class="menu-link {{ Route::is('Kategori*') ? 'active' : '' }}"
                         href="{{ route('admin.kategori') }}">
                         <span class="menu-icon">

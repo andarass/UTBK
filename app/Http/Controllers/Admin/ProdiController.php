@@ -4,19 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Kategori;
-use App\Models\PaketSoal;
-use App\Models\SoalUjian;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use App\Models\Prodi;
+use App\Models\Universitas;
 
-class KategoriController extends Controller
+class ProdiController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
+        $prodi = Prodi::get();
         if ($request->ajax()) {
-            $Kategori = Kategori::get();
-            return DataTables::of($Kategori)
+            return DataTables::of($prodi)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($item) {
                     return
@@ -31,7 +32,7 @@ class KategoriController extends Controller
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
                         <div class="menu-item px-3">
-                            <a href="' . route('admin.kategori.edit', $item->id) . '" class="menu-link px-3">
+                            <a href="' . route('Prodi.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
                         </div>
@@ -41,77 +42,103 @@ class KategoriController extends Controller
                     </div>
                 </div>';
                 })
+                ->editColumn('universitas', function ($item) {
+                    return $item->Universitas->name ?? "-";
+                })
                 ->rawColumns(['actions'])
                 ->make();
         }
-        return view('admin.kategori.index');
+        return view('admin.prodi.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('admin.kategori.create');
+        $universitas = Universitas::get();
+
+        return view('admin.prodi.create', compact('universitas'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $data = $request->except('_token');
 
         $request->validate([
             'name' => 'required|string',
+            'nilai_minimal' => 'required|string',
+            'universitas_id' => 'required',
         ]);
 
-        Kategori::create($data);
+        Prodi::create($data);
 
-        return redirect()->route('admin.kategori')->with('success', 'Berhasil Tambah Kategori Soal');
+        return redirect()->route('Prodi.index')->with('success', 'Berhasil Tambah Prodi');
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $Kategori = Kategori::find($id);
-
-        return view('admin.kategori.edit', ['Kategori' => $Kategori]);
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $prodi = Prodi::find($id);
+
+        $universitas = Universitas::select(['id', 'name'])->get();
+
+        return view('admin.prodi.edit', compact('prodi', 'universitas'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $data = $request->except('_token');
 
         $request->validate([
             'name' => 'required|string',
+            'nilai_minimal' => 'required|string',
+            'universitas_id' => 'required',
         ]);
 
-        $Kategori = Kategori::find($id);
+        $prodi = Prodi::find($id);
 
-        $Kategori->update($data);
+        $prodi->update($data);
 
-        return redirect()->route('admin.kategori')->with('success', 'Berhasil Ubah Kategori Soal');
+        return redirect()->route('Prodi.index')->with('success', 'Berhasil Ubah Prodi');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
         try {
-            $Kategori = Kategori::find($id);
+            $prodi = Prodi::find($id);
 
-            if (!$Kategori) {
+            if (!$prodi) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Kategori Soal not found',
+                    'message' => 'Prodi not found',
                 ], 404);
             }
 
-             // Menghapus semua soal yang terkait dengan kategori
-             $soalujians = SoalUjian::where('kategori_id', $id)->get();
-
-             //Menghapus semua soal yang terkait
-             foreach ($soalujians as $soalujian) {
-                 $soalujian->delete();
-             }
-
-            $Kategori->delete();
+            $prodi->delete();
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Kategori Soal deleted',
+                'message' => 'Prodi deleted',
             ]);
         } catch (\Exception $e) {
             return response()->json([

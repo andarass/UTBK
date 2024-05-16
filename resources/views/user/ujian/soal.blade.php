@@ -153,7 +153,6 @@
                 points: '{{ $currentSoal->point_soal }}',
                 idKategori: '{{ $currentSoal->kategori_id }}',
             };
-
             sessionStorage.setItem('jawabanSoal_' + idPertanyaanSaatIni, JSON.stringify(jawaban));
         }
 
@@ -212,7 +211,7 @@
 
 <script>
     function redirectToQuestion(soalId) {
-        
+
         const url = '/soal-ujian/{{ $currentSoal->paket_soal_id }}/' + soalId;
         window.location.href = url;
     }

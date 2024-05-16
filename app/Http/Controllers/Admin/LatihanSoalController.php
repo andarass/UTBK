@@ -395,7 +395,7 @@ class LatihanSoalController extends Controller
         //answer d
         if ($request->input('answer_d_type') === 'text') {
             $validate['jawaban_d'] = 'string';
-            $data['jawaban_d'] = $request->input('answer_d');
+            $data['jawaban_d'] = $request->input('jawaban_d');
             $data['jawaban_d_gambar'] = null;
         } else if ($request->input('answer_d_type') === 'image') {
             // $answerDImage = $request->input('jawaban_d_gambar');
@@ -409,13 +409,13 @@ class LatihanSoalController extends Controller
             $data['answer_d'] = null;
         } else {
             $data['jawaban_d_gambar'] = $latihanSoal->jawaban_d_gambar;
-            $data['answer_d'] = null;
+            $data['jawaban_d'] = null;
         }
 
         //answer e
         if ($request->input('answer_e_type') === 'text') {
             $validate['jawaban_e'] = 'string';
-            $data['jawaban_e'] = $request->input('answer_e');
+            $data['jawaban_e'] = $request->input('jawaban_e');
             $data['jawaban_e_gambar'] = null;
         } else if ($request->input('answer_e_type') === 'image') {
             // $answerDImage = $request->input('jawaban_d_gambar');
@@ -429,7 +429,7 @@ class LatihanSoalController extends Controller
             $data['jawaban_e'] = null;
         } else {
             $data['jawaban_e_gambar'] = $latihanSoal->jawaban_e_gambar;
-            $data['answer_e'] = null;
+            $data['jawaban_e'] = null;
         }
 
 

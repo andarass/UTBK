@@ -4,19 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Kategori;
-use App\Models\PaketSoal;
-use App\Models\SoalUjian;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use App\Models\Universitas;
+use App\Models\Prodi;
 
-class KategoriController extends Controller
+class UniversitasController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(Request $request)
     {
+        $universitas = Universitas::get();
         if ($request->ajax()) {
-            $Kategori = Kategori::get();
-            return DataTables::of($Kategori)
+            return DataTables::of($universitas)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($item) {
                     return
@@ -31,7 +32,7 @@ class KategoriController extends Controller
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
                         <div class="menu-item px-3">
-                            <a href="' . route('admin.kategori.edit', $item->id) . '" class="menu-link px-3">
+                            <a href="' . route('Universitas.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
                         </div>
@@ -44,14 +45,20 @@ class KategoriController extends Controller
                 ->rawColumns(['actions'])
                 ->make();
         }
-        return view('admin.kategori.index');
+        return view('admin.universitas.index');
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('admin.kategori.create');
+        return view('admin.universitas.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $data = $request->except('_token');
@@ -60,19 +67,33 @@ class KategoriController extends Controller
             'name' => 'required|string',
         ]);
 
-        Kategori::create($data);
+        Universitas::create($data);
 
-        return redirect()->route('admin.kategori')->with('success', 'Berhasil Tambah Kategori Soal');
+        return redirect()->route('Universitas.index')->with('success', 'Berhasil Tambah Universitas');
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        $Kategori = Kategori::find($id);
-
-        return view('admin.kategori.edit', ['Kategori' => $Kategori]);
+        //
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $universitas = Universitas::find($id);
+
+        return view('admin.universitas.edit', compact('universitas'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $data = $request->except('_token');
 
@@ -80,38 +101,41 @@ class KategoriController extends Controller
             'name' => 'required|string',
         ]);
 
-        $Kategori = Kategori::find($id);
+        $universitas = Universitas::find($id);
 
-        $Kategori->update($data);
+        $universitas->update($data);
 
-        return redirect()->route('admin.kategori')->with('success', 'Berhasil Ubah Kategori Soal');
+        return redirect()->route('Universitas.index')->with('success', 'Berhasil Ubah Universitas');
     }
 
-    public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
         try {
-            $Kategori = Kategori::find($id);
+            $universitas = Universitas::find($id);
 
-            if (!$Kategori) {
+            if (!$universitas) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Kategori Soal not found',
+                    'message' => 'Universitas not found',
                 ], 404);
             }
 
              // Menghapus semua soal yang terkait dengan kategori
-             $soalujians = SoalUjian::where('kategori_id', $id)->get();
+             $prodis = Prodi::where('universitas_id', $id)->get();
 
              //Menghapus semua soal yang terkait
-             foreach ($soalujians as $soalujian) {
-                 $soalujian->delete();
+             foreach ($prodis as $prodi) {
+                 $prodi->delete();
              }
 
-            $Kategori->delete();
+            $universitas->delete();
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Kategori Soal deleted',
+                'message' => 'Universitas deleted',
             ]);
         } catch (\Exception $e) {
             return response()->json([

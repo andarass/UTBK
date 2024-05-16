@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\PaketUjianController;
 use App\Http\Controllers\Admin\SoalUjianController;
 use App\Http\Controllers\Admin\PaketLatihanSoalController;
 use App\Http\Controllers\Admin\LatihanSoalController;
+use App\Http\Controllers\Admin\UniversitasController;
+use App\Http\Controllers\Admin\ProdiController;
 use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\MenuController;
 use App\Http\Controllers\User\RegisterController;
@@ -90,6 +92,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
         Route::resource('PaketUjianSoal', PaketUjianController::class);
 
+        Route::resource('Universitas', UniversitasController::class);
+
+        Route::resource('Prodi', ProdiController::class);
 
         Route::group(['prefix' => 'SoalUjian'], function () {
             Route::get('/soal/{id}/delete-image', [SoalUjianController::class, 'deleteImage'])->name('admin.soal-ujian.delete_image');

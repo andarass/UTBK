@@ -402,10 +402,9 @@ class SoalUjianController extends Controller
         //answer d
         if ($request->input('answer_d_type') === 'text') {
             $validate['jawaban_d'] = 'string';
-            $data['jawaban_d'] = $request->input('answer_d');
+            $data['jawaban_d'] = $request->input('jawaban_d');
             $data['jawaban_d_gambar'] = null;
         } else if ($request->input('answer_d_type') === 'image') {
-            // $answerDImage = $request->input('jawaban_d_gambar');
             $answerDImage = $request->file('jawaban_d_gambar');
             $originalAnswerDImage = Str::random(10) . $answerDImage->getClientOriginalName();
             $answerDImage->storeAs('public/jawaban_d', $originalAnswerDImage);
@@ -413,19 +412,18 @@ class SoalUjianController extends Controller
 
             Storage::delete('public/jawaban_d/' . $soalUjian->jawaban_d_gambar);
 
-            $data['answer_d'] = null;
+            $data['jawaban_d'] = null;
         } else {
             $data['jawaban_d_gambar'] = $soalUjian->jawaban_d_gambar;
-            $data['answer_d'] = null;
+            $data['jawaban_d'] = null;
         }
 
         //answer e
         if ($request->input('answer_e_type') === 'text') {
             $validate['jawaban_e'] = 'string';
-            $data['jawaban_e'] = $request->input('answer_e');
+            $data['jawaban_e'] = $request->input('jawaban_e');
             $data['jawaban_e_gambar'] = null;
         } else if ($request->input('answer_e_type') === 'image') {
-            // $answerDImage = $request->input('jawaban_d_gambar');
             $answerEImage = $request->file('jawaban_e_gambar');
             $originalAnswerEImage = Str::random(10) . $answerEImage->getClientOriginalName();
             $answerEImage->storeAs('public/jawaban_e', $originalAnswerEImage);
@@ -436,7 +434,7 @@ class SoalUjianController extends Controller
             $data['jawaban_e'] = null;
         } else {
             $data['jawaban_e_gambar'] = $soalUjian->jawaban_e_gambar;
-            $data['answer_e'] = null;
+            $data['jawaban_e'] = null;
         }
 
 
