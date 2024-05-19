@@ -43,8 +43,12 @@
                                 {{-- User's answers will be populated here dynamically --}}
                             </tbody>
                         </table>
-                        <button onclick="logoutAndRedirect()"
-                            class="btn btn-danger mt-4">
+                        <div id="statusLulus" class="text-center mt-4"></div>
+                        @if (auth()->user()->prodis_id)
+                            <a href="{{ route('prodi.kriteriaKelulusan', auth()->user()->prodis_id) }}"
+                                class="btn btn-info mt-4">Lihat Kriteria Kelulusan</a>
+                        @endif
+                        <button onclick="logoutAndRedirect()" class="btn btn-danger mt-4">
                             Logout
                         </button>
                     </div>
@@ -55,7 +59,6 @@
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-
 
     <script>
         function displayUserAnswers() {
@@ -116,11 +119,19 @@
                 </tr>
             `;
             resultTableBody.innerHTML += totalRow;
+
+            // Check if the user passed or failed
+            const minimalPoints = {{ $prodi ? $prodi->nilai_minimal : 500 }};
+            const statusLulus = document.getElementById('statusLulus');
+            if (totalPoints >= minimalPoints) {
+                statusLulus.innerHTML = '<h4 class="text-success">Lulus</h4>';
+            } else {
+                statusLulus.innerHTML = '<h4 class="text-danger">Tidak Lulus</h4>';
+            }
         }
 
         document.addEventListener('DOMContentLoaded', displayUserAnswers);
     </script>
-
 
     <script>
         function logoutAndRedirect() {
@@ -138,12 +149,11 @@
                     sessionStorage.clear();
 
                     // Redirect to logout route
-                    window.location.href = '/';
+                    window.location.href = '/menu';
                 }
             });
         }
     </script>
-    {{-- @endpush --}}
 </body>
 
 </html>

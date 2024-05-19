@@ -31,6 +31,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'prodis_id',
     ];
 
     /**
@@ -73,5 +74,8 @@ class User extends Authenticatable
         return $this->hasMany(Jawaban::class);
     }
 
-
+    public function prodi(): HasMany
+    {
+        return $this->hasMany(Prodi::class);
+    }
 }

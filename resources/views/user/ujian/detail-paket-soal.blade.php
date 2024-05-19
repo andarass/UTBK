@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
     <title>Detail Paket Soal</title>
@@ -68,10 +66,35 @@
             // Update waktu awal
             updateWaktuAwal();
 
-            window.location.href =
-                "{{ route('user.soal-ujian', ['paketSoalId' => $paketSoal->id, 'soalId' => $firstSoalId]) }}";
+            let paketSoalId = <?php echo json_encode($paketSoal->id); ?>;
+            let soalByCategory = <?php echo json_encode($soalByCategory); ?>;
+
+            if (!soalByCategory || Object.keys(soalByCategory).length === 0) {
+                // Handle the case where soalByCategory is null or empty
+                console.error("Invalid or empty soalByCategory.");
+                return;
+            }
+
+            // Get the keys of soalByCategory
+            let categoryKeys = Object.keys(soalByCategory);
+
+            // Get the index of the first question in the first category
+            let questionIndex = 0;
+
+           
+            if (categoryKeys.length > 0) {
+
+                let firstCategoryKey = categoryKeys[0];
+
+                if (soalByCategory[firstCategoryKey].length > questionIndex) {
+
+                    let firstQuestion = soalByCategory[firstCategoryKey][questionIndex];
+
+                    window.location.href = `/soal-ujian/${paketSoalId}/${firstQuestion.id}`;
+                    return;
+                }
+            }
         }
-    </script>
     </script>
 </body>
 

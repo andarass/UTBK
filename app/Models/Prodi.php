@@ -20,4 +20,9 @@ class Prodi extends Model
     {
         return $this->belongsTo(Universitas::class);
     }
+
+    public function prodi(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -47,7 +47,7 @@
                     </div>
                     <div class="row mb-5">
                         <div class="col-xl-3">
-                            <label for="universitas_id" class="fs-6 fw-bold mt-2 mb-3">Kategori Soal</label>
+                            <label for="universitas_id" class="fs-6 fw-bold mt-2 mb-3">Universitas</label>
                         </div>
                         <div class="col-lg">
                             <select name="universitas_id" id="universitas_id" class="form-select custom-placeholder"

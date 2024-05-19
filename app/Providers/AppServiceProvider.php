@@ -27,5 +27,9 @@ class AppServiceProvider extends ServiceProvider
 
             return in_array(strtolower($value->getClientOriginalExtension()), $allowedExtensions);
         });
+
+        //  if(config('app.env') === 'local') {
+        //     URL::forceScheme('https');
+        // }
     }
 }

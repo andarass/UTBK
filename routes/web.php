@@ -61,6 +61,7 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']
     Route::get('/paket-ujian/{id}', [UjianController::class, 'detailPaketSoal'])->name('user.ujian.detail-paket-ujian');
     Route::get('/soal-ujian/{paketSoalId}/{soalId}', [UjianController::class, 'mulaiUjian'])->name('user.soal-ujian');
     Route::get('/skor-akhir-ujian', [UjianController::class, 'jawaban'])->name('user.ujian.skor-akhir-ujian');
+    Route::get('/{prodiId}/kriteria-kelulusan', [UjianController::class, 'kriteriaKelulusan'])->name('prodi.kriteriaKelulusan');
 
 });
 
