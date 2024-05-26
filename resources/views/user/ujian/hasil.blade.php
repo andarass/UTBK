@@ -61,57 +61,41 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <script>
+        // Ambil data dari sesi Laravel
+        const soalByCategory = {!! json_encode(session('soalByCategory')) !!};
+
         function displayUserAnswers() {
             const resultTableBody = document.getElementById('resultTableBody');
-            const sessionStorageKeys = Object.keys(sessionStorage).filter(key => key.includes('jawabanSoal_'));
-
-            let questionNumber = 1;
             let totalPoints = 0;
+            let questionNumber = 1;
 
-            // Object to store answers based on category
-            const answersByCategory = {};
+            // Iterasi setiap kategori dan tampilkan jawaban sesuai urutan soalByCategory
+            Object.keys(soalByCategory).forEach(kategoriId => {
+                const category = soalByCategory[kategoriId];
+                const kategoriName = category[0].kategori.name; // Ambil nama kategori dari data sesi Laravel
+                category.forEach(soal => {
+                    const sessionStorageKey = `jawabanSoal_${soal.id}`;
+                    const jawaban = JSON.parse(sessionStorage.getItem(sessionStorageKey));
+                    const points = jawaban.opsiDipilih === jawaban.correctAnswer ? parseInt(jawaban.points) : 0;
 
-            sessionStorageKeys.forEach(key => {
-                const jawaban = JSON.parse(sessionStorage.getItem(key));
+                    // Tambahkan poin ke total
+                    totalPoints += points;
 
-                // Determine points based on whether opsiDipilih is correct
-                const points = jawaban.opsiDipilih === jawaban.correctAnswer ? parseInt(jawaban.points) : 0;
-
-                // Store answers based on category
-                if (!answersByCategory[jawaban.kategori]) {
-                    answersByCategory[jawaban.kategori] = [];
-                }
-                answersByCategory[jawaban.kategori].push({
-                    questionNumber: questionNumber,
-                    opsiDipilih: jawaban.opsiDipilih,
-                    points: points
-                });
-
-                // Increment total points
-                totalPoints += points;
-
-                questionNumber++;
-            });
-
-            // Iterate over categories and display answers
-            Object.keys(answersByCategory).forEach(kategori => {
-                const categoryAnswers = answersByCategory[kategori];
-                // Sort answers by question number within the category
-                categoryAnswers.sort((a, b) => a.questionNumber - b.questionNumber);
-                categoryAnswers.forEach(answer => {
+                    // Tampilkan jawaban dalam tabel
                     const resultRow = `
                         <tr>
-                            <td>${answer.questionNumber}</td>
-                            <td>${answer.opsiDipilih}</td>
-                            <td>${kategori}</td>
-                            <td>${answer.points}</td>
+                            <td>${questionNumber}</td>
+                            <td>${jawaban.opsiDipilih}</td>
+                            <td>${kategoriName}</td>
+                            <td>${points}</td>
                         </tr>
                     `;
                     resultTableBody.innerHTML += resultRow;
+                    questionNumber++;
                 });
             });
 
-            // Display the total points
+            // Tampilkan total poin
             const totalRow = `
                 <tr>
                     <td colspan="3"><b>Total</b></td>
@@ -120,7 +104,7 @@
             `;
             resultTableBody.innerHTML += totalRow;
 
-            // Check if the user passed or failed
+            // Tentukan status lulus atau tidak
             const minimalPoints = {{ $prodi ? $prodi->nilai_minimal : 500 }};
             const statusLulus = document.getElementById('statusLulus');
             if (totalPoints >= minimalPoints) {
@@ -155,5 +139,4 @@
         }
     </script>
 </body>
-
 </html>

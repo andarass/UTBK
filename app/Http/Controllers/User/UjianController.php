@@ -99,6 +99,7 @@ class UjianController extends Controller
 
         //  dd(session()->all());
 
+        $currentSoal->ragu_ragu = $request->session()->get('ragu_ragu_' . $currentSoal->id, false);
 
         return view('user.ujian.soal', compact('soals', 'currentSoalIndex', 'currentSoal', 'previousSoal', 'lastSoal', 'nextSoal'));
     }

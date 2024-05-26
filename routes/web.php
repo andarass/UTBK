@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\PaketLatihanSoalController;
 use App\Http\Controllers\Admin\LatihanSoalController;
 use App\Http\Controllers\Admin\UniversitasController;
 use App\Http\Controllers\Admin\ProdiController;
+use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\LoginController as UserLoginController;
 use App\Http\Controllers\User\MenuController;
 use App\Http\Controllers\User\RegisterController;
@@ -35,14 +36,6 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-// Route::get('/ujian-soal', function () {
-//     return view('user.ujian.soal');
-// });
-
-// Route::get('/menu', function () {
-//     return view('user.menu');
-// });
-
 Route::get('/login', [UserLoginController::class, 'index'])->name('user.login');
 Route::post('/login', [UserLoginController::class, 'auth'])->name('login.auth');
 
@@ -51,6 +44,7 @@ Route::get('/register', [RegisterController::class, 'index'])->name('user.regist
 Route::post('/register', [RegisterController::class, 'store'])->name('user.register.store');
 
 Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']], function () {
+    // Route::get('/dashboard-user', [DashboardController::class, 'index'])->name('dashboard.user');
     Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
@@ -62,7 +56,6 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']
     Route::get('/soal-ujian/{paketSoalId}/{soalId}', [UjianController::class, 'mulaiUjian'])->name('user.soal-ujian');
     Route::get('/skor-akhir-ujian', [UjianController::class, 'jawaban'])->name('user.ujian.skor-akhir-ujian');
     Route::get('/{prodiId}/kriteria-kelulusan', [UjianController::class, 'kriteriaKelulusan'])->name('prodi.kriteriaKelulusan');
-
 });
 
 //Route Admin

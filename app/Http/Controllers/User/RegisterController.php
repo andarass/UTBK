@@ -43,8 +43,6 @@ class RegisterController extends Controller
                 ->withInput();
         }
 
-        // session(['universitas_id' => $request->universitas, 'prodi_id' => $request->prodi]);
-
         $data['password'] = Hash::make($request->password);
 
         $user = User::create($data);

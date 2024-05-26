@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
-        <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
     <title>Soal Ujian | KITAPTN</title>
 </head>
@@ -54,7 +52,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">
-                                      @include('user.components.ujian.daftar-soal')
+                                        @include('user.components.ujian.daftar-soal')
                                     </div>
                                 </div>
                             </div>
@@ -81,9 +79,6 @@
         </div>
     </section>
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script> --}}
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
@@ -111,7 +106,7 @@
             document.getElementById("detik").innerText = seconds.toString().padStart(2, '0');
 
             // notifikasi 30 menit
-            if (minutes === 30  && !notifikasi30Menit) {
+            if (minutes === 30 && !notifikasi30Menit) {
                 notifikasi30Menit = true
                 Swal.fire({
                     title: "Perhatian!",
@@ -209,13 +204,40 @@
         });
     </script>
 
-<script>
-    function redirectToQuestion(soalId) {
+    <script>
+        function redirectToQuestion(soalId) {
 
-        const url = '/soal-ujian/{{ $currentSoal->paket_soal_id }}/' + soalId;
-        window.location.href = url;
-    }
-</script>
+            const raguRagu = sessionStorage.getItem('ragu_ragu_' + soalId); // Periksa status ragu-ragu
+
+            // Perbarui warna tombol berdasarkan status ragu-ragu
+            const buttonElement = document.getElementById('questionButton_' + soalId);
+            if (raguRagu) {
+                buttonElement.classList.add('btn-warning'); // Tambahkan warna kuning jika ragu-ragu
+            } else {
+                buttonElement.classList.remove('btn-warning'); // Hapus warna kuning jika tidak ragu-ragu
+            }
+
+            const url = '/soal-ujian/{{ $currentSoal->paket_soal_id }}/' + soalId;
+            window.location.href = url;
+        }
+
+        // Fungsi untuk memperbarui warna tombol ketika halaman dimuat
+        function updateButtonColorOnLoad() {
+            const buttons = document.querySelectorAll('.btn-square-social');
+            buttons.forEach(function(button) {
+                const soalId = button.id.replace('questionButton_', '');
+                const raguRagu = sessionStorage.getItem('ragu_ragu_' + soalId);
+                if (raguRagu) {
+                    button.classList.add('btn-warning'); // Tambahkan warna kuning jika ragu-ragu
+                }
+            });
+        }
+
+        // Panggil fungsi untuk memperbarui warna tombol saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            updateButtonColorOnLoad();
+        });
+    </script>
 
     <script>
         function konfirmasiAkhiriUjian() {
@@ -247,7 +269,7 @@
                 if (currentCategory !== nextCategory) {
                     Swal.fire({
                         title: "Pindah Sesi!",
-                        text: "You are moving to the next Section. Are you sure?",
+                        text: "Apakah anda yakin ingin pindah sesi selanjutnya ?",
                         icon: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#3085d6",
@@ -287,6 +309,66 @@
                 }
             });
         };
+    </script>
+
+    <script>
+        // Fungsi untuk menandai atau menghapus tanda ragu-ragu
+        function tandaiRaguRagu() {
+            const checkbox = document.getElementById('ragu-ragu-checklist');
+            const checked = checkbox.checked;
+            const currentSoalId = '{{ $currentSoal->id }}';
+
+            if (checked) {
+                // Tandai ragu-ragu
+                sessionStorage.setItem('ragu_ragu_' + currentSoalId, true);
+                // Perbarui warna tombol pada modal
+                perbaruiWarnaTombol(currentSoalId, true);
+            } else {
+                // Hapus tanda ragu-ragu
+                sessionStorage.removeItem('ragu_ragu_' + currentSoalId);
+                // Perbarui warna tombol pada modal
+                perbaruiWarnaTombol(currentSoalId, false);
+            }
+        }
+
+        // Fungsi untuk memperbarui warna latar belakang tombol pada modal
+        function perbaruiWarnaTombol(soalId, raguRagu) {
+            // Periksa apakah tombol ada pada modal
+            const buttonElement = document.getElementById('questionButton_' + soalId);
+            if (buttonElement) {
+                // Perbarui warna tombol
+                if (raguRagu) {
+                    buttonElement.classList.add('btn-warning');
+                } else {
+                    buttonElement.classList.remove('btn-warning');
+                }
+            }
+        }
+
+        // Inisialisasi status checklist saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkbox = document.getElementById('ragu-ragu-checklist');
+            const currentSoalId = '{{ $currentSoal->id }}';
+            const raguRagu = sessionStorage.getItem('ragu_ragu_' + currentSoalId);
+
+            if (raguRagu) {
+                checkbox.checked = true;
+                // Perbarui warna tombol pada modal jika raguRagu dicentang saat halaman dimuat
+                perbaruiWarnaTombol(currentSoalId, true);
+            } else {
+                checkbox.checked = false;
+            }
+
+            // Memperbarui warna tombol pada modal ketika pengguna pindah ke soal selanjutnya
+            const buttons = document.querySelectorAll('.bg-primary');
+            buttons.forEach(function(button) {
+                const soalId = button.id.replace('questionButton_', '');
+                const raguRagu = sessionStorage.getItem('ragu_ragu_' + soalId);
+                if (raguRagu) {
+                    button.classList.add('btn-warning');
+                }
+            });
+        });
     </script>
 </body>
 </html>

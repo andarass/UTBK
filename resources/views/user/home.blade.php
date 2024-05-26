@@ -2,30 +2,62 @@
 <html lang="en" style="scroll-behavior: smooth;">
 
 <head>
-    <!-- Required meta tags -->
+     {{-- Required meta tags --}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--====== Favicon Icon ======-->
+    {{-- ====== Favicon Icon ====== --}}
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
 
     <title>KITAPTN</title>
 
-    <!-- Icon -->
+     {{-- Icon --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/LineIcons.2.0.css') }}">
-    <!-- Animate -->
+     {{-- Animate --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/animate.css') }}">
-    <!-- Tiny Slider  -->
+    {{-- Tiny Slider --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/tiny-slider.css') }}">
-    <!-- Tailwind css -->
+     {{-- Tailwind css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/tailwind.css') }}">
+
+    <style>
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .profile-dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Header Area wrapper Starts -->
+     {{-- Header Area wrapper Starts --}}
     <header id="header-wrap" class="relative">
-        <!-- Navbar Start -->
+         {{-- Navbar Start --}}
         <div class="navigation fixed top-0 left-0 w-full z-30 duration-300">
             <div class="container">
                 <nav class="navbar py-1 navbar-expand-lg flex justify-between items-center relative duration-300">
@@ -69,17 +101,31 @@
                     </div>
                     @auth
                         @if (isset($username))
-                            <span class="text-sm font-normal">Welcome, {{ $username }}</span>
+                            {{-- <span class="text-sm font-normal">Welcome, {{ $username }}</span> --}}
+                            <div class="profile-dropdown">
+                                <span class="profile-name">Welcome, {{ $username }}</span>
+                                <div class="dropdown-content">
+                                    <a href="#">Dashboard</a>
+                                    <a href="{{ route('user.logout') }}">Logout</a>
+                                </div>
+                            </div>
                         @else
-                            <span class="text-sm font-normal">Welcome,
-                                {{ Auth::user()->username }}</span>
+                            {{-- <span class="text-sm font-normal">Welcome,
+                                {{ Auth::user()->username }}</span> --}}
+                            <div class="profile-dropdown">
+                                <span class="profile-name">Welcome, {{ Auth::user()->username }}</span>
+                                <div class="dropdown-content">
+                                    <a href="#">Dashboard</a>
+                                    <a href="{{ route('user.logout') }}">Logout</a>
+                                </div>
+                            </div>
                         @endif
-                        <a href="{{ route('user.logout') }}" class="text-sm font-normal"><span>Logout</span></a>
+                        {{-- <a href="{{ route('user.logout') }}" class="text-sm font-normal"><span>Logout</span></a> --}}
                     @else
                         <div class="header-btn hidden sm:block sm:absolute sm:right-0 sm:mr-16 lg:static lg:mr-0">
                             <a class="text-blue-600 border border-blue-600 px-10 py-3 rounded-full duration-300 hover:bg-blue-600 hover:text-white"
                                 href="{{ route('user.login') }}">Login</a>
-                                 {{-- @include('user.components.user-profile') --}}
+                            {{-- @include('user.components.user-profile') --}}
                         </div>
                     @endauth
                     {{-- <div class="header-btn hidden sm:block sm:absolute sm:right-0 sm:mr-16 lg:static lg:mr-0">
@@ -99,7 +145,7 @@
                 <div class="w-full text-center">
                     <h2 class="text-4xl font-bold leading-snug text-gray-700 mb-10 wow fadeInUp" data-wow-delay="1s">
                         KITA PTN</h2>
-                    <!-- <br class="hidden lg:block"> Built with TailwindCSS -->
+                    {{-- <br class="hidden lg:block"> Built with TailwindCSS --}}
                     @guest
                         <div class="text-center mb-10 wow fadeInUp" data-wow-delay="1.2s">
                             <a href="{{ route('user.login') }}" rel="nofollow" class="btn">Mulai</a>
@@ -815,18 +861,35 @@
         <i class="lni lni-arrow-up"></i>
     </a>
 
-    <!-- Preloader -->
-    <!--     <div id="preloader">
+    {{-- reloader
+    <div id="preloader">
       <div class="loader" id="loader-1"></div>
-    </div> -->
-    <!-- End Preloader -->
+    </div>
+    End Preloader --}}
 
-    <!-- All js Here -->
+    {{-- All js Here --}}
     <script src="{{ asset('assets/js/user/wow.js') }}"></script>
-    <!-- <script src="assets/js/tiny-slider.js"></script> -->
+    {{-- <script src="assets/js/tiny-slider.js"></script>  --}}
     <script src="{{ asset('assets/js/user/tiny-slider.js') }}"></script>
     <script src="{{ asset('assets/js/user/contact-form.js') }}"></script>
     <script src=" {{ asset('assets/js/user/main.js') }} "></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileName = document.querySelector('.profile-name');
+            const dropdownContent = document.querySelector('.dropdown-content');
+
+            profileName.addEventListener('click', function() {
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' :
+                'block';
+            });
+
+            window.addEventListener('click', function(e) {
+                if (!profileName.contains(e.target) && !dropdownContent.contains(e.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

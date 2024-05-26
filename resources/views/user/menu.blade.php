@@ -42,6 +42,7 @@
                     </div>
                     <div class="col-12 mt-3">
                         <button type="submit" class="btn btn-primary">Masuk</button>
+                        <a href="/" class="btn btn-danger">Kembali ke Homepage</a>
                     </div>
                 </div>
             </div>
@@ -74,5 +75,4 @@
         });
     </script>
 </body>
-
 </html>
