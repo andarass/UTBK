@@ -369,6 +369,32 @@
                 }
             });
         });
+    </script>6
+
+    <script>
+        document.addEventListener('mouseleave', function(event) {
+
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            if (event.clientY <= 0 || event.clientX <= 0 || event.clientX >= viewportWidth || event.clientY >=
+                viewportHeight) {
+
+                //  Ambil jumlah munculnya sweet alert dari session storage
+                // let sweetAlertCount = sessionStorage.getItem('sweetAlertCount');
+                // Ubah ke tipe number
+                // sweetAlertCount = parseInt(sweetAlertCount) || 0;
+                // Tambah 1 ke jumlah munculnya
+                // sweetAlertCount++;
+                // Simpan kembali ke session storage
+                // sessionStorage.setItem('sweetAlertCount', sweetAlertCount);
+                Swal.fire({
+                    title: 'Hayo mau nyontek ya',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
     </script>
 </body>
 </html>

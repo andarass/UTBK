@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket_soal_latihan_soals', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('universitas_id')->nullable();
+            $table->foreign('universitas_id')->references('id')->on('universitas');
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket_soal_latihan_soals');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

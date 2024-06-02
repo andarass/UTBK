@@ -30,7 +30,6 @@ return new class extends Migration
             $table->text('konten_bacaan_gambar')->nullable();
             $table->string('kunci_jawaban');
             $table->string('point_soal');
-            $table->foreignId('paket_soal_id')->constrained('paket_soal_latihan_soals');
             $table->foreignId('kategori_id')->constrained('kategoris');
             $table->timestamps();
         });

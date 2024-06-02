@@ -336,18 +336,18 @@
 
                     <div class="row mb-5">
                         <div class="col-xl-3">
-                            <label for="paket_soal_id" class="fs-6 fw-bold mt-2 mb-3">Paket Soal</label>
+                            <label for="kategori_latihan_soal_id" class="fs-6 fw-bold mt-2 mb-3">Kategori Latihan Soal</label>
                         </div>
                         <div class="col-lg">
-                            <select name="paket_soal_id" id="paket_soal_id" class="form-select" data-control="select2">
-                                @foreach ($paketSoal as $paket)
-                                    <option value="{{ $paket->id }}"
-                                        {{ $paket->id == $latihanSoal->paket_soal_id ? 'selected' : '' }}>
-                                        {{ $paket->name }}
+                            <select name="kategori_latihan_soal_id" id="kategori_latihan_soal_id" class="form-select" data-control="select2">
+                                @foreach ($kategoriLatihanSoals as $kategoriLatihanSoal)
+                                    <option value="{{ $kategoriLatihanSoal->id }}"
+                                        {{ $kategoriLatihanSoal->id == $latihanSoal->kategori_latihan_soal_id ? 'selected' : '' }}>
+                                        {{ $kategoriLatihanSoal->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('paket_soal_id')
+                            @error('kategori_latihan_soal_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

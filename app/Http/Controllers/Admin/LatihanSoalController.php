@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\LatihanSoal;
-use App\Models\PaketSoalLatihanSoal;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
+use App\Models\KategoriLatihanSoal;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
@@ -19,7 +19,7 @@ class LatihanSoalController extends Controller
      */
     public function index(Request $request)
     {
-        $jumlahPaketSoal = PaketSoalLatihanSoal::count();
+        $jumlahSoal = KategoriLatihanSoal::count();
 
         if ($request->ajax()) {
             $latihanSoal = LatihanSoal::get();
@@ -79,16 +79,16 @@ class LatihanSoalController extends Controller
                     </div>
                 </div>';
                 })
-                ->editColumn('kategori', function ($item) {
-                    return $item->Kategori->name ? $item->Kategori->name : "-";
+                ->editColumn('kategori_latihan_soal', function ($item) {
+                    return $item->KategoriLatihanSoal->name ? $item->KategoriLatihanSoal->name : "-";
                 })
-                ->editColumn('paket_soal', function ($item) {
-                    return $item->PaketSoal->name ?? "-";
+                ->editColumn('kategori', function ($item) {
+                    return $item->Kategori->name ?? "-";
                 })
                 ->rawColumns(['actions', 'soal_gambar', 'soal_audio', 'soal'])
                 ->make();
         }
-        return view('admin.latihan-soal.index', compact('jumlahPaketSoal'));
+        return view('admin.latihan-soal.index', compact('jumlahSoal'));
     }
 
     /**
@@ -96,10 +96,10 @@ class LatihanSoalController extends Controller
      */
     public function create()
     {
-        $paketSoals = PaketSoalLatihanSoal::select(['id', 'name'])->get();
+        $kategoriSoals = KategoriLatihanSoal::select(['id', 'name'])->get();
         $kategoris = Kategori::select(['id', 'name'])->get();
 
-        return view('admin.latihan-soal.create', compact('paketSoals', 'kategoris'));
+        return view('admin.latihan-soal.create', compact('kategoriSoals', 'kategoris'));
     }
 
     /**
@@ -119,7 +119,7 @@ class LatihanSoalController extends Controller
             'jawaban_e_gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'kunci_jawaban' => 'required|string',
             'point_soal' => 'required|string',
-            'paket_soal_id' => 'required',
+            'kategori_latihan_soal_id' => 'required',
             'kategori_id' => 'required',
             'konten_bacaan_gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
@@ -270,12 +270,12 @@ class LatihanSoalController extends Controller
     {
         $latihanSoal = LatihanSoal::find($id);
 
-        $paketSoal = PaketSoalLatihanSoal::select(['id', 'name'])->get();
+        $kategoriLatihanSoals = KategoriLatihanSoal::select(['id', 'name'])->get();
 
         $kategoriSoals = Kategori::select(['id', 'name'])->get();
 
         return view('admin.latihan-soal.edit', [
-            'paketSoal' => $paketSoal,
+            'kategoriLatihanSoals' => $kategoriLatihanSoals,
             'kategoriSoals' => $kategoriSoals,
             'latihanSoal' => $latihanSoal,
         ]);
@@ -298,7 +298,7 @@ class LatihanSoalController extends Controller
             'jawaban_e_gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'kunci_jawaban' => 'required|string',
             'point_soal' => 'required|string',
-            'paket_soal_id' => 'required',
+            'kategori_latihan_soal_id' => 'required',
             'kategori_id' => 'required',
             'konten_bacaan_gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];

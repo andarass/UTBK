@@ -223,17 +223,17 @@
 
                     <div class="row mb-5">
                         <div class="col-xl-3">
-                            <label for="paket_soal_id" class="fs-6 fw-bold mt-2 mb-3">Paket Soal</label>
+                            <label for="kategori_latihan_soal_id" class="fs-6 fw-bold mt-2 mb-3">Kategori Latihan Soal</label>
                         </div>
                         <div class="col-lg">
-                            <select name="paket_soal_id" id="paket_soal_id" class="form-select custom-placeholder"
-                                data-control="select2" data-placeholder="Pilih Paket Soal">
-                                <option value="" disabled selected>Pilih Paket Soal</option>
-                                @foreach ($paketSoals as $paketSoal)
-                                    <option value="{{ $paketSoal->id }}">{{ $paketSoal->name }}</option>
+                            <select name="kategori_latihan_soal_id" id="kategori_latihan_soal_id" class="form-select custom-placeholder"
+                                data-control="select2" data-placeholder="Pilih Kategori Latihan Soal">
+                                <option value="" disabled selected>Pilih Kategori Latihan Soal</option>
+                                @foreach ($kategoriSoals as $kategoriSoal)
+                                    <option value="{{ $kategoriSoal->id }}">{{ $kategoriSoal->name }}</option>
                                 @endforeach
                             </select>
-                            @error('paket_soal_id')
+                            @error('kategori_latihan_soal_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

@@ -28,13 +28,13 @@ class LatihanSoal extends Model
         'konten_bacaan_gambar',
         'kunci_jawaban',
         'point_soal',
-        'paket_soal_id',
+        'kategori_latihan_soal_id',
         'kategori_id',
     ];
 
-    public function PaketSoal(): BelongsTo
+    public function KategoriLatihanSoal(): BelongsTo
     {
-        return $this->belongsTo(PaketSoalLatihanSoal::class);
+        return $this->belongsTo(KategoriLatihanSoal::class);
     }
 
     public function Kategori(): BelongsTo

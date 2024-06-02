@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Latihan Soal')
+@section('title', 'User Management')
 
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
-            Latihan Soal
+            User Management
         </h1>
     </div>
 @endsection
@@ -27,23 +27,23 @@
                     placeholder="Cari.." />
             </div>
             <div class="d-flex flex-stack">
-                @if ($jumlahSoal > 0)
-                    <a type="button" class="btn btn-primary ms-2" href="{{ route('LatihanSoal.create') }}">
-                        Tambah Soal
+                    <a type="button" class="btn btn-primary ms-2" href="{{ route('User.create') }}">
+                        Tambah User
                     </a>
-                @endif
             </div>
         </div>
         <div class="card-body pt-0">
-            <table id="soal-table" class="table align-middle table-row-dashed fs-6 gy-5">
+            <table id="user-table" class="table align-middle table-row-dashed fs-6 gy-5">
                 <thead>
                     <tr class="fw-semibold fs-6 text-muted">
                         <th class="text-start min-w-100px">No</th>
-                        <th class="text-start min-w-100px">Soal</th>
-                        <th class="text-start min-w-100px">Soal Gambar</th>
-                        <th class="text-center min-w-100px">Soal Audio</th>
-                        <th class="text-start min-w-100px">Kategori Latihan Soal</th>
-                        <th class="text-start min-w-100px">Kategori</th>
+                        <th class="text-start min-w-100px">User Profile</th>
+                        <th class="text-start min-w-100px">Nama User</th>
+                        <th class="text-start min-w-100px">Username</th>
+                        <th class="text-start min-w-100px">E-Mail</th>
+                        <th class="text-start min-w-100px">Role</th>
+                        <th class="text-start min-w-100px">Universitas</th>
+                        <th class="text-start min-w-100px">Prodi</th>
                         <th class="text-end min-w-100px">Actions</th>
                     </tr>
                 </thead>
@@ -53,7 +53,7 @@
 @endsection
 @push('scripts')
     <script>
-        var datatable = $('#soal-table').DataTable({
+        var datatable = $('#user-table').DataTable({
             processing: true,
             serverSide: true,
             ordering: true,
@@ -69,50 +69,53 @@
                     width: '10%'
                 },
                 {
-                    data: 'soal',
-                    name: 'soal',
+                    data: 'profile_photo_path',
+                    name: 'profile_photo_path',
                     orderable: true,
                     searchable: true,
-                    width: '30%',
-                    render: function(data, type, row) {
-                        if (type === 'display') {
-                            if (data.length > 100) {
-                                return data.slice(0, 100);
-                            } else {
-                                return data;
-                            }
-                        } else {
-                            return data;
-                        }
-                    }
+                    width: '20%'
                 },
                 {
-                    data: 'soal_gambar',
-                    name: 'soal_gambar',
+                    data: 'name',
+                    name: 'name',
                     orderable: true,
                     searchable: true,
-                    width: '20%',
+                    width: '20%'
                 },
                 {
-                    data: 'soal_audio',
-                    name: 'soal_audio',
+                    data: 'username',
+                    name: 'username',
                     orderable: true,
                     searchable: true,
-                    width: '20%',
+                    width: '20%'
                 },
                 {
-                    data: 'kategori_latihan_soal',
-                    name: 'kategori_latihan_soal',
+                    data: 'email',
+                    name: 'email',
                     orderable: true,
                     searchable: true,
-                    width: '30%'
+                    width: '20%'
                 },
                 {
-                    data: 'kategori',
-                    name: 'kategori',
+                    data: 'role',
+                    name: 'role',
                     orderable: true,
                     searchable: true,
-                    width: '30%'
+                    width: '20%'
+                },
+                {
+                    data: 'universitas_id',
+                    name: 'universitas_id',
+                    orderable: true,
+                    searchable: true,
+                    width: '20%'
+                },
+                {
+                    data: 'prodis_id',
+                    name: 'prodis_id',
+                    orderable: true,
+                    searchable: true,
+                    width: '20%'
                 },
                 {
                     data: 'actions',
@@ -149,7 +152,7 @@
                 if (result.isConfirmed) {
                     e.preventDefault();
                     var id = $(this).data("id");
-                    var route = "{{ route('LatihanSoal.destroy', ':id') }}";
+                    var route = "{{ route('User.destroy', ':id') }}";
                     route = route.replace(':id', id);
                     $.ajax({
                         url: route,

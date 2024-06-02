@@ -18,4 +18,8 @@ class Universitas extends Model
     {
         return $this->hasMany(SoalUjian::class);
     }
+    public function user(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
 }

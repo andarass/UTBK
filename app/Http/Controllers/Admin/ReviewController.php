@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\LatihanSoal;
-use App\Models\PaketSoalLatihanSoal;
-use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Review;
+use Yajra\DataTables\DataTables;
 
-class PaketLatihanSoalController extends Controller
+
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $paketLatihanSoal = PaketSoalLatihanSoal::get();
-
+        $review = Review::get();
         if ($request->ajax()) {
-            return DataTables::of($paketLatihanSoal)
+            return DataTables::of($review)
                 ->addIndexColumn()
                 ->addColumn('actions', function ($item) {
                     return
@@ -33,7 +33,7 @@ class PaketLatihanSoalController extends Controller
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
                         <div class="menu-item px-3">
-                            <a href="' . route('PaketLatihanSoal.edit', $item->id) . '" class="menu-link px-3">
+                            <a href="' . route('ReviewAplikasi.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
                         </div>
@@ -46,7 +46,7 @@ class PaketLatihanSoalController extends Controller
                 ->rawColumns(['actions'])
                 ->make();
         }
-        return view('admin.paket-latihan-soal.index');
+        return view('admin.review.index');
     }
 
     /**
@@ -54,7 +54,7 @@ class PaketLatihanSoalController extends Controller
      */
     public function create()
     {
-        return view('admin.paket-latihan-soal.create');
+        //
     }
 
     /**
@@ -62,21 +62,13 @@ class PaketLatihanSoalController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->except('_token');
-
-        $request->validate([
-            'name' => 'required|string',
-        ]);
-
-        PaketSoalLatihanSoal::create($data);
-
-        return redirect()->route('PaketLatihanSoal.index')->with('success', 'Berhasil Tambah Paket Soal');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PaketSoalLatihanSoal $paketSoalLatihanSoal)
+    public function show(string $id)
     {
         //
     }
@@ -84,65 +76,24 @@ class PaketLatihanSoalController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(string $id)
     {
-        $PaketSoal = PaketSoalLatihanSoal::find($id);
-
-        return view('admin.paket-latihan-soal.edit', compact('PaketSoal'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        $data = $request->except('_token');
-
-        $request->validate([
-            'name' => 'required|string',
-        ]);
-
-        $paketLatihanSoal = PaketSoalLatihanSoal::find($id);
-
-        $paketLatihanSoal->update($data);
-
-        return redirect()->route('PaketLatihanSoal.index')->with('success', 'Berhasil Ubah Paket Soal');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        try {
-            $paketLatihanSoal = PaketSoalLatihanSoal::find($id);
-
-            if (!$paketLatihanSoal) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Paket Soal not found',
-                ], 404);
-            }
-
-              // Menghapus semua soal yang terkait dengan paket soal
-              $soalLatihanSoals = LatihanSoal::where('paket_soal_id', $id)->get();
-
-              //Menghapus semua soal yang terkait
-              foreach ($soalLatihanSoals as $soalLatihanSoal) {
-                  $soalLatihanSoal->delete();
-              }
-
-            $paketLatihanSoal->delete();
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Paket Soal deleted',
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => $e->getMessage(),
-            ], 500);
-        }
+        //
     }
 }

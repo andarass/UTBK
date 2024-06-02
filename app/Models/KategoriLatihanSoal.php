@@ -5,25 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Prodi extends Model
+class KategoriLatihanSoal extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
-        'nilai_minimal',
-        'universitas_id',
+        'kategori_id',
     ];
 
-    public function Universitas(): BelongsTo
+    public function LatihanSoal(): HasMany
     {
-        return $this->belongsTo(Universitas::class);
+        return $this->hasMany(LatihanSoal::class);
     }
 
-    public function user(): HasMany
+    public function Kategori(): BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(Kategori::class);
     }
 }

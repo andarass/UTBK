@@ -140,9 +140,9 @@
                 </div>
             </div>
             <div class="row mb-7">
-                <label class="col-lg-4 fw-semibold text-muted">Paket Soal</label>
+                <label class="col-lg-4 fw-semibold text-muted">Kategori Latihan Soal</label>
                 <div class="col-lg-8">
-                    <span class="fw-bold fs-6 text-gray-800">{{ $latihanSoal->PaketSoal->name }}</span>
+                    <span class="fw-bold fs-6 text-gray-800">{{ $latihanSoal->KategoriLatihanSoal->name }}</span>
                 </div>
             </div>
         </div>

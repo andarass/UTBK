@@ -2,7 +2,7 @@
 <html lang="en" style="scroll-behavior: smooth;">
 
 <head>
-     {{-- Required meta tags --}}
+    {{-- Required meta tags --}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,19 +11,20 @@
 
     <title>KITAPTN</title>
 
-     {{-- Icon --}}
+    {{-- Icon --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/LineIcons.2.0.css') }}">
-     {{-- Animate --}}
+    {{-- Animate --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/animate.css') }}">
     {{-- Tiny Slider --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/tiny-slider.css') }}">
-     {{-- Tailwind css --}}
+    {{-- Tailwind css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/tailwind.css') }}">
 
     <style>
         .profile-dropdown {
             position: relative;
             display: inline-block;
+            cursor: pointer;
         }
 
         .dropdown-content {
@@ -55,9 +56,9 @@
 
 <body>
 
-     {{-- Header Area wrapper Starts --}}
+    {{-- Header Area wrapper Starts --}}
     <header id="header-wrap" class="relative">
-         {{-- Navbar Start --}}
+        {{-- Navbar Start --}}
         <div class="navigation fixed top-0 left-0 w-full z-30 duration-300">
             <div class="container">
                 <nav class="navbar py-1 navbar-expand-lg flex justify-between items-center relative duration-300">
@@ -101,12 +102,17 @@
                     </div>
                     @auth
                         @if (isset($username))
-                            {{-- <span class="text-sm font-normal">Welcome, {{ $username }}</span> --}}
                             <div class="profile-dropdown">
                                 <span class="profile-name">Welcome, {{ $username }}</span>
                                 <div class="dropdown-content">
-                                    <a href="#">Dashboard</a>
-                                    <a href="{{ route('user.logout') }}">Logout</a>
+                                    @if (Auth::user()->hasRole('User'))
+                                        <a href="{{ route('dashboard.user') }}">Dashboard</a>
+                                    @endif
+                                    @if (Auth::user()->hasRole('User'))
+                                        <a href="{{ route('user.logout') }}">Logout</a>
+                                    @elseif (Auth::user()->hasRole('Super Admin'))
+                                        <a href="{{ route('admin.logout') }}">Logout</a>
+                                    @endif
                                 </div>
                             </div>
                         @else
@@ -115,8 +121,14 @@
                             <div class="profile-dropdown">
                                 <span class="profile-name">Welcome, {{ Auth::user()->username }}</span>
                                 <div class="dropdown-content">
-                                    <a href="#">Dashboard</a>
-                                    <a href="{{ route('user.logout') }}">Logout</a>
+                                    @if (Auth::user()->hasRole('User'))
+                                        <a href="{{ route('dashboard.user') }}">Dashboard</a>
+                                    @endif
+                                    @if (Auth::user()->hasRole('User'))
+                                        <a href="{{ route('user.logout') }}">Logout</a>
+                                    @elseif (Auth::user()->hasRole('Super Admin'))
+                                        <a href="{{ route('admin.logout') }}">Logout</a>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -156,7 +168,8 @@
                         </div>
                     @endguest
                     <div class="text-center wow fadeInUp" data-wow-delay="1.6s">
-                        <img class="img-fluid mx-auto" src="{{ asset('assets/images/user/hero.svg') }}" alt="">
+                        <img class="img-fluid mx-auto" src="{{ asset('assets/images/user/hero.svg') }}"
+                            alt="">
                     </div>
                 </div>
             </div>
@@ -495,7 +508,7 @@
                                 </div>
                                 <div class="mb-2">
                                     <h2 class="font-bold text-lg uppercase text-blue-600 mb-2">Duta</h2>
-                                    <h3 class="font-medium text-white text-sm">Euphoriya</h3>
+                                    <h3 class="font-medium text-white text-sm">Pengguna</h3>
                                 </div>
                             </div>
                         </div>
@@ -880,7 +893,7 @@
 
             profileName.addEventListener('click', function() {
                 dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' :
-                'block';
+                    'block';
             });
 
             window.addEventListener('click', function(e) {

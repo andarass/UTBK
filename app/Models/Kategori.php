@@ -29,4 +29,9 @@ class Kategori extends Model
     {
         return $this->hasMany(LatihanSoal::class, 'kategori_id', 'id');
     }
+
+    public function KategoriLatihanSoal(): HasMany
+    {
+        return $this->hasMany(KategoriLatihanSoal::class);
+    }
 }

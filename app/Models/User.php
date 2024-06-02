@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -29,9 +30,16 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'username',
+        'kota_lahir',
+        'tanggal_lahir',
+        'kecamatan',
+        'kelurahan',
+        'kode_pos',
         'email',
         'password',
+        'profile_photo_path',
         'prodis_id',
+        'universitas_id'
     ];
 
     /**
@@ -74,8 +82,13 @@ class User extends Authenticatable
         return $this->hasMany(Jawaban::class);
     }
 
-    public function prodi(): HasMany
+    public function prodi(): BelongsTo
     {
-        return $this->hasMany(Prodi::class);
+        return $this->belongsTo(Prodi::class, 'prodis_id');
+    }
+
+    public function universitas(): BelongsTo
+    {
+        return $this->belongsTo(Universitas::class, 'universitas_id');
     }
 }

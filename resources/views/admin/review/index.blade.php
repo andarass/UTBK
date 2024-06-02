@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Paket Latihan Soal')
+@section('title', 'Review Aplikasi')
 
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
-            Paket Latihan Soal
+            Review Aplikasi
         </h1>
     </div>
 @endsection
@@ -27,17 +27,18 @@
                     placeholder="Cari.." />
             </div>
             <div class="d-flex flex-stack">
-                <a type="button" class="btn btn-primary ms-2" href="{{ route('PaketLatihanSoal.create') }}">
-                    Tambah Paket Soal
+                <a type="button" class="btn btn-primary ms-2" href="{{ route('ReviewAplikasi.create') }}">
+                    Tambah Review
                 </a>
             </div>
         </div>
         <div class="card-body pt-0">
-            <table id="paket-soal-table" class="table align-middle table-row-dashed fs-6 gy-5">
+            <table id="review-table" class="table align-middle table-row-dashed fs-6 gy-5">
                 <thead>
                     <tr class="fw-semibold fs-6 text-muted">
                         <th class="text-start min-w-100px">No</th>
-                        <th class="text-start min-w-70px">Paket Soal</th>
+                        <th class="text-start min-w-100px">Nama Pengguna</th>
+                        <th class="text-start min-w-100px">Deskripsi</th>
                         <th class="text-end min-w-100px">Actions</th>
                     </tr>
                 </thead>
@@ -47,7 +48,7 @@
 @endsection
 @push('scripts')
     <script>
-        var datatable = $('#paket-soal-table').DataTable({
+        var datatable = $('#review-table').DataTable({
             processing: true,
             serverSide: true,
             ordering: true,
@@ -63,8 +64,15 @@
                     width: '10%'
                 },
                 {
-                    data: 'name',
-                    name: 'name',
+                    data: 'user_id',
+                    name: 'user_id',
+                    orderable: true,
+                    searchable: true,
+                    width: '30%'
+                },
+                {
+                    data: 'user_id',
+                    name: 'user_id',
                     orderable: true,
                     searchable: true,
                     width: '30%'
@@ -104,7 +112,7 @@
                 if (result.isConfirmed) {
                     e.preventDefault();
                     var id = $(this).data("id");
-                    var route = "{{ route('PaketLatihanSoal.destroy', ':id') }}";
+                    var route = "{{ route('admin.kategori.destroy', ':id') }}";
                     route = route.replace(':id', id);
                     $.ajax({
                         url: route,

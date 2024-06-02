@@ -1,9 +1,9 @@
 @extends('layouts.app')
-@section('title', 'Edit Prodi')
+@section('title', 'Edit Kategori Latihan Soal')
 @section('page-title')
     <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
         <h1 class="page-heading d-flex text-dark fw-bold flex-column justify-content-center my-0">
-            Edit Prodi
+            Edit Kategori Latihan Soal
         </h1>
     </div>
 @endsection
@@ -14,42 +14,36 @@
 @section('content')
     <div class="card card-docs flex-row-fluid mb-2">
         <div class="card-body fs-6 text-gray-700">
-            <form action="{{ route('Prodi.update', $prodi->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('KTLatihanSoal.update', $kategoriLatihanSoal->id) }}" method="POST"
+                enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="card-body p-9">
                     <div class="row mb-5">
                         <div class="col-xl-3">
-                            <label for="name" class="fs-6 fw-bold mt-2 mb-3">Prodi</label>
+                            <label for="name" class="fs-6 fw-bold mt-2 mb-3">Kategori Latihan Soal</label>
                         </div>
                         <div class="col-lg">
-                            <input type="text" name="name" class="form-control" value="{{ $prodi->name }}"
-                                placeholder="Input nama prodi" />
+                            <input type="text" name="name" class="form-control"
+                                value="{{ $kategoriLatihanSoal->name }}" placeholder="Input kategori latihan soal" />
+
                         </div>
                     </div>
+
                     <div class="row mb-5">
                         <div class="col-xl-3">
-                            <label for="nilai_minimal" class="fs-6 fw-bold mt-2 mb-3">Nilai Minimal</label>
+                            <label for="kategori_id" class="fs-6 fw-bold mt-2 mb-3">Kategori Soal</label>
                         </div>
                         <div class="col-lg">
-                            <input type="text" name="nilai_minimal" class="form-control" value="{{ $prodi->nilai_minimal }}"
-                                placeholder="Input nama prodi" />
-                        </div>
-                    </div>
-                    <div class="row mb-5">
-                        <div class="col-xl-3">
-                            <label for="universitas_id" class="fs-6 fw-bold mt-2 mb-3">Universitas</label>
-                        </div>
-                        <div class="col-lg">
-                            <select name="universitas_id" id="universitas_id" class="form-select" data-control="select2">
-                                @foreach ($universitas as $university)
-                                    <option value="{{ $university->id }}"
-                                        {{ $university->id == $prodi->universitas_id ? 'selected' : '' }}>
-                                        {{ $university->name }}
+                            <select name="kategori_id" id="kategori_id" class="form-select" data-control="select2">
+                                @foreach ($kategoris as $kategori)
+                                    <option value="{{ $kategori->id }}"
+                                        {{ $kategori->id == $kategoriLatihanSoal->kategori_id ? 'selected' : '' }}>
+                                        {{ $kategori->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('universitas_id')
+                            @error('kategori_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>

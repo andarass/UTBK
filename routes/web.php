@@ -18,7 +18,11 @@ use App\Http\Controllers\User\MenuController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\LatihanSoalController as UserLatihanSoalController;
 use App\Http\Controllers\User\UjianController;
-
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\KategoriLatihanSoalController;
+use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\User\ProfileController as UserProfileController;
+use App\Http\Controllers\User\ProfileUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +48,17 @@ Route::get('/register', [RegisterController::class, 'index'])->name('user.regist
 Route::post('/register', [RegisterController::class, 'store'])->name('user.register.store');
 
 Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']], function () {
-    // Route::get('/dashboard-user', [DashboardController::class, 'index'])->name('dashboard.user');
-    Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
+    Route::group(['middleware' => [CheckRoleMiddleware::class . ':User']], function () {
+        Route::resource('ProfileUser', ProfileUserController::class);
+
+        Route::get('/dashboard-user', [DashboardController::class, 'index'])->name('dashboard.user');
+        Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
+
+        Route::post('/update-profile-user', [UserProfileController::class, 'updateProfile'])->name('user.update.profile');
+
+        Route::get('/change-password-user', [UserProfileController::class, 'change_password'])->name('user.changePassword');
+        Route::post('/update-password-user', [UserProfileController::class, 'update_password'])->name('user.updatePassword');
+    });
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
 
@@ -68,6 +81,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             return view('dashboard');
         })->name('dashboard');
 
+        Route::post('/update-profile', [ProfileController::class, 'updateProfile'])->name('update.profile');
+
         Route::get('/change-password', [ProfileController::class, 'change_password'])->name('changePassword');
         Route::post('/update-password', [ProfileController::class, 'update_password'])->name('updatePassword');
 
@@ -86,6 +101,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
         Route::resource('PaketUjianSoal', PaketUjianController::class);
 
+        Route::resource('User', UserController::class);
+
+        Route::resource('ReviewAplikasi', ReviewController::class);
+
         Route::resource('Universitas', UniversitasController::class);
 
         Route::resource('Prodi', ProdiController::class);
@@ -97,7 +116,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
         Route::resource('SoalUjian', SoalUjianController::class);
 
-        Route::resource('PaketLatihanSoal', PaketLatihanSoalController::class);
+        Route::resource('KTLatihanSoal', KategoriLatihanSoalController::class);
 
         Route::resource('LatihanSoal', LatihanSoalController::class);
 
