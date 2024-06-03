@@ -20,6 +20,8 @@
     {{-- Tailwind css --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/user/tailwind.css') }}">
 
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
     <style>
         .profile-dropdown {
             position: relative;
@@ -181,7 +183,8 @@
     <section id="services" class="py-24">
         <div class="container">
             <div class="text-center">
-                <h2 class="mb-12 section-heading wow fadeInDown" data-wow-delay="0.3s">Our Services</h2>
+                <h2 class="mb-2 section-heading wow fadeInDown" data-wow-delay="0.3s">Our Services</h2>
+                <h6 class="mb-12 section-heading-2 wow fadeInDown" data-wow-delay="0.3s">"Why should you choose Try Out UTBK Pahamify?"</h6>
             </div>
             <div class="flex flex-wrap">
                 <!-- Services item -->
@@ -191,10 +194,8 @@
                             <i class="lni lni-cog"></i>
                         </div>
                         <div>
-                            <h3 class="service-title">Web Development</h3>
-                            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                                perspiciatis dicta labore nulla beatae quaerat quia
-                                incidunt laborum aspernatur...</p>
+                            <h3 class="service-title">Soal HOTS terbaru</h3>
+                            <p class="text-gray-600">Soal TO disusun dengan prinsip HOTS mengikuti standar UTBK terbaru. Sistem penilaiannya mengikuti sistem penilaian UTBK oleh LTMPT.</p>
                         </div>
                     </div>
                 </div>
@@ -205,10 +206,8 @@
                             <i class="lni lni-bar-chart"></i>
                         </div>
                         <div>
-                            <h3 class="service-title">Graphic Design</h3>
-                            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                                perspiciatis dicta labore nulla beatae quaerat quia
-                                incidunt laborum aspernatur...</p>
+                            <h3 class="service-title">Sistem CBT</h3>
+                            <p class="text-gray-600">Simulasi UTBK (Tryout) dibuat semirip mungkin dengan aslinya. Sehingga membuat kamu semakin terbiasa dan siap.</p>
                         </div>
                     </div>
                 </div>
@@ -219,52 +218,8 @@
                             <i class="lni lni-briefcase"></i>
                         </div>
                         <div>
-                            <h3 class="service-title">Business Branding</h3>
-                            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                                perspiciatis dicta labore nulla beatae quaerat quia
-                                incidunt laborum aspernatur...</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Services item -->
-                <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
-                    <div class="m-4 wow fadeInRight" data-wow-delay="1.2s">
-                        <div class="icon text-5xl">
-                            <i class="lni lni-pencil-alt"></i>
-                        </div>
-                        <div>
-                            <h3 class="service-title">Content Writing</h3>
-                            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                                perspiciatis dicta labore nulla beatae quaerat quia
-                                incidunt laborum aspernatur...</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Services item -->
-                <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
-                    <div class="m-4 wow fadeInRight" data-wow-delay="1.5s">
-                        <div class="icon text-5xl">
-                            <i class="lni lni-mobile"></i>
-                        </div>
-                        <div>
-                            <h3 class="service-title">App Development</h3>
-                            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                                perspiciatis dicta labore nulla beatae quaerat quia
-                                incidunt laborum aspernatur...</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Services item -->
-                <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
-                    <div class="m-4 wow fadeInRight" data-wow-delay="1.8s">
-                        <div class="icon text-5xl">
-                            <i class="lni lni-layers"></i>
-                        </div>
-                        <div>
-                            <h3 class="service-title">Digital Marketing</h3>
-                            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde
-                                perspiciatis dicta labore nulla beatae quaerat quia
-                                incidunt laborum aspernatur...</p>
+                            <h3 class="service-title">Passing Grade Jurusan</h3>
+                            <p class="text-gray-600">Lihat bagaimana perbandinganmu dengan saingan jurusan yang sama, atau jurusan lain!</p>
                         </div>
                     </div>
                 </div>
@@ -487,8 +442,11 @@
     <!-- Clients Section End -->
 
     <!-- Testimonial Section Start -->
-    <section id="testimonial" class="py-24 bg-gray-800">
+    <section id="testimonial" class="py-24 bg-white-800">
         <div class="container">
+        <div class="text-center">
+                <h2 class="mb-6 section-heading wow fadeInDown" data-wow-delay="0.3s">Testimonial</h2>
+            </div>
             <div class="flex justify-center mx-3">
                 <div class="w-full lg:w-7/12">
                     <div id="testimonials" class="testimonials">

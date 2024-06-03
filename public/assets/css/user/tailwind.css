@@ -1251,6 +1251,15 @@ p {
   letter-spacing: 0.025em;
 }
 
+.section-heading-2 {
+  font-size: 1.5rem;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
 .icon {
   margin-bottom: 1rem;
   --text-opacity: 1;
