@@ -91,4 +91,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Universitas::class, 'universitas_id');
     }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
 }

@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\KategoriLatihanSoalController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Http\Controllers\User\ProfileUserController;
+use App\Http\Controllers\User\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +37,11 @@ use App\Http\Controllers\User\ProfileUserController;
 */
 
 //Route User
-Route::get('/', function () {
-    return view('user.home');
-});
+// Route::get('/', function () {
+//     return view('user.home');
+// })->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/login', [UserLoginController::class, 'index'])->name('user.login');
 Route::post('/login', [UserLoginController::class, 'auth'])->name('login.auth');
@@ -52,13 +55,14 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']
         Route::resource('ProfileUser', ProfileUserController::class);
 
         Route::get('/dashboard-user', [DashboardController::class, 'index'])->name('dashboard.user');
-        Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
 
         Route::post('/update-profile-user', [UserProfileController::class, 'updateProfile'])->name('user.update.profile');
 
         Route::get('/change-password-user', [UserProfileController::class, 'change_password'])->name('user.changePassword');
         Route::post('/update-password-user', [UserProfileController::class, 'update_password'])->name('user.updatePassword');
     });
+
+    Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
 

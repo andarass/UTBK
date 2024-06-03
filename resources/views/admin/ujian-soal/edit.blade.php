@@ -23,12 +23,13 @@
                             <label for="soal" class="fs-6 fw-bold mt-2 mb-3">Soal</label>
                         </div>
                         <div class="col-lg">
-                            <textarea name="soal" id="soal" class="form-control" value="{{ $soalUjian->soal }}" placeholder="Input Soal">@if (old('soal'))
+                            <textarea name="soal" id="soal" class="form-control" value="{{ $soalUjian->soal }}" placeholder="Input Soal">
+@if (old('soal'))
 {{ old('soal') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->soal }}
 @endif
-                            </textarea>
+</textarea>
                         </div>
                     </div>
 
@@ -81,12 +82,13 @@
                         </div>
                         <div class="col-lg">
                             <textarea name="konten_bacaan_teks" id="konten_bacaan_teks" class="form-control"
-                                value="{{ $soalUjian->konten_bacaan_teks }}" placeholder="Input Konten Bacaan Teks">@if (old('konten_bacaan_teks'))
+                                value="{{ $soalUjian->konten_bacaan_teks }}" placeholder="Input Konten Bacaan Teks">
+@if (old('konten_bacaan_teks'))
 {{ old('konten_bacaan_teks') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->konten_bacaan_teks }}
 @endif
-                            </textarea>
+</textarea>
                         </div>
                     </div>
 
@@ -122,12 +124,13 @@
                             <input type="radio" name="answer_a_type" value="image" id="imageAnswerRadio" />
                             <label for="imageAnswerRadio">Gambar</label>
                             <textarea name="jawaban_a" id="answer_a" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_a }}" placeholder="Input Jawaban A">@if (old('jawaban_a'))
+                                value="{{ $soalUjian->jawaban_a }}" placeholder="Input Jawaban A">
+@if (old('jawaban_a'))
 {{ old('jawaban_a') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_a }}
 @endif
-                                </textarea>
+</textarea>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 h-15 mt-2"
                                 name="jawaban_a_gambar" id="imageAnswerA" type="file" style="display: none;" />
@@ -154,12 +157,13 @@
                             <input type="radio" name="answer_b_type" value="image" id="imageAnswerRadioB" />
                             <label for="imageAnswerRadioB">Gambar</label>
                             <textarea name="jawaban_b" id="answer_b" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_b }}" placeholder="Input Jawaban B">@if (old('jawaban_b'))
+                                value="{{ $soalUjian->jawaban_b }}" placeholder="Input Jawaban B">
+@if (old('jawaban_b'))
 {{ old('jawaban_b') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_b }}
 @endif
-                            </textarea>
+</textarea>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 h-15 mt-2"
                                 name="jawaban_b_gambar" id="imageAnswerB" type="file" style="display: none;" />
@@ -186,11 +190,13 @@
                             <input type="radio" name="answer_c_type" value="image" id="imageAnswerRadioC" />
                             <label for="imageAnswerRadioC">Gambar</label>
                             <textarea name="jawaban_c" id="answer_c" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_c }}" placeholder="Input Jawaban C">@if (old('jawaban_c'))
+                                value="{{ $soalUjian->jawaban_c }}" placeholder="Input Jawaban C">
+@if (old('jawaban_c'))
 {{ old('jawaban_c') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_c }}
-@endif </textarea>
+@endif
+</textarea>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 h-15 mt-2"
                                 name="jawaban_c_gambar" id="imageAnswerC" type="file" style="display: none;" />
@@ -217,11 +223,13 @@
                             <input type="radio" name="answer_d_type" value="image" id="imageAnswerRadioD" />
                             <label for="imageAnswerRadioD">Gambar</label>
                             <textarea name="jawaban_d" id="answer_d" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_d }}" placeholder="Input Jawaban D">@if (old('jawaban_d'))
+                                value="{{ $soalUjian->jawaban_d }}" placeholder="Input Jawaban D">
+@if (old('jawaban_d'))
 {{ old('jawaban_d') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_d }}
-@endif </textarea>
+@endif
+</textarea>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 h-15 mt-2"
                                 name="jawaban_d_gambar" id="imageAnswerD" type="file" style="display: none;" />
@@ -248,11 +256,13 @@
                             <input type="radio" name="answer_e_type" value="image" id="imageAnswerRadioE" />
                             <label for="imageAnswerRadioE">Gambar</label>
                             <textarea name="jawaban_e" id="answer_e" class="form-control z-depth-1 mt-2" rows="3"
-                                value="{{ $soalUjian->jawaban_e }}" placeholder="Input Jawaban E">@if (old('jawaban_e'))
+                                value="{{ $soalUjian->jawaban_e }}" placeholder="Input Jawaban E">
+@if (old('jawaban_e'))
 {{ old('jawaban_e') }}
 @elseif(isset($soalUjian))
 {{ $soalUjian->jawaban_e }}
-@endif </textarea>
+@endif
+</textarea>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 h-15 mt-2"
                                 name="jawaban_e_gambar" id="imageAnswerE" type="file" style="display: none;" />
@@ -274,9 +284,8 @@
                             <label for="kunci_jawaban" class="fs-6 fw-bold mt-2 mb-3">Kunci Jawaban</label>
                         </div>
                         <div class="col-lg">
-                            <select name="kunci_jawaban"
-                                class="form-select @error('kunci_jawaban') is-invalid @enderror" data-control="select2"
-                                data-placeholder="Pilih Kunci Jawaban">
+                            <select name="kunci_jawaban" class="form-select @error('kunci_jawaban') is-invalid @enderror"
+                                data-control="select2" data-placeholder="Pilih Kunci Jawaban">
                                 <option value="" disabled selected>Pilih Kunci Jawaban</option>
                                 <option value="A" {{ $soalUjian->kunci_jawaban == 'A' ? 'selected' : '' }}>A
                                 </option>

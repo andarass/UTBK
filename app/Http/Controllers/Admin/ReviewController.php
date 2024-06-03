@@ -32,7 +32,12 @@ class ReviewController extends Controller
                         </span>
                     </button>
                     <div class="dropdown-menu menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-100px py-4" data-kt-menu="true">
-                        <div class="menu-item px-3">
+                    <div class="menu-item px-3">
+                            <a href="' . route('ReviewAplikasi.show', $item->id) . '" class="menu-link px-3">
+                                Review Detail
+                            </a>
+                        </div>
+                    <div class="menu-item px-3">
                             <a href="' . route('ReviewAplikasi.edit', $item->id) . '" class="menu-link px-3">
                                 Edit Data
                             </a>
@@ -42,6 +47,9 @@ class ReviewController extends Controller
                         </div>
                     </div>
                 </div>';
+                })
+                ->editColumn('user_id', function ($item) {
+                    return $item->user->name ? $item->user->name : "-";
                 })
                 ->rawColumns(['actions'])
                 ->make();
@@ -54,7 +62,9 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::get();
+
+        return view('admin.review.create', compact('users'));
     }
 
     /**
@@ -62,7 +72,28 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->except('_token');
+
+        $validate = [
+            'user_id' => 'required',
+        ];
+
+        if ($request->has('description')) {
+            $validate['description'] = 'string';
+            $input = strip_tags($request->input('description'));
+            $input = preg_replace('/&hellip;|&nbsp;/', '', $input);
+            $input = preg_replace('/&rdquo;/', '"', $input);
+            $validate['description'] = 'nullable|string';
+            $data['description'] = $input;
+        } else {
+            $data['description'] = null;
+        }
+
+        $request->validate($validate);
+
+        Review::create($data);
+
+        return redirect()->route('ReviewAplikasi.index')->with('success', 'Berhasil Tambah Review');
     }
 
     /**
@@ -70,7 +101,9 @@ class ReviewController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $reviews = Review::find($id);
+
+        return view('admin.review.show', compact('reviews'));
     }
 
     /**
@@ -78,7 +111,11 @@ class ReviewController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $review = Review::find($id);
+
+        $users = User::select(['id', 'name'])->get();
+
+        return view('admin.review.edit', compact('review', 'users'));
     }
 
     /**
@@ -86,7 +123,26 @@ class ReviewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->except('_token');
+
+        $validate = [
+            'user_id' => 'required',
+        ];
+
+        if ($request->has('description')) {
+            $validate['description'] = 'string';
+            $input = strip_tags($request->input('description'));
+            $input = preg_replace('/&hellip;|&nbsp;/', '', $input);
+            $input = preg_replace('/&rdquo;/', '"', $input);
+            $validate['description'] = 'nullable|string';
+            $data['description'] = $input;
+        }
+
+        $review = Review::find($id);
+
+        $review->update($data);
+
+        return redirect()->route('ReviewAplikasi.index')->with('success', 'Berhasil Ubah Review');
     }
 
     /**
@@ -94,6 +150,27 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $review = Review::find($id);
+
+            if (!$review) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Review pengguna not found',
+                ], 404);
+            }
+
+            $review->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Review pengguna deleted',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
     }
 }

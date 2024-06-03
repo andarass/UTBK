@@ -61,7 +61,15 @@
                             <span class="menu-icon">
                                 <i class="bi bi-person-fill"></i>
                             </span>
-                            <span class="menu-title">User</span>
+                            <span class="menu-title">User Management</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ Route::is('ReviewAplikasi*') ? 'active' : '' }}" href="{{ route('ReviewAplikasi.index') }}">
+                            <span class="menu-icon">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+                            <span class="menu-title">Review Aplikasi</span>
                         </a>
                     </div>
                     {{-- <div class="menu-item">

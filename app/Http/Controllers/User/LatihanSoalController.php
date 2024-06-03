@@ -11,8 +11,6 @@ use App\Models\Kategori;
 class LatihanSoalController extends Controller
 {
     public function index() {
-        $paketLatihanSoals = PaketSoalLatihanSoal::all();
-        
-        return view('user.latihan-soal.detail-menu', compact('paketLatihanSoals'));
+       
     }
 }

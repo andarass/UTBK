@@ -94,9 +94,9 @@
                             <li class="nav-item">
                                 <a class="page-scroll" href="#testimonial">Testimonial</a>
                             </li>
-                            <!-- <li class="nav-item">
+                             {{-- <li class="nav-item">
                             <a class="page-scroll" href="#pricing">Pricing</a>
-                          </li> -->
+                          </li> --}}
                             <li class="nav-item">
                                 <a class="page-scroll" href="#contact">Contact</a>
                             </li>
@@ -184,7 +184,8 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="mb-2 section-heading wow fadeInDown" data-wow-delay="0.3s">Our Services</h2>
-                <h6 class="mb-12 section-heading-2 wow fadeInDown" data-wow-delay="0.3s">"Why should you choose Try Out UTBK Pahamify?"</h6>
+                <h6 class="mb-12 section-heading-2 wow fadeInDown" data-wow-delay="0.3s">"Why should you choose Try
+                    Out UTBK KITAPTN?"</h6>
             </div>
             <div class="flex flex-wrap">
                 <!-- Services item -->
@@ -195,11 +196,12 @@
                         </div>
                         <div>
                             <h3 class="service-title">Soal HOTS terbaru</h3>
-                            <p class="text-gray-600">Soal TO disusun dengan prinsip HOTS mengikuti standar UTBK terbaru. Sistem penilaiannya mengikuti sistem penilaian UTBK oleh LTMPT.</p>
+                            <p class="text-gray-600">Soal TO disusun dengan prinsip HOTS mengikuti standar UTBK
+                                terbaru. Sistem penilaiannya mengikuti sistem penilaian UTBK oleh LTMPT.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Services item -->
+                 {{-- Services item --}}
                 <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
                     <div class="m-4 wow fadeInRight" data-wow-delay="0.6s">
                         <div class="icon text-5xl">
@@ -207,11 +209,12 @@
                         </div>
                         <div>
                             <h3 class="service-title">Sistem CBT</h3>
-                            <p class="text-gray-600">Simulasi UTBK (Tryout) dibuat semirip mungkin dengan aslinya. Sehingga membuat kamu semakin terbiasa dan siap.</p>
+                            <p class="text-gray-600">Simulasi UTBK (Tryout) dibuat semirip mungkin dengan aslinya.
+                                Sehingga membuat kamu semakin terbiasa dan siap.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Services item -->
+                {{--  Services item  --}}
                 <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3">
                     <div class="m-4 wow fadeInRight" data-wow-delay="0.9s">
                         <div class="icon text-5xl">
@@ -219,14 +222,15 @@
                         </div>
                         <div>
                             <h3 class="service-title">Passing Grade Jurusan</h3>
-                            <p class="text-gray-600">Lihat bagaimana perbandinganmu dengan saingan jurusan yang sama, atau jurusan lain!</p>
+                            <p class="text-gray-600">Lihat bagaimana perbandinganmu dengan saingan jurusan yang sama,
+                                atau jurusan lain!</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Services Section End -->
+    {{--  Services Section End  --}}
 
 
     <!-- Feature Section Start -->
@@ -444,76 +448,31 @@
     <!-- Testimonial Section Start -->
     <section id="testimonial" class="py-24 bg-white-800">
         <div class="container">
-        <div class="text-center">
+            <div class="text-center">
                 <h2 class="mb-6 section-heading wow fadeInDown" data-wow-delay="0.3s">Testimonial</h2>
             </div>
             <div class="flex justify-center mx-3">
                 <div class="w-full lg:w-7/12">
                     <div id="testimonials" class="testimonials">
-                        <!-- testimonial item start -->
-                        <div class="item focus:outline-none">
-                            <div class="text-center py-10 px-8 md:px-10 rounded border border-gray-900">
-                                <div class="text-center">
-                                    <p class="text-gray-600 leading-loose">Holisticly empower leveraged ROI whereas
-                                        effective web-readiness. Completely enable emerging meta-services with
-                                        cross-platform web services. Quickly initiate inexpensive total linkage rather
-                                        than extensible scenarios. Holisticly empower leveraged ROI whereas effective
-                                        web-readiness. </p>
-                                </div>
-                                <div class="my-3 mx-auto w-24 h-24 shadow-md rounded-full">
-                                    <img class="rounded-full p-2 w-full" src="assets/img/testimonial/img1.jpg"
-                                        alt="">
-                                </div>
-                                <div class="mb-2">
-                                    <h2 class="font-bold text-lg uppercase text-blue-600 mb-2">Duta</h2>
-                                    <h3 class="font-medium text-white text-sm">Pengguna</h3>
+                        @foreach ($reviews as $review)
+                            <!-- testimonial item start -->
+                            <div class="item focus:outline-none">
+                                <div class="text-center py-10 px-8 md:px-10 rounded border border-gray-900">
+                                    <div class="text-center">
+                                        <p class="text-gray-600 leading-loose"> {!! $review->description !!} </p>
+                                    </div>
+                                    <div class="my-3 mx-auto w-24 h-24 shadow-md rounded-full">
+                                        <img class="rounded-full p-2 w-full" src="{{ asset('storage/' . $review->user->profile_photo_path) }}"
+                                            alt="">
+                                    </div>
+                                    <div class="mb-2" style="margin-top: 30px;">
+                                        <h2 class="font-bold text-lg uppercase text-black mb-2">{{ $review->user->name }}</h2>
+                                        <h3 class="font-medium text-black text-sm">Pengguna</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- testimonial item end -->
-                        <!-- testimonial item start -->
-                        <div class="item focus:outline-none">
-                            <div class="text-center py-10 px-8 md:px-10 rounded border border-gray-900">
-                                <div class="text-center">
-                                    <p class="text-gray-600 leading-loose">Holisticly empower leveraged ROI whereas
-                                        effective web-readiness. Completely enable emerging meta-services with
-                                        cross-platform web services. Quickly initiate inexpensive total linkage rather
-                                        than extensible scenarios. Holisticly empower leveraged ROI whereas effective
-                                        web-readiness. </p>
-                                </div>
-                                <div class="my-3 mx-auto w-24 h-24 shadow-md rounded-full">
-                                    <img class="rounded-full p-2 w-full" src="assets/img/testimonial/img2.jpg"
-                                        alt="">
-                                </div>
-                                <div class="mb-2">
-                                    <h2 class="font-bold text-lg uppercase text-blue-600 mb-2">Mila</h2>
-                                    <h3 class="font-medium text-white text-sm">PageBulb</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- testimonial item end -->
-                        <!-- testimonial item start -->
-                        <div class="item focus:outline-none">
-                            <div class="text-center py-10 px-8 md:px-10 rounded border border-gray-900">
-                                <div class="text-center">
-                                    <p class="text-gray-600 leading-loose">Holisticly empower leveraged ROI whereas
-                                        effective web-readiness. Completely enable emerging meta-services with
-                                        cross-platform web services. Quickly initiate inexpensive total linkage rather
-                                        than extensible scenarios. Holisticly empower leveraged ROI whereas effective
-                                        web-readiness. </p>
-                                </div>
-                                <div class="my-3 mx-auto w-24 h-24 shadow-md rounded-full">
-                                    <img class="rounded-full p-2 w-full" src="assets/img/testimonial/img1.jpg"
-                                        alt="">
-                                </div>
-                                <div class="mb-2">
-                                    <h2 class="font-bold text-lg uppercase text-blue-600 mb-2">Rob</h2>
-                                    <h3 class="font-medium text-white text-sm">OnePageLove</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- testimonial item end -->
-
+                            <!-- testimonial item end -->
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -820,13 +779,13 @@
         <div class="container">
             <div class="flex flex-wrap">
                 <div class="w-full text-center">
-                    <p class="text-white">Designed and Developed by Duta Alif Gunawan</p>
+                    <p class="text-white">Designed and Developed by Andara Putri</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Go to Top Link -->
+     {{-- Go to Top Link --}}
     <a href="#"
         class="back-to-top w-10 h-10 fixed bottom-0 right-0 mb-5 mr-5 flex items-center justify-center rounded-full bg-blue-600 text-white text-lg z-20 duration-300 hover:bg-blue-400">
         <i class="lni lni-arrow-up"></i>

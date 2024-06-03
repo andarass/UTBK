@@ -71,11 +71,22 @@
                     width: '30%'
                 },
                 {
-                    data: 'user_id',
-                    name: 'user_id',
+                    data: 'description',
+                    name: 'description',
                     orderable: true,
                     searchable: true,
-                    width: '30%'
+                    width: '30%',
+                    render: function(data, type, row) {
+                        if (type === 'display') {
+                            if (data.length > 100) {
+                                return data.slice(0, 100);
+                            } else {
+                                return data;
+                            }
+                        } else {
+                            return data;
+                        }
+                    }
                 },
                 {
                     data: 'actions',
@@ -112,7 +123,7 @@
                 if (result.isConfirmed) {
                     e.preventDefault();
                     var id = $(this).data("id");
-                    var route = "{{ route('admin.kategori.destroy', ':id') }}";
+                    var route = "{{ route('ReviewAplikasi.destroy', ':id') }}";
                     route = route.replace(':id', id);
                     $.ajax({
                         url: route,
