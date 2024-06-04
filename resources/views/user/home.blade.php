@@ -166,7 +166,7 @@
                         </div>
                     @else
                         <div class="text-center mb-10 wow fadeInUp" data-wow-delay="1.2s">
-                            <a href="/menu" rel="nofollow" class="btn">Mulai</a>
+                            <a href="{{ route('user.menu') }}" rel="nofollow" class="btn">Mulai</a>
                         </div>
                     @endguest
                     <div class="text-center wow fadeInUp" data-wow-delay="1.6s">
@@ -231,7 +231,6 @@
         </div>
     </section>
     {{--  Services Section End  --}}
-
 
     <!-- Feature Section Start -->
     <div id="feature" class="bg-blue-100 py-24">
@@ -454,25 +453,29 @@
             <div class="flex justify-center mx-3">
                 <div class="w-full lg:w-7/12">
                     <div id="testimonials" class="testimonials">
-                        @foreach ($reviews as $review)
-                            <!-- testimonial item start -->
-                            <div class="item focus:outline-none">
-                                <div class="text-center py-10 px-8 md:px-10 rounded border border-gray-900">
-                                    <div class="text-center">
-                                        <p class="text-gray-600 leading-loose"> {!! $review->description !!} </p>
-                                    </div>
-                                    <div class="my-3 mx-auto w-24 h-24 shadow-md rounded-full">
-                                        <img class="rounded-full p-2 w-full" src="{{ asset('storage/' . $review->user->profile_photo_path) }}"
-                                            alt="">
-                                    </div>
-                                    <div class="mb-2" style="margin-top: 30px;">
-                                        <h2 class="font-bold text-lg uppercase text-black mb-2">{{ $review->user->name }}</h2>
-                                        <h3 class="font-medium text-black text-sm">Pengguna</h3>
-                                    </div>
+                        @forelse ($reviews as $review)
+                        <!-- testimonial item start -->
+                        <div class="item focus:outline-none">
+                            <div class="text-center py-10 px-8 md:px-10 rounded border border-gray-900">
+                                <div class="text-center">
+                                    <p class="text-gray-600 leading-loose"> {!! $review->description !!} </p>
+                                </div>
+                                <div class="my-3 mx-auto w-24 h-25 shadow-md rounded-full">
+                                    <img class="rounded-full p-2 w-full" src="{{ asset('storage/' . $review->user->profile_photo_path) }}"
+                                        alt="">
+                                </div>
+                                <div class="mb-2" style="margin-top: 30px;">
+                                    <h2 class="font-bold text-lg uppercase text-black mb-2">{{ $review->user->name }}</h2>
+                                    <h3 class="font-medium text-black text-sm">Pengguna</h3>
                                 </div>
                             </div>
-                            <!-- testimonial item end -->
-                        @endforeach
+                        </div>
+                        <!-- testimonial item end -->
+                        @empty
+                        <div class="text-center py-10 px-8 md:px-10 rounded border border-gray-900">
+                            <p class="text-gray-600 leading-loose">TIDAK ADA TESTIMONI</p>
+                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -480,7 +483,7 @@
     </section>
     <!-- Testimonial Section End -->
 
-    <!-- Pricing section Start -->
+    {{-- <!-- Pricing section Start -->
     <!-- <section id="pricing" class="py-24">
       <div class="container">
         <div class="flex flex-wrap justify-center md:justify-start">
@@ -553,9 +556,9 @@
         </div>
       </div>
     </section> -->
-    <!-- Pricing Table Section End -->
+    <!-- Pricing Table Section End --> --}}
 
-    <!-- carousel-area Section Start -->
+    {{-- <!-- carousel-area Section Start -->
     <!-- <section class="carousel-area bg-gray-800 py-32">
       <div class="container">
         <div class="flex">
@@ -584,9 +587,9 @@
         </div>
       </div>
     </section> -->
-    <!-- carousel-area Section End -->
+    <!-- carousel-area Section End --> --}}
 
-    <!-- Subscribe Section Start -->
+    {{-- Subscribe Section Start
     <section id="Subscribes" class="text-center py-20 bg-blue-100">
         <div class="container">
             <div class="flex justify-center mx-3">
@@ -609,7 +612,7 @@
             </div>
         </div>
     </section>
-    <!-- Subscribe Section End -->
+     Subscribe Section End --}}
 
     <!-- Contact Section Start -->
     <section id="contact" class="py-24">

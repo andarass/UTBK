@@ -26,7 +26,8 @@ class LoginController extends Controller
             $user = Auth::user();
 
             // dd(session()->all());
-            return view('user.home', ['username' => $user->username]);
+            // return view('user.home', ['username' => $user->username]);
+            return redirect()->route('home');
         }
 
         return redirect()->route('user.login')

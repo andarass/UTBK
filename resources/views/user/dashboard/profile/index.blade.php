@@ -11,8 +11,7 @@
     </div>
 
     <div id="kt_account_settings_profile_details" class="collapse show">
-        
+
     </div>
 </div>
-
 @endsection
