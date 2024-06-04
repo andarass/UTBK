@@ -806,7 +806,7 @@
     <script src="{{ asset('assets/js/user/tiny-slider.js') }}"></script>
     <script src="{{ asset('assets/js/user/contact-form.js') }}"></script>
     <script src=" {{ asset('assets/js/user/main.js') }} "></script>
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             const profileName = document.querySelector('.profile-name');
             const dropdownContent = document.querySelector('.dropdown-content');
@@ -822,7 +822,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

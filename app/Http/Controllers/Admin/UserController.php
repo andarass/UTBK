@@ -199,7 +199,6 @@ class UserController extends Controller
                     'message' => 'User not found',
                 ], 404);
             }
-
             $user->delete();
 
             return response()->json([

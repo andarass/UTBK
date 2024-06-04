@@ -80,7 +80,7 @@
                     </div>
                     <div class="row mb-5">
                         <div class="col-xl-3">
-                            <label for="universitas_id" class="fs-6 fw-bold mt-2 mb-3">Universitas</label>
+                            <label for="prodis_id" class="fs-6 fw-bold mt-2 mb-3">Prodi</label>
                         </div>
                         <div class="col-lg">
                             <select name="prodis_id" id="prodis_id" class="form-select" data-control="select2">
