@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Http\Controllers\Admin\PaketUjianController;
 use App\Http\Controllers\Admin\SoalUjianController;
-use App\Http\Controllers\Admin\PaketLatihanSoalController;
 use App\Http\Controllers\Admin\LatihanSoalController;
 use App\Http\Controllers\Admin\UniversitasController;
 use App\Http\Controllers\Admin\ProdiController;
@@ -65,13 +64,17 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
 
-    Route::get('/paket-latihan-soal', [UserLatihanSoalController::class, 'index'])->name('user.latihan-soal');
+    Route::get('/latihan-soal', [UserLatihanSoalController::class, 'index'])->name('user.latihan-soal');
+    Route::get('/latihan-soal/{id}', [UserLatihanSoalController::class, 'detailKategori'])->name('user.detail-latihan-soal');
+    Route::get('/latihan-soal/{kategoriLatihanSoalId}/{soalId}', [UserLatihanSoalController::class, 'mulaiLatihanSoal'])->name('user.soal-mulai');
+    Route::get('/skor-akhir-latihan-soal', [UserLatihanSoalController::class, 'hasilAkhir'])->name('user.hasil-akhir-latihan-soal');
 
     Route::get('/paket-ujian', [UjianController::class, 'index'])->name('user.ujian');
     Route::get('/paket-ujian/{id}', [UjianController::class, 'detailPaketSoal'])->name('user.ujian.detail-paket-ujian');
     Route::get('/soal-ujian/{paketSoalId}/{soalId}', [UjianController::class, 'mulaiUjian'])->name('user.soal-ujian');
     Route::get('/skor-akhir-ujian', [UjianController::class, 'jawaban'])->name('user.ujian.skor-akhir-ujian');
     Route::get('/{prodiId}/kriteria-kelulusan', [UjianController::class, 'kriteriaKelulusan'])->name('prodi.kriteriaKelulusan');
+    Route::post('/store-tesimoni', [UjianController::class, 'storeTestimoni'])->name('user.testimoni.store');
 });
 
 //Route Admin

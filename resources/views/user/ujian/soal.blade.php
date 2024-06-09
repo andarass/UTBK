@@ -369,7 +369,7 @@
                 }
             });
         });
-    </script>6
+    </script>
 
     <script>
         document.addEventListener('mouseleave', function(event) {

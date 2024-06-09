@@ -9,6 +9,8 @@ use App\Models\Kategori;
 use Illuminate\Support\Facades\Session;
 use App\Models\SoalUjian;
 use App\Models\Prodi;
+use App\Models\Review;
+use Illuminate\Foundation\Auth\User;
 
 class UjianController extends Controller
 {
@@ -108,12 +110,40 @@ class UjianController extends Controller
     {
         $prodi = Prodi::find(auth()->user()->prodis_id);
 
-        return view('user.ujian.hasil', compact('prodi'));
+        $users = User::get();
+
+        return view('user.ujian.hasil', compact('prodi', 'users'));
     }
 
     public function kriteriaKelulusan($prodiId)
     {
         $prodi = Prodi::findOrFail($prodiId);
         return view('user.ujian.kriteria-kelulusan', compact('prodi'));
+    }
+    public function storeTestimoni(Request $request) {
+        $data = $request->except('_token');
+
+        $validate = [
+            'user_id' => 'required',
+        ];
+
+        if ($request->has('description')) {
+            $validate['description'] = 'string';
+            $input = strip_tags($request->input('description'));
+            $input = preg_replace('/&hellip;|&nbsp;/', '', $input);
+            $input = preg_replace('/&rdquo;/', '"', $input);
+            $validate['description'] = 'nullable|string';
+            $data['description'] = $input;
+        } else {
+            $data['description'] = null;
+        }
+
+        $request->validate($validate);
+
+        Review::create($data);
+
+        // dd($data);
+
+        return redirect()->route('user.ujian.skor-akhir-ujian')->with('success', 'Berhasil Tambah Testimoni');
     }
 }

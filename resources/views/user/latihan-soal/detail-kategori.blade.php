@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
-    <title>Detail Paket Soal</title>
+    <title>Detail Kategori | KITAPTN</title>
 </head>
 
 <body>
@@ -26,26 +26,35 @@
         <div class="col-4">
             <div class="card widget-card border-light shadow">
                 <div class="card-header bg-transparent p-4 border-light-subtle">
-                    <h5 class="card-title widget-card-title m-0 text-center">Detail Paket Soal {{ $paketSoal->name }}</h5>
+                    <h5 class="card-title widget-card-title m-0 text-center">Detail Kategori Soal</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="col-md-8">
-                        @foreach ($kategoris as $kategori)
-                            <p class="fw-medium">{{ $kategori->name }} : <span>{{ $kategori->soal_ujian_count }}</span>
-                            </p>
-                        @endforeach
+                        @foreach ($kategoriLatihanSoals as $kategoriLatihanSoal)
+                        @if ($kategoriLatihanSoal->latihan_soal_count > 0)
+                        <p class="text-base mt-2">{{ $kategoriLatihanSoal->name }}:
+                            @if ($kategoriLatihanSoal->latihan_soal_count < 10)
+                                {{ $kategoriLatihanSoal->latihan_soal_count }} Soal
+                            @else
+                                10 Soal
+                            @endif
+                        </p>
+                    @endif
+                    @endforeach
                     </div>
+                    {{-- <input type="hidden" id="shuffledSoalIds" value="{{ json_encode($shuffledSoalIds) }}"> --}}
+                    {{-- <div class="col-12 mt-4 text-center">
+                        <a href="" onclick="mulaiTes()" class="btn btn-primary">Mulai</a>
+                    </div> --}}
                     <div class="col-12 mt-4 text-center">
-                        <button type="submit" onclick="mulaiUjian()" id="continue"
-                            class="btn btn-primary">Mulai</button>
-                    </div>
+                        <a href="{{ route('user.soal-mulai', ['kategoriLatihanSoalId' => $soalAcak->kategori_latihan_soal_id, 'soalId' => $soalAcak->id]) }}" onclick="mulaiTes()" type="submit" id="continue" class="btn btn-primary">Mulai</a>
+                   </div>
                 </div>
             </div>
         </div>
     </div>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> --}}
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.js') }}"></script>
+
     <script>
         let waktuAwal = sessionStorage.getItem("waktuAwal");
 
@@ -58,43 +67,14 @@
             waktuAwal = new Date().getTime();
             sessionStorage.setItem("waktuAwal", waktuAwal);
         }
+    </script>
 
-        function mulaiUjian() {
+    <script>
+        function mulaiTes() {
             sessionStorage.clear();
 
-            // Update waktu awal
             updateWaktuAwal();
-
-            let paketSoalId = <?php echo json_encode($paketSoal->id); ?>;
-            let soalByCategory = <?php echo json_encode($soalByCategory); ?>;
-
-            if (!soalByCategory || Object.keys(soalByCategory).length === 0) {
-                // Handle the case where soalByCategory is null or empty
-                console.error("Invalid or empty soalByCategory.");
-                return;
-            }
-
-            // Get the keys of soalByCategory
-            let categoryKeys = Object.keys(soalByCategory);
-
-            // Get the index of the first question in the first category
-            let questionIndex = 0;
-
-
-            if (categoryKeys.length > 0) {
-
-                let firstCategoryKey = categoryKeys[0];
-
-                if (soalByCategory[firstCategoryKey].length > questionIndex) {
-
-                    let firstQuestion = soalByCategory[firstCategoryKey][questionIndex];
-
-                    window.location.href = `/soal-ujian/${paketSoalId}/${firstQuestion.id}`;
-                    return;
-                }
-            }
         }
     </script>
 </body>
-
 </html>

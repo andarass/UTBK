@@ -83,7 +83,7 @@
                                 <a class="page-scroll active" href="#hero-area">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="page-scroll" href="#services">Services</a>
+                                <a class="page-scroll" href="#services">Service</a>
                             </li>
                             <li class="nav-item">
                                 <a class="page-scroll" href="#feature">feature</a>
@@ -183,9 +183,8 @@
     <section id="services" class="py-24">
         <div class="container">
             <div class="text-center">
-                <h2 class="mb-2 section-heading wow fadeInDown" data-wow-delay="0.3s">Our Services</h2>
-                <h6 class="mb-12 section-heading-2 wow fadeInDown" data-wow-delay="0.3s">"Why should you choose Try
-                    Out UTBK KITAPTN?"</h6>
+                <h2 class="mb-2 section-heading wow fadeInDown" data-wow-delay="0.3s">Service</h2>
+                <h6 class="mb-12 section-heading-2 wow fadeInDown" data-wow-delay="0.3s">"Mengapa Anda Harus Memilih KITAPTN ?"</h6>
             </div>
             <div class="flex flex-wrap">
                 <!-- Services item -->
@@ -196,7 +195,7 @@
                         </div>
                         <div>
                             <h3 class="service-title">Soal HOTS terbaru</h3>
-                            <p class="text-gray-600">Soal TO disusun dengan prinsip HOTS mengikuti standar UTBK
+                            <p class="text-gray-600">Soal disusun dengan prinsip HOTS mengikuti standar UTBK
                                 terbaru. Sistem penilaiannya mengikuti sistem penilaian UTBK oleh LTMPT.</p>
                         </div>
                     </div>
@@ -238,7 +237,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full lg:w-1/2">
                     <div class="mb-5 lg:mb-0">
-                        <h2 class="mb-12 section-heading wow fadeInDown" data-wow-delay="0.3s">Learn More About Us
+                        <h2 class="mb-12 section-heading wow fadeInDown" data-wow-delay="0.3s">Visi dan Misi
                         </h2>
 
                         <div class="flex flex-wrap">
@@ -248,7 +247,7 @@
                                         <i class="lni lni-layers"></i>
                                     </div>
                                     <div class="features-content">
-                                        <h4 class="feature-title">Built with TailwindCSS</h4>
+                                        <h4 class="feature-title">Membantu Siswa</h4>
                                         <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam tempora
                                             quidem vel sint.</p>
                                     </div>

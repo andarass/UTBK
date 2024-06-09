@@ -56,6 +56,37 @@
             </div>
         </div>
     </div>
+
+    <div class="row justify-content-center gy-3 gy-md-4 mt-4">
+        <div class="col-8">
+            <div class="card widget-card border-light shadow">
+                <div class="card-header bg-transparent p-4 border-light-subtle">
+                    <h5 class="card-title widget-card-title m-0 text-center">Form Testimoni</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ route('user.testimoni.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="user_id" class="form-label">Nama</label>
+                            <select class="form-select custom-placeholder" name="user_id" data-control="select2"
+                                data-placeholder="Pilih User">
+                                <option disabled selected>Pilih User</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Pesan</label>
+                            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('components.toastr')
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
@@ -76,7 +107,8 @@
                 category.forEach(soal => {
                     const sessionStorageKey = `jawabanSoal_${soal.id}`;
                     const jawaban = JSON.parse(sessionStorage.getItem(sessionStorageKey));
-                    const points = jawaban.opsiDipilih === jawaban.correctAnswer ? parseInt(jawaban.points) : 0;
+                    const points = jawaban.opsiDipilih === jawaban.correctAnswer ? parseInt(jawaban
+                        .points) : 0;
 
                     // Tambahkan poin ke total
                     totalPoints += points;
@@ -99,7 +131,7 @@
             const totalRow = `
                 <tr>
                     <td colspan="3"><b>Total</b></td>
-                    <td><b>${totalPoints}</b></td>
+                    <td><b>${totalPoints}/1000</b></td>
                 </tr>
             `;
             resultTableBody.innerHTML += totalRow;
@@ -125,8 +157,8 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Logout',
-                cancelButtonText: 'No'
+                confirmButtonText: 'Iya',
+                cancelButtonText: 'Tidak'
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Clear sessionStorage
@@ -139,4 +171,5 @@
         }
     </script>
 </body>
+
 </html>

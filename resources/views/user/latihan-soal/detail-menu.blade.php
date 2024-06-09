@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
-    <title>Paket Latihan Soal | KITAPTN</title>
+    <title>Latihan Soal | KITAPTN</title>
 </head>
 
 <body>
@@ -26,30 +26,59 @@
         <div class="col-8">
             <div class="card widget-card border-light shadow">
                 <div class="card-header bg-transparent p-4 border-light-subtle">
-                    <h5 class="card-title widget-card-title m-0">Paket Latihan Soal</h5>
+                    <h5 class="card-title widget-card-title m-0">Latihan Soal</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="col-md-6">
-                        <label for="" class="form-label">Paket Soal</label>
-                        <select name="paketSoal" id="paketSoal" class="form-select">
-                            <option value="" hidden>Pilih Paket Soal</option>
-                            @foreach ($paketLatihanSoals as $paketLatihanSoal)
-                                <option value="{{ $paketLatihanSoal->id }}">{{ $paketLatihanSoal->name }}</option>
+                        <label for="kategoriSoal" class="form-label">Kategori Soal</label>
+                        <select name="kategoriSoal" id="kategoriSoal" class="form-select" required>
+                            <option value="" hidden>Pilih Kategori Soal</option>
+                            @foreach ($kategoris as $kategori)
+                                <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mt-3">
+                        <label for="kategoriLatihanSoal" class="form-label">Kategori Latihan Soal</label>
+                        <select name="kategoriLatihanSoal" id="kategoriLatihanSoal" class="form-select" required>
+                            <option value="" hidden>Pilih Kategori Latihan Soal</option>
+                            @foreach ($kategoriLatihanSoals as $kategoriLatihanSoal)
+                                <option value="{{ $kategoriLatihanSoal->id }}">{{ $kategoriLatihanSoal->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-12 mt-3">
-                        <button type="submit" id="continue" class="btn btn-primary">Masuk</button>
+                        {{-- <button type="submit" id="continue" class="btn btn-primary">Masuk</button> --}}
+                        <a href="" type="submit" id="continue" class="btn btn-primary">Masuk</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.js') }}"></script>
+
+    <script>
+        document.getElementById('kategoriSoal').addEventListener('change', function() {
+            var kategoriSoalId = this.value;
+            var kategoriLatihanSoalSelect = document.getElementById('kategoriLatihanSoal');
+            kategoriLatihanSoalSelect.innerHTML = '<option value="" hidden>Pilih Kategori Latihan Soal</option>';
+
+            @foreach ($kategoriLatihanSoals as $kategoriLatihanSoal)
+                if ({{ $kategoriLatihanSoal->kategori_id }} == kategoriSoalId) {
+                    var option = document.createElement('option');
+                    option.value = {{ $kategoriLatihanSoal->id }};
+                    option.text = '{{ $kategoriLatihanSoal->name }}';
+                    kategoriLatihanSoalSelect.appendChild(option);
+                }
+            @endforeach
+        });
+    </script>
     <script>
         document.getElementById('continue').addEventListener('click', function() {
-            let selectedPackage = document.getElementById('paketSoal').value;
-            window.location.href = '/paket-ujian/' + selectedPackage;
+            event.preventDefault();
+            let selectedPackage = document.getElementById('kategoriLatihanSoal').value;
+            window.location.href = '/latihan-soal/' + selectedPackage;
         });
     </script>
 </body>
