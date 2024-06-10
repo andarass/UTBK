@@ -31,6 +31,7 @@ class User extends Authenticatable
         'name',
         'username',
         'kota_lahir',
+        'nomer_tlp',
         'tanggal_lahir',
         'kecamatan',
         'kelurahan',

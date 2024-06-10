@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('username')->nullable();
+            $table->string('nomer_tlp')->nullable();
             $table->string('kota_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('kecamatan')->nullable();
