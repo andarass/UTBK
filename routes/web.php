@@ -127,8 +127,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::resource('LatihanSoal', LatihanSoalController::class);
 
         Route::group(['prefix' => 'LatihanSoal'], function () {
-            Route::get('/soal/{id}/delete-image', [LatihanSoalController::class, 'deleteImage'])->name('admin.soal-ujian.delete_image');
-            Route::get('/soal/{id}/delete-audio', [LatihanSoalController::class, 'deleteAudio'])->name('admin.soal-ujian.delete_audio');
+            Route::get('/soal/{id}/delete-image', [LatihanSoalController::class, 'deleteImage'])->name('admin.latihan-soal.delete_image');
+            Route::get('/soal/{id}/delete-audio', [LatihanSoalController::class, 'deleteAudio'])->name('admin.latihan-soal.delete_audio');
         });
 
         Route::post('/logout', [LoginController::class, 'logout'])->name('admin.logout');

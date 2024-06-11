@@ -47,7 +47,7 @@
                                 <p>Current Image:</p>
                                 <img src="{{ asset('storage/soal/' . $latihanSoal->soal_gambar) }}" alt="Current Image"
                                     width="20%" height="20%">
-                                <a href="{{ route('admin.soal-ujian.delete_image', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_image', ['id' => $latihanSoal->id]) }}"
                                     class="text-red-500">Hapus Gambar</a>
                             @else
                                 <p>No Image Uploaded.</p>
@@ -68,7 +68,7 @@
                                 <audio controls>
                                     <source src="{{ asset('storage/soal/' . $latihanSoal->soal_audio) }}" type="audio/mpeg">
                                 </audio>
-                                <a href="{{ route('admin.soal-ujian.delete_audio', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_audio', ['id' => $latihanSoal->id]) }}"
                                     class="text-red-500">Hapus Audio</a>
                             @else
                                 <p>No Audio Uploaded.</p>
@@ -104,9 +104,9 @@
                                 5MB).</p>
                             @if ($latihanSoal->konten_bacaan_gambar)
                                 <p>Current Image:</p>
-                                <img src="{{ asset('storage/reading-ujian/' . $latihanSoal->konten_bacaan_gambar) }}"
+                                <img src="{{ asset('storage/reading-latihan-soal/' . $latihanSoal->konten_bacaan_gambar) }}"
                                     alt="Current Image" width="20%" height="20%">
-                                <a href="{{ route('admin.soal-ujian.delete_image', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_image', ['id' => $latihanSoal->id]) }}"
                                     class="text-red-500">Hapus Gambar</a>
                             @else
                                 <p>No Image Uploaded.</p>
@@ -138,7 +138,7 @@
                             @if ($latihanSoal->jawaban_a_gambar)
                                 <img src="{{ asset('storage/jawaban_a/' . $latihanSoal->jawaban_a_gambar) }}"
                                     id="image-answer-a" alt="Current Image" width="20%" height="20%">
-                                <a href="{{ route('admin.soal-ujian.delete_image', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_image', ['id' => $latihanSoal->id]) }}"
                                     id="delete-button-a" class="text-red-500">Hapus Gambar</a>
                             @else
                                 <p id="keterangan-no-image-a">No Image Uploaded.</p>
@@ -170,7 +170,7 @@
                             @if ($latihanSoal->jawaban_b_gambar)
                                 <img src="{{ asset('storage/jawaban_b/' . $latihanSoal->jawaban_b_gambar) }}"
                                     id="image-answer-b" alt="Current Image" width="20%" height="20%">
-                                <a href="{{ route('admin.soal-ujian.delete_image', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_image', ['id' => $latihanSoal->id]) }}"
                                     id="delete-button-b" class="text-red-500">Hapus Gambar</a>
                             @else
                                 <p id="keterangan-no-image-b">No Image Uploaded.</p>
@@ -201,7 +201,7 @@
                             @if ($latihanSoal->jawaban_c_gambar)
                                 <img src="{{ asset('storage/jawaban_c/' . $latihanSoal->jawaban_c_gambar) }}"
                                     id="image-answer-c" alt="Current Image" width="20%" height="20%">
-                                <a href="{{ route('admin.soal-ujian.delete_image', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_image', ['id' => $latihanSoal->id]) }}"
                                     id="delete-button-c" class="text-red-500">Hapus Gambar</a>
                             @else
                                 <p id="keterangan-no-image-c">No Image Uploaded.</p>
@@ -232,7 +232,7 @@
                             @if ($latihanSoal->jawaban_d_gambar)
                                 <img src="{{ asset('storage/jawaban_d/' . $latihanSoal->jawaban_d_gambar) }}"
                                     id="image-answer-d" alt="Current Image" width="20%" height="20%">
-                                <a href="{{ route('admin.soal-ujian.delete_image', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_image', ['id' => $latihanSoal->id]) }}"
                                     id="delete-button-d" class="text-red-500">Hapus Gambar</a>
                             @else
                                 <p id="keterangan-no-image-d">No Image Uploaded.</p>
@@ -263,7 +263,7 @@
                             @if ($latihanSoal->jawaban_e_gambar)
                                 <img src="{{ asset('storage/jawaban_e/' . $latihanSoal->jawaban_e_gambar) }}"
                                     id="image-answer-e" alt="Current Image" width="20%" height="20%">
-                                <a href="{{ route('admin.soal-ujian.delete_image', ['id' => $latihanSoal->id]) }}"
+                                <a href="{{ route('admin.latihan-soal.delete_image', ['id' => $latihanSoal->id]) }}"
                                     id="delete-button-e" class="text-red-500">Hapus Gambar</a>
                             @else
                                 <p id="keterangan-no-image-e">No Image Uploaded.</p>

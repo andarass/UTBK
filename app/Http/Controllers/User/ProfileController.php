@@ -17,12 +17,24 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'nomer_tlp' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'kecamatan' => 'required|string|max:255',
+            'kelurahan' => 'required|string|max:255',
+            'kota_lahir' => 'required|string|max:255',
+            'kode_pos' => 'required|string|max:255',
             'profile_photo_path' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         // Update data user
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->nomer_tlp = $request->input('nomer_tlp');
+        $user->tanggal_lahir = $request->input('tanggal_lahir');
+        $user->kecamatan = $request->input('kecamatan');
+        $user->kelurahan = $request->input('kelurahan');
+        $user->kota_lahir = $request->input('kota_lahir');
+        $user->kode_pos = $request->input('kode_pos');
 
         if ($request->hasFile('profile_photo_path')) {
 

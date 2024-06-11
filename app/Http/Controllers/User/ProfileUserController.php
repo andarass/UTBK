@@ -15,7 +15,7 @@ class ProfileUserController extends Controller
     {
         $user = User::get();
 
-        return view('user.dashboard.profile.index');
+        return view('user.dashboard.profile.index', compact('user'));
     }
 
     /**
