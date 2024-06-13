@@ -63,6 +63,7 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']
     Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
+    Route::get('/data-pengguna', [MenuController::class, 'dataPengguna'])->name('user.dataPengguna');
 
     Route::get('/latihan-soal', [UserLatihanSoalController::class, 'index'])->name('user.latihan-soal');
     Route::get('/latihan-soal/{id}', [UserLatihanSoalController::class, 'detailKategori'])->name('user.detail-latihan-soal');
