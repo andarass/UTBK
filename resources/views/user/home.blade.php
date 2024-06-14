@@ -109,11 +109,15 @@
                                 <div class="dropdown-content">
                                     @if (Auth::user()->hasRole('User'))
                                         <a href="{{ route('dashboard.user') }}">Dashboard</a>
+                                    @elseif (Auth::user()->hasRole('Admin'))
+                                        <a href="{{ route('dashboard.admin') }}">Dashboard</a>
                                     @endif
                                     @if (Auth::user()->hasRole('User'))
                                         <a href="{{ route('user.logout') }}">Logout</a>
                                     @elseif (Auth::user()->hasRole('Super Admin'))
                                         <a href="{{ route('admin.logout') }}">Logout</a>
+                                    @elseif (Auth::user()->hasRole('Admin'))
+                                        <a href="{{ route('logout.admin') }}">Logout</a>
                                     @endif
                                 </div>
                             </div>

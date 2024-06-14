@@ -272,6 +272,40 @@
                         </a>
                     </div>
                 @endhasanyrole
+
+                @hasanyrole('Admin')
+                    <div class="menu-item">
+                        <a class="menu-link {{ Route::is('dashboard.admin') ? 'active' : '' }}"
+                            href="{{ route('dashboard.admin') }}">
+                            <span class="menu-icon">
+                                <span class="svg-icon svg-icon-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="2" y="2" width="9" height="9" rx="2"
+                                            fill="currentColor" />
+                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2"
+                                            fill="currentColor" />
+                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2"
+                                            fill="currentColor" />
+                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </span>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </div>
+
+                    {{-- <div class="menu-item">
+                        <a class="menu-link {{ Route::is('ProfileUser*') ? 'active' : '' }}"
+                            href="{{ route('ProfileUser.index') }}">
+                            <span class="menu-icon">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+                            <span class="menu-title">Data Pengguna</span>
+                        </a>
+                    </div> --}}
+                @endhasanyrole
                 {{-- <div class="menu-item">
                     <a class="menu-link {{ Route::is('changePassword') ? 'active' : '' }}"
                         href="{{ route('changePassword') }}">
@@ -321,6 +355,23 @@
                     </span>
                 </a>
             </form>
+        @elseif (Auth::user()->hasRole('Admin'))
+        <form action="{{ route('logout.admin') }}" method="GET" id="logout-form">
+            @csrf
+            <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                class="btn btn-flex flex-center btn-custom btn-primary overflow-hidden text-nowrap px-0 h-40px w-100"
+                data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss-="click">
+                <span class="btn-label">Logout</span>
+                <span class="svg-icon btn-icon svg-icon-2 m-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2"
+                            d="M20 12h-9.5m7.5 3l3-3l-3-3m-5-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2v-1" />
+                    </svg>
+                </span>
+            </a>
+        </form>
         @endif
     </div>
 </div>

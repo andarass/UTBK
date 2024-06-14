@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Http\Controllers\User\ProfileUserController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,12 @@ Route::post('/login', [UserLoginController::class, 'auth'])->name('login.auth');
 Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
 Route::post('/register', [RegisterController::class, 'store'])->name('user.register.store');
 
-Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']], function () {
+Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User|Admin']], function () {
+
+    Route::group(['middleware' => [CheckRoleMiddleware::class . ':Admin']], function () {
+        Route::get('/dashboard-admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin');
+    });
+
     Route::group(['middleware' => [CheckRoleMiddleware::class . ':User']], function () {
         Route::resource('ProfileUser', ProfileUserController::class);
 
@@ -61,6 +67,8 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User']
     });
 
     Route::get('/logout', [UserLoginController::class, 'logout'])->name('user.logout');
+
+    Route::get('/logout-admin', [AdminDashboardController::class, 'logout'])->name('logout.admin');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
     Route::get('/data-pengguna', [MenuController::class, 'dataPengguna'])->name('user.dataPengguna');

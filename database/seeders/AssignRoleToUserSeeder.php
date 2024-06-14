@@ -14,5 +14,8 @@ class AssignRoleToUserSeeder extends Seeder
     {
         $superAdmin = \App\Models\User::where('username', 'superadmin')->first();
         $superAdmin->assignRole('Super Admin');
+
+        $editor = \App\Models\User::where('username', 'admin')->first();
+        $editor->assignRole('Admin');
     }
 }
