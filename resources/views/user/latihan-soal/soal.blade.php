@@ -7,6 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
+    <style>
+        .answered {
+            background-color: green ;
+            color: white;
+        }
+    </style>
     <title>Soal | KITAPTN</title>
 </head>
 
@@ -146,12 +152,13 @@
             const jawaban = {
                 idPertanyaan: idPertanyaanSaatIni,
                 opsiDipilih: opsi,
-                kategori: '{{ $currentSoal->KategoriLatihanSoal->name }}',
+                kategori: '{{ $currentSoal->kategori->name }}',
                 correctAnswer: '{{ $currentSoal->kunci_jawaban }}',
                 points: '{{ $currentSoal->point_soal }}',
-                idKategori: '{{ $currentSoal->kategori_latihan_soal_id }}',
+                idKategori: '{{ $currentSoal->kategori_id }}',
             };
             sessionStorage.setItem('jawabanSoal_' + idPertanyaanSaatIni, JSON.stringify(jawaban));
+            updateQuestionButtonColor(idPertanyaanSaatIni);
         }
 
         function ambilOpsiDipilih() {
@@ -175,8 +182,27 @@
             }
         }
 
+        function updateQuestionButtonColor(idPertanyaan) {
+            const button = document.getElementById('questionButton_' + idPertanyaan);
+            const dataJawaban = sessionStorage.getItem('jawabanSoal_' + idPertanyaan);
+
+            if (dataJawaban) {
+                button.classList.add('answered');
+            } else {
+                button.classList.remove('answered');
+            }
+        }
+
+        function updateAllQuestionButtonsColor() {
+            document.querySelectorAll('[id^="questionButton_"]').forEach(button => {
+                const idPertanyaan = button.id.replace('questionButton_', '');
+                updateQuestionButtonColor(idPertanyaan);
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             ambilOpsiDipilih();
+            updateAllQuestionButtonsColor();
         });
 
         document.addEventListener('click', function(event) {

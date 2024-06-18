@@ -23,7 +23,10 @@ class MenuController extends Controller
         return redirect()->route('user.menu');
     }
 
-    public function storeDataPengguna() {
-        
+    public function storeDataPengguna(Request $request) {
+        $user = Auth::user();
+        $user->update($request->only('nomer_tlp', 'tanggal_lahir', 'kota_lahir', 'kecamatan', 'kelurahan', 'kode_pos'));
+
+        return redirect()->route('user.menu')->with('status', 'Data diri berhasil disimpan');
     }
 }

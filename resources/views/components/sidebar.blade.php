@@ -263,8 +263,8 @@
                     </div>
 
                     <div class="menu-item">
-                        <a class="menu-link {{ Route::is('ProfileUser*') ? 'active' : '' }}"
-                            href="{{ route('ProfileUser.index') }}">
+                        <a class="menu-link {{ Route::is('overview*') ? 'active' : '' }}"
+                            href="{{ route('user.overview') }}">
                             <span class="menu-icon">
                                 <i class="bi bi-person-fill"></i>
                             </span>

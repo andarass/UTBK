@@ -51,6 +51,7 @@ class RegisterController extends Controller
         $user->assignRole('User');
 
         // Mengaitkan pengguna dengan Prodi yang dipilih
+        $user->universitas_id = $request->universitas;
         $user->prodis_id = $request->prodi;
         $user->save();
 

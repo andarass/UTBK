@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
-    <title>Detail Paket Soal</title>
+    <title>Detail Paket Soal | KITAPTN</title>
 </head>
 
 <body>

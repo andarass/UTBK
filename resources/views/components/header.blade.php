@@ -22,6 +22,9 @@
                         <span class="menu-link">
                             <span class="menu-title">
                                 @hasrole('Super Admin')
+                                    Super Admin
+                                @endhasrole
+                                @hasrole('Admin')
                                     Admin
                                 @endhasrole
                                 {{-- @hasrole('Kaprodi')
@@ -48,6 +51,9 @@
                         <span class="menu-link">
                             <span class="menu-title">
                                 @hasrole('Super Admin')
+                                    Super Admin
+                                @endhasrole
+                                @hasrole('Admin')
                                     Administrator
                                 @endhasrole
                                 @hasrole('User')
@@ -232,6 +238,9 @@
                                 <a href="{{ route('changePassword') }}" class="menu-link px-5">Change Password</a>
                             @elseif (Auth::user()->hasRole('User'))
                                 <a href="{{ route('user.changePassword') }}" class="menu-link px-5">Change
+                                    Password</a>
+                            @elseif (Auth::user()->hasRole('Admin'))
+                                <a href="{{ route('admin.changePassword') }}" class="menu-link px-5">Change
                                     Password</a>
                             @endif
                         </div>

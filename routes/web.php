@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\KategoriController;
@@ -24,6 +23,7 @@ use App\Http\Controllers\User\ProfileController as UserProfileController;
 use App\Http\Controllers\User\ProfileUserController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ProfileAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,18 +46,29 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [UserLoginController::class, 'index'])->name('user.login');
 Route::post('/login', [UserLoginController::class, 'auth'])->name('login.auth');
 
+Route::get('/forgot-password', [UserLoginController::class, 'forgot_password'])->name('forgot-password');
+Route::post('/forgot-password-act', [UserLoginController::class, 'forgot_password_act'])->name('forgot-password-act');
+
+Route::get('/validasi-forgot-password/{token}', [UserLoginController::class, 'validasi_forgot_password'])->name('validasi-forgot-password');
+Route::post('/validasi-forgot-password-act', [UserLoginController::class, 'validasi_forgot_password_act'])->name('validasi-forgot-password-act');
+
 Route::get('/register', [RegisterController::class, 'index'])->name('user.register');
 Route::post('/register', [RegisterController::class, 'store'])->name('user.register.store');
 
 Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User|Admin']], function () {
 
+    Route::resource('ProfileUser', ProfileUserController::class);
+
+    Route::get('/overview', [ProfileUserController::class, 'overview'])->name('user.overview');
+
     Route::group(['middleware' => [CheckRoleMiddleware::class . ':Admin']], function () {
         Route::get('/dashboard-admin', [AdminDashboardController::class, 'index'])->name('dashboard.admin');
+
+        Route::get('/change-password-admin', [ProfileAdminController::class, 'change_password'])->name('admin.changePassword');
+        Route::post('/update-password-admin', [ProfileAdminController::class, 'update_password'])->name('admin.updatePassword');
     });
 
     Route::group(['middleware' => [CheckRoleMiddleware::class . ':User']], function () {
-        Route::resource('ProfileUser', ProfileUserController::class);
-
         Route::get('/dashboard-user', [DashboardController::class, 'index'])->name('dashboard.user');
 
         Route::post('/update-profile-user', [UserProfileController::class, 'updateProfile'])->name('user.update.profile');
@@ -71,7 +82,9 @@ Route::group(['middleware' => [CheckRoleMiddleware::class . ':Super Admin|User|A
     Route::get('/logout-admin', [AdminDashboardController::class, 'logout'])->name('logout.admin');
 
     Route::get('/menu', [MenuController::class, 'index'])->name('user.menu');
+
     Route::get('/data-pengguna', [MenuController::class, 'dataPengguna'])->name('user.dataPengguna');
+    Route::post('/store-data-pengguna', [MenuController::class, 'storeDataPengguna'])->name('store.user.dataPengguna');
 
     Route::get('/latihan-soal', [UserLatihanSoalController::class, 'index'])->name('user.latihan-soal');
     Route::get('/latihan-soal/{id}', [UserLatihanSoalController::class, 'detailKategori'])->name('user.detail-latihan-soal');

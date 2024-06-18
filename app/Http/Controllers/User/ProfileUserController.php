@@ -65,4 +65,8 @@ class ProfileUserController extends Controller
     {
         //
     }
+
+    public function overview() {
+      return view('user.dashboard.profile.show');
+    }
 }

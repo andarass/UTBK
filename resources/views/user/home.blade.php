@@ -129,11 +129,15 @@
                                 <div class="dropdown-content">
                                     @if (Auth::user()->hasRole('User'))
                                         <a href="{{ route('dashboard.user') }}">Dashboard</a>
+                                    @elseif (Auth::user()->hasRole('Admin'))
+                                        <a href="{{ route('dashboard.admin') }}">Dashboard</a>
                                     @endif
                                     @if (Auth::user()->hasRole('User'))
                                         <a href="{{ route('user.logout') }}">Logout</a>
                                     @elseif (Auth::user()->hasRole('Super Admin'))
                                         <a href="{{ route('admin.logout') }}">Logout</a>
+                                    @elseif (Auth::user()->hasRole('Admin'))
+                                        <a href="{{ route('logout.admin') }}">Logout</a>
                                     @endif
                                 </div>
                             </div>
@@ -170,6 +174,10 @@
                         </div>
                     @else
                         @if (Auth::user()->hasRole('Super Admin'))
+                            <div class="text-center mb-10 wow fadeInUp" data-wow-delay="1.2s">
+                                <a href="{{ route('user.menu') }}" rel="nofollow" class="btn">Mulai</a>
+                            </div>
+                        @elseif (Auth::user()->hasRole('Admin'))
                             <div class="text-center mb-10 wow fadeInUp" data-wow-delay="1.2s">
                                 <a href="{{ route('user.menu') }}" rel="nofollow" class="btn">Mulai</a>
                             </div>
@@ -379,7 +387,7 @@
                             </div>
                         </div>
                         <div class="text-center px-5 py-3">
-                            <h3 class="team-name">Andara Putri</h3>
+                            <h3 class="team-name">Andara Puteri Syalsabella</h3>
                             <p>Front-End Developer</p>
                         </div>
                     </div>
@@ -794,7 +802,7 @@
         <div class="container">
             <div class="flex flex-wrap">
                 <div class="w-full text-center">
-                    <p class="text-white">Designed and Developed by Andara Putri</p>
+                    <p class="text-white">Designed and Developed by Andara Puteri Syalsabella</p>
                 </div>
             </div>
         </div>

@@ -48,7 +48,11 @@
                                     <rect x="7" y="6" width="4" height="4" rx="2" fill="currentColor" />
                                 </svg>
                             </span>
-                            <!--end::Svg Icon-->Developer</a>
+                            <!--end::Svg Icon-->
+                            @if (Auth::user()->hasRole('Super Admin'))
+                                Super Admin
+                            @endif
+                        </a>
                             <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                             <span class="svg-icon svg-icon-4 me-1">
@@ -92,20 +96,6 @@
             <!--end::Info-->
         </div>
         <!--end::Details-->
-        <!--begin::Navs-->
-        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
-            <!--begin::Nav item-->
-            <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="{{ route('profile.show') }}">Overview</a>
-            </li>
-            <!--end::Nav item-->
-            <!--begin::Nav item-->
-            <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="../../demo1/dist/account/settings.html">Settings</a>
-            </li>
-            <!--end::Nav item-->
-        </ul>
-        <!--begin::Navs-->
     </div>
 </div>
 
@@ -373,20 +363,6 @@
             <!--end::Info-->
         </div>
         <!--end::Details-->
-        <!--begin::Navs-->
-        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
-            <!--begin::Nav item-->
-            <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="{{ route('profile.show') }}">Overview</a>
-            </li>
-            <!--end::Nav item-->
-            <!--begin::Nav item-->
-            <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="../../demo1/dist/account/settings.html">Settings</a>
-            </li>
-            <!--end::Nav item-->
-        </ul>
-        <!--begin::Navs-->
     </div>
 </div>
 
