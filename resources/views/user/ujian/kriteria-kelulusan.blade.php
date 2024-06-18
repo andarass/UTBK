@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
     <title>Kriteria Kelulusan | KITAPTN</title>
+    <style>
+        body {
+            background-color: #EBF8FF;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,8 +29,8 @@
     <div class="row justify-content-center gy-3 gy-md-4">
         <div class="col-8">
             <div class="card widget-card border-light shadow">
-                <div class="card-header bg-transparent p-4 border-light-subtle">
-                    <h5 class="card-title widget-card-title m-0 text-center">Kriteria Kelulusan - {{ $prodi->name }} {{ $prodi->Universitas->name }}</h5>
+                <div class="card-header p-4 border-light-subtle" style="background-color:#0C3080;">
+                    <h5 class="card-title widget-card-title m-0 text-center text-white">Kriteria Kelulusan - {{ $prodi->name }} {{ $prodi->Universitas->name }}</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="col-md-12">

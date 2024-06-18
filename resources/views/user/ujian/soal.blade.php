@@ -13,6 +13,9 @@
             background-color: green !important;
             color: white !important;
         }
+        body {
+            background-color: #EBF8FF;
+        }
     </style>
 </head>
 
@@ -53,8 +56,8 @@
                         </div>
                         <div class="col-12">
                             <div class="card widget-card border-light shadow">
-                                <div class="card-header bg-transparent p-4 border-light-subtle">
-                                    <h5 class="card-title widget-card-title m-0">Daftar Soal</h5>
+                                <div class="card-header p-4 border-light-subtle" style="background-color:#0C3080;">
+                                    <h5 class="card-title widget-card-title m-0 text-white">Daftar Soal</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="row justify-content-center">

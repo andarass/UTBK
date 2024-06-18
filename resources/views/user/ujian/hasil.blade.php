@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo-aplikasi.png') }}" type="image/png">
     <title>Hasil Akhir Ujian | KITAPTN</title>
+    <style>
+        body {
+            background-color: #EBF8FF;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,8 +30,8 @@
     <div class="row justify-content-center gy-3 gy-md-4">
         <div class="col-8">
             <div class="card widget-card border-light shadow">
-                <div class="card-header bg-transparent p-4 border-light-subtle">
-                    <h5 class="card-title widget-card-title m-0 text-center">Review Hasil</h5>
+                <div class="card-header p-4 border-light-subtle" style="background-color:#0C3080;">
+                    <h5 class="card-title widget-card-title m-0 text-center text-white">Review Hasil</h5>
                 </div>
                 <div class="card-body p-4">
                     <div class="col-md-12">
@@ -60,8 +65,8 @@
     <div class="row justify-content-center gy-3 gy-md-4 mt-4">
         <div class="col-8">
             <div class="card widget-card border-light shadow">
-                <div class="card-header bg-transparent p-4 border-light-subtle">
-                    <h5 class="card-title widget-card-title m-0 text-center">Form Testimoni</h5>
+                <div class="card-header p-4 border-light-subtle" style="background-color:#0C3080;">
+                    <h5 class="card-title widget-card-title m-0 text-center text-white">Form Testimoni</h5>
                 </div>
                 <div class="card-body p-4">
                     <form action="{{ route('user.testimoni.store') }}" method="POST">
